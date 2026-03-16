@@ -53,22 +53,14 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-<<<<<<< HEAD
-.hero-btn {
-  padding: 15px 35px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: var(--primary-color, #0d9488);
-  border: none;
-  border-radius: 100px 10px 100px 100px; /* Forma simulada de un pez (cuerpo redondeado, cola puntiaguda en un extremo) */
-=======
 /* BOTON PEZ */
 
 .fish-btn{
->>>>>>> 2d3b9605534c932c8a64c00996c0c8d6b19ab3d6
   cursor: pointer;
   display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .fish{
@@ -106,6 +98,7 @@
 
 .fish-btn:hover .fish-tail{
   animation: tailMove 0.4s infinite alternate;
+  transform-origin: 140px 40px; /* Aligned with the polygon point */
 }
 
 @keyframes tailMove{
