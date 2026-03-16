@@ -16,7 +16,7 @@ const Navbar = () => {
 
           {/* Menú Desktop */}
           <div className="hidden md:flex space-x-8 font-medium">
-            <a href="#inicio" className="hover:text-blue-400 transition">Inicio</a>
+            <a href="#inicio" className="hover:text-blue-400 transition">HHFF</a>
             <a href="#servicios" className="hover:text-blue-400 transition">Servicios</a>
             <a href="#proyectos" className="hover:text-blue-400 transition">Proyectos</a>
             <a href="#contacto" className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 transition">Contacto</a>
