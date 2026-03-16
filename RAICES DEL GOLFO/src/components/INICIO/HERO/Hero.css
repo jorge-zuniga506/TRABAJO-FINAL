@@ -1,7 +1,7 @@
 .hero-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* Ocupa toda la altura de la pantalla inicial */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@
   left: 50%;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que el video cubra todo el espacio sin deformarse */
+  object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -25,7 +25,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Capa oscura para que el texto resalte, ajustable */
+  background: rgba(0,0,0,0.4);
   z-index: 2;
 }
 
@@ -33,7 +33,7 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  color: #fff; /* Texto blanco en el hero */
+  color: #fff;
   max-width: 800px;
   padding: 0 20px;
   animation: fadeIn 1.5s ease;
@@ -43,16 +43,17 @@
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 40px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
+<<<<<<< HEAD
 .hero-btn {
   padding: 15px 35px;
   font-size: 1.1rem;
@@ -61,40 +62,92 @@
   background-color: var(--primary-color, #0d9488);
   border: none;
   border-radius: 100px 10px 100px 100px; /* Forma simulada de un pez (cuerpo redondeado, cola puntiaguda en un extremo) */
+=======
+/* BOTON PEZ */
+
+.fish-btn{
+>>>>>>> 2d3b9605534c932c8a64c00996c0c8d6b19ab3d6
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
+  display: inline-block;
 }
 
-.hero-btn:hover {
-  background-color: var(--primary-dark, #0f766e);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.6);
+.fish{
+  width: 220px;
+  transition: transform 0.3s ease;
 }
+
+/* cuerpo del pez */
+.fish-body{
+  fill: #0d9488;
+}
+
+.fish-tail{
+  fill: #0d9488;
+}
+
+/* ojo */
+.fish-eye{
+  fill: black;
+}
+
+/* texto */
+.fish-text{
+  fill: white;
+  font-size: 18px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* animacion */
+
+.fish-btn:hover .fish{
+  transform: translateX(10px);
+}
+
+.fish-btn:hover .fish-tail{
+  animation: tailMove 0.4s infinite alternate;
+}
+
+@keyframes tailMove{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(15deg);
+  }
+}
+
+/* animacion hero */
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
+  from{
+    opacity:0;
     transform: translateY(20px);
   }
-  to {
-    opacity: 1;
+  to{
+    opacity:1;
     transform: translateY(0);
   }
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .hero-title {
-    font-size: 2.8rem;
+/* responsive */
+
+@media screen and (max-width:768px){
+
+  .hero-title{
+    font-size:2.8rem;
   }
-  .hero-subtitle {
-    font-size: 1.2rem;
+
+  .hero-subtitle{
+    font-size:1.2rem;
   }
+
 }
 
-@media screen and (max-width: 480px) {
-  .hero-title {
-    font-size: 2.2rem;
+@media screen and (max-width:480px){
+
+  .hero-title{
+    font-size:2.2rem;
   }
+
 }
