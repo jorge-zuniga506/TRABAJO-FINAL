@@ -58,6 +58,9 @@
 .fish-btn{
   cursor: pointer;
   display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .fish{
@@ -95,6 +98,7 @@
 
 .fish-btn:hover .fish-tail{
   animation: tailMove 0.4s infinite alternate;
+  transform-origin: 140px 40px; /* Aligned with the polygon point */
 }
 
 @keyframes tailMove{
