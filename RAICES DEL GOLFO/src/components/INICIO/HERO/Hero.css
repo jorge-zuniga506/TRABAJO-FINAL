@@ -60,7 +60,7 @@
   color: #fff;
   background-color: var(--primary-color, #0d9488);
   border: none;
-  border-radius: 50px;
+  border-radius: 100px 10px 100px 100px; /* Forma simulada de un pez (cuerpo redondeado, cola puntiaguda en un extremo) */
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
