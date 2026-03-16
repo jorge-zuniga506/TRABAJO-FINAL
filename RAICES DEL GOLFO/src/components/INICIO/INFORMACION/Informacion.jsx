@@ -1,5 +1,6 @@
 import React from 'react';
 import './Informacion.css';
+import infoImg from './IMG/image copy.png';
 
 function Informacion() {
   return (
@@ -35,10 +36,7 @@ function Informacion() {
         </div>
 
         <div className="info-image-container">
-          {/* Placeholder para una imagen o collage decorativo de la reserva/golfo */}
-          <div className="info-image-placeholder">
-            <span className="placeholder-text">Descubre la Belleza del Golfo</span>
-          </div>
+          <img src={infoImg} alt="Raíces del Golfo" className="info-image" />
         </div>
       </div>
     </section>
