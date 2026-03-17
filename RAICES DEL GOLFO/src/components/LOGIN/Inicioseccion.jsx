@@ -50,9 +50,11 @@ const Inicioseccion = () => {
                 <button type="submit">LOGIN</button>
             </form>
             <div className="auth-options">
-                <a href="#">Forgot password?</a>
                 <p>
                     Don't have an account? <Link to="/registro">Register here</Link>
+                </p>
+                <p>
+                    Regresar a Inicio <Link to="/">Inicio</Link>
                 </p>
             </div>
         </div>
