@@ -23,6 +23,7 @@ function Navbar() {
     { name: 'Gastronomía', path: '/gastronomia' },
     { name: 'Transporte', path: '/transporte' },
     { name: 'Isla Venado', path: '/isla-venado' },
+    { name: 'Acerca de', path: '/acerca-de' },
   ];
 
   return (
