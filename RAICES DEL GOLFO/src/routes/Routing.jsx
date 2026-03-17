@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Inicio from '../pages/Inicio'
 import Tours from '../pages/Tours'
-
+            
 
 function Routing() {
   return (
