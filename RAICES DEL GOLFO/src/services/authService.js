@@ -1,4 +1,4 @@
-import { API } from './authService';
+export const API = 'http://localhost:3007/users';
 
 export const registerUser = async (user) => {
     const response = await fetch(API, {
