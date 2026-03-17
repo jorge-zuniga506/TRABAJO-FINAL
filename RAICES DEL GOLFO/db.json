@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "cd3c",
+      "name": "JORGE LIS ",
+      "email": "jzunigafwdcostarica@gmail.com",
+      "password": "1234"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
