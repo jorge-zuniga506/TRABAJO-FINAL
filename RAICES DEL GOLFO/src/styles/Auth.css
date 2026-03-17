@@ -1,73 +1,104 @@
+
 /* Estilos generales para la página de autenticación */
 .auth-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f2f5;
+    background-color: #f4f7f6;
+    font-family: sans-serif;
 }
 
 .auth-container {
     display: flex;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 900px;
+    height: 600px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 800px;
-    max-width: 90%;
 }
 
-/* Panel izquierdo (formulario) */
-.auth-form-container {
+/* El fondo diagonal morado */
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    background: linear-gradient(-135deg, #8e44ad, #6a1b9a);
+    /* La magia de la diagonal con clip-path */
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.auth-form-container, .auth-info-container {
     flex: 1;
-    padding: 40px;
+    padding: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative; /* Para que el contenido esté sobre el pseudo-elemento */
+    z-index: 2;
+}
+
+/* Lado Izquierdo: Formulario */
+.auth-form-container {
+    align-items: flex-start;
 }
 
 .auth-form-container h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 700;
     color: #333;
-    font-weight: 600;
+    margin-bottom: 25px;
 }
 
 .auth-form-container input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #f0f2f5;
+    border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
+    transition: box-shadow 0.3s;
+}
+
+.auth-form-container input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #8e44ad;
 }
 
 .auth-form-container button {
     width: 100%;
-    padding: 12px;
-    background-color: #6a1b9a;
+    padding: 15px;
+    background-color: #8e44ad;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .auth-form-container button:hover {
-    background-color: #4a148c;
+    background-color: #6a1b9a;
 }
 
 .auth-options {
-    margin-top: 15px;
+    margin-top: 25px;
     font-size: 14px;
-    color: #555;
-    text-align: center;
+    color: #777;
+    width: 100%;
 }
 
 .auth-options a {
-    color: #6a1b9a;
+    color: #8e44ad;
     text-decoration: none;
     font-weight: 600;
 }
@@ -76,32 +107,33 @@
     text-decoration: underline;
 }
 
-.error-message {
-    color: #d32f2f;
-    margin-bottom: 15px;
-    font-size: 14px;
+.auth-options p {
+    margin-top: 15px;
 }
 
-/* Panel derecho (informativo) */
+/* Lado Derecho: Información */
 .auth-info-container {
-    flex: 1;
-    background: linear-gradient(135deg, #6a1b9a, #ab47bc);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 40px;
     text-align: center;
+    color: white;
 }
 
 .auth-info-container h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-size: 40px;
     font-weight: 700;
+    margin-bottom: 15px;
 }
 
 .auth-info-container p {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
+    max-width: 90%;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
 }

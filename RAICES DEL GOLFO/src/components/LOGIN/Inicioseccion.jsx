@@ -1,46 +1,62 @@
-import { useState } from "react";
-import { loginUser } from "../../services/authService";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-export default function LoginForm() {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
+const Inicioseccion = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        if (!email || !password) {
+            setError('Por favor, complete todos los campos.');
+            return;
+        }
+        try {
+            const response = await fetch(`http://localhost:5001/users?email=${email}&password=${password}`);
+            const users = await response.json();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+            if (users.length > 0) {
+                localStorage.setItem('user', JSON.stringify(users[0]));
+                navigate('/');
+            } else {
+                setError('El correo electrónico o la contraseña son incorrectos.');
+            }
+        } catch (err) {
+            setError('Ocurrió un error al iniciar sesión. Inténtelo de nuevo más tarde.');
+        }
+    };
 
-    const user = await loginUser(form.email, form.password);
+    return (
+        <div className="auth-form-container">
+            <h2>Login</h2>
+            {error && <p className="error-message">{error}</p>}
+            <form onSubmit={handleLogin}>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">LOGIN</button>
+            </form>
+            <div className="auth-options">
+                <a href="#">Forgot password?</a>
+                <p>
+                    Don't have an account? <Link to="/registro">Register here</Link>
+                </p>
+            </div>
+        </div>
+    );
+};
 
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/restaurante");
-    } else {
-      alert("Datos incorrectos");
-    }
-  };
-
-  return (
-    <form className="form" onSubmit={handleSubmit}>
-      <input name="email" placeholder="Correo" onChange={handleChange} />
-
-      <div className="password-box">
-        <input
-          type={show ? "text" : "password"}
-          name="password"
-          placeholder="Contraseña"
-          onChange={handleChange}
-        />
-        <span onClick={() => setShow(!show)}>
-          {show ? "🙈" : "👁️"}
-        </span>
-      </div>
-
-      <button>Entrar</button>
-    </form>
-  );
-}
+export default Inicioseccion;
