@@ -1,13 +1,10 @@
-import { data } from "react-router-dom";
+import { API } from './authService';
 
-
-export const API = "http://localhost:3007/users";
-
- export const registerUser = async (user) => {
+export const registerUser = async (user) => {
     const response = await fetch(API, {
-        method: "POST",
+        method: 'POST',
         headers: {
-         "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
     });
@@ -17,5 +14,5 @@ export const API = "http://localhost:3007/users";
 export const loginUser = async (email, password) => {
     const response = await fetch(`${API}?email=${email}&password=${password}`);
     const users = await response.json();
-    return data.length > 0 ? users[0] : null;
-}
+    return users.length > 0 ? users[0] : null;
+};
