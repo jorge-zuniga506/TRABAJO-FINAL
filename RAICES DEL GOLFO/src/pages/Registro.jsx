@@ -4,20 +4,17 @@ import "../styles/Auth.css";
 
  function Registro() {
   return (
-    <div className="container">
-      <div className="card">
-
-        <div className="logo">⚛</div>
-
-        <h2>Sign Up</h2>
-
+    <div className="auth-container">
+      <div className="auth-left">
+        <div className="logo">Velocity</div>
+      </div>
+      <div className="auth-right">
+        <h2>Register</h2>
         <RegisterForm />
-
         <p className="toggle">
-          ¿Ya tienes cuenta?
-          <Link to="/"> Iniciar sesión</Link>
+          Already have an account?
+          <Link to="/"> Login here</Link>
         </p>
-
       </div>
     </div>
   );
