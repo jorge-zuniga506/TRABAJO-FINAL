@@ -43,7 +43,8 @@
 .form input {
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: none;
+  background-color: #f0f0f0;
   border-radius: 8px;
 }
 
