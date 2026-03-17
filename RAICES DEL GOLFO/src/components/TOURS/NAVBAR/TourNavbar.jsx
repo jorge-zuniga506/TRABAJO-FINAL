@@ -18,22 +18,12 @@ function TourNavbar() {
 
   const navLinks = [
     { name: 'Inicio', path: '/' },
-    { name: 'Tours Posada', path: '#tours-posada' },
-    { name: 'Tours Isla Venado', path: '#tours-isla' },
+    { name: 'Habitaciones', path: '/habitaciones' },
+    { name: 'Tours', path: '/tours' },
+    { name: 'Gastronomía', path: '/gastronomia' },
+    { name: 'Transporte', path: '/transporte' },
+    { name: 'Isla Venado', path: '/isla-venado' },
   ];
-
-  const handleNavClick = (e, path) => {
-    setMenuOpen(false);
-    
-    // Smooth scroll for anchor links
-    if (path.startsWith('#')) {
-      e.preventDefault();
-      const element = document.getElementById(path.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
 
   return (
     <nav className={`tour-navbar ${scrolled ? 'tour-navbar-scrolled' : ''}`}>
@@ -48,23 +38,13 @@ function TourNavbar() {
         <ul className={`tour-navbar-menu ${menuOpen ? 'active' : ''}`}>
           {navLinks.map((link, index) => (
             <li key={index} className="tour-navbar-item">
-              {link.path.startsWith('#') ? (
-                <a 
-                  href={link.path}
-                  className="tour-navbar-link"
-                  onClick={(e) => handleNavClick(e, link.path)}
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <Link 
-                  to={link.path} 
-                  className={`tour-navbar-link ${location.pathname === link.path ? 'active-link' : ''}`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              )}
+              <Link 
+                to={link.path} 
+                className={`tour-navbar-link ${location.pathname === link.path ? 'active-link' : ''}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
             </li>
           ))}
           {/* Mobile Reservar link */}
@@ -82,7 +62,7 @@ function TourNavbar() {
         {/* Action Buttons */}
         <div className="tour-navbar-actions">
           <Link to="/reservar" className="tour-btn-reservar">
-            Reservar
+            Reservar Now
           </Link>
           <div className={`tour-menu-icon ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
             <div className="bar"></div>
