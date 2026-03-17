@@ -5,6 +5,7 @@ import Tours from '../pages/Tours'
 import Login from '../pages/Login'
 import Registro from '../pages/Registro'
 import Habitaciones from '../pages/Habitaciones'
+import Gastronomia from '../pages/Gastronomia'
             
 
 function Routing() {
@@ -16,6 +17,7 @@ function Routing() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/habitaciones" element={<Habitaciones />} />
+        <Route path="/gastronomia" element={<Gastronomia />} />
       </Routes>
     </BrowserRouter>
   );
