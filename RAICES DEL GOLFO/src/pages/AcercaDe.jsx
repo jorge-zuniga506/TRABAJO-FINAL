@@ -4,7 +4,7 @@ import AcercaDeComponent from '../components/AcercaDe/AcercaDe';
 function AcercaDe() {
   return (
     <div className="acerca-de-page">
-      <AcercaDeComponent />
+      <AcercaDeComponent variant="solid" />
     </div>
   );
 }

@@ -1,0 +1,147 @@
+.historia-islas {
+  padding-top: 80px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+}
+
+.historia-hero {
+  background: linear-gradient(rgba(15, 118, 110, 0.7), rgba(13, 148, 136, 0.7)), url('/src/CHIRA/unnamed.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.historia-hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.historia-hero p {
+  font-size: 1.4rem;
+  max-width: 800px;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.historia-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.historia-section {
+  margin-bottom: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.historia-section.reverse {
+  direction: rtl;
+}
+
+.historia-section.reverse .historia-content {
+  direction: ltr;
+}
+
+.historia-content h2 {
+  font-size: 2.8rem;
+  color: #0f172a;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.historia-content h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #0d9488;
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+.historia-content p {
+  font-size: 1.15rem;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.historia-image-wrapper {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.historia-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.historia-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.islas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.isla-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(13, 148, 136, 0.1);
+  transition: all 0.3s ease;
+}
+
+.isla-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: #0d9488;
+}
+
+.isla-card h3 {
+  color: #0d9488;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.isla-card p {
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+  .historia-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .historia-section.reverse {
+    direction: ltr;
+  }
+  
+  .historia-hero h1 {
+    font-size: 2.5rem;
+  }
+}

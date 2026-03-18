@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar({ variant }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -22,12 +22,12 @@ function Navbar() {
     { name: 'Tours', path: '/tours' },
     { name: 'Gastronomía', path: '/gastronomia' },
     { name: 'Transporte', path: '/transporte' },
-    { name: 'Isla Venado', path: '/isla-venado' },
+    { name: 'Historia de las Islas', path: '/historia-de-las-islas' },
     { name: 'Acerca de', path: '/acerca-de' },
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''} ${variant === 'solid' ? 'navbar-solid' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link to="/" className="logo-text">
