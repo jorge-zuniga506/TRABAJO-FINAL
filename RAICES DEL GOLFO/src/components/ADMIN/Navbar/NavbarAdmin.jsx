@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SharkLogo from '../../common/SharkLogo';
 import './NavbarAdmin.css';
 
 function NavbarAdmin({ toggleSidebar }) {
@@ -22,8 +23,8 @@ function NavbarAdmin({ toggleSidebar }) {
               <div className="bar"></div>
             </div>
           </button>
-          <Link to="/admin" className="logo-admin-text">
-            Raíces del Golfo <span className="admin-badge">Admin</span>
+          <Link to="/admin">
+            <SharkLogo color="#0d9488" suffix="Admin" />
           </Link>
         </div>
 

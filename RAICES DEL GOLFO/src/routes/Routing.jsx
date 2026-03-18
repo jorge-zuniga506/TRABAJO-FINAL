@@ -12,10 +12,12 @@ import HistoriaIslasPage from '../pages/HistoriaIslasPage'
 import Admin from '../pages/Admin'
 import Cliente from '../pages/Cliente'
 import ProtectedRoute from './ProtectedRoute'
+import SessionManager from '../components/common/SessionManager'
 
 function Routing() {
   return (
     <BrowserRouter>
+      <SessionManager />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/tours" element={<Tours />} />

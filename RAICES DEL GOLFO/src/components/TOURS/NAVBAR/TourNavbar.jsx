@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SharkLogo from '../../common/SharkLogo';
 import './TourNavbar.css';
 
 function TourNavbar() {
@@ -30,8 +31,8 @@ function TourNavbar() {
     <nav className={`tour-navbar ${scrolled ? 'tour-navbar-scrolled' : ''}`}>
       <div className="tour-navbar-container">
         <div className="tour-navbar-logo">
-          <Link to="/" className="tour-logo-text">
-            Raíces del Golfo
+          <Link to="/">
+            <SharkLogo color={scrolled ? "#0d9488" : "white"} />
           </Link>
         </div>
 
