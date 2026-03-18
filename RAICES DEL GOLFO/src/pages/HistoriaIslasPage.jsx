@@ -5,6 +5,7 @@ function HistoriaIslasPage() {
   return (
     <div className="historia-islas-page">
       <HistoriaIslasComponent />
+      <Footer />
 
     </div>
   );
