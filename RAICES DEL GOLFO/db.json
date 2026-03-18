@@ -1,4 +1,12 @@
 {
-  "users": []
- 
+  "users": [
+    {
+      "email": "admin@admin.com",
+      "password": "admin123",
+      "role": "admin",
+      "id": "dc0b"
+    }
+  ],
+  "reservations": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
