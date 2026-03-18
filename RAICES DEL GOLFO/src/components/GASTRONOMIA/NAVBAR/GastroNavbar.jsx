@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SharkLogo from '../../common/SharkLogo';
 import './GastroNavbar.css';
 
 function GastroNavbar() {
@@ -30,8 +31,8 @@ function GastroNavbar() {
     <nav className={`gastro-navbar ${scrolled ? 'gastro-navbar-scrolled' : ''}`}>
       <div className="gastro-navbar-container">
         <div className="gastro-navbar-logo">
-          <Link to="/" className="gastro-logo-text">
-            Raíces del Golfo
+          <Link to="/">
+            <SharkLogo color={scrolled ? "#0d9488" : "white"} />
           </Link>
         </div>
 

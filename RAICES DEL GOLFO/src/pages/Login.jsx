@@ -1,5 +1,6 @@
 import Inicioseccion from "../components/LOGIN/Inicioseccion";
 import { Link } from "react-router-dom";
+import SharkLogo from "../components/common/SharkLogo";
 import "../styles/Auth.css";
 
 function Login() {
@@ -8,7 +9,7 @@ function Login() {
       <div className="auth-container">
         <Inicioseccion />
         <div className="auth-info-container">
-          <h1>RAICES DEL GOLFO</h1>
+          <SharkLogo color="white" />
           <p>Descubre la belleza del Golfo de Nicoya. Un paraíso natural te espera.</p>
         </div>
       </div>

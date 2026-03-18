@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SharkLogo from '../../common/SharkLogo';
 import './Navbar.css';
 
 function Navbar({ variant }) {
@@ -30,8 +31,8 @@ function Navbar({ variant }) {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''} ${variant === 'solid' ? 'navbar-solid' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" className="logo-text">
-            Raíces del Golfo
+          <Link to="/">
+             <SharkLogo color={scrolled ? "#0d9488" : "white"} />
           </Link>
         </div>
 
