@@ -1,4 +1,33 @@
 {
-  "users": []
- 
+  "users": [
+    {
+      "email": "admin@admin.com",
+      "password": "admin123",
+      "role": "admin",
+      "id": "dc0b"
+    },
+    {
+      "id": "a1d7",
+      "name": "stacy",
+      "email": "stacy@gmail.com",
+      "password": "12345",
+      "role": "cliente"
+    },
+    {
+      "id": "1cb7",
+      "name": "stacy",
+      "email": "stacy@gmail.com",
+      "password": "12345",
+      "role": "cliente"
+    },
+    {
+      "id": "10ff",
+      "name": "stay",
+      "email": "stay@gmail.com",
+      "password": "1234",
+      "role": "cliente"
+    }
+  ],
+  "reservations": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

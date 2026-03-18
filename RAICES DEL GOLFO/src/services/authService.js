@@ -1,12 +1,13 @@
 export const API = 'http://localhost:3007/users';
 
 export const registerUser = async (user) => {
+    const userWithRole = { ...user, role: 'cliente' };
     const response = await fetch(API, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(userWithRole),
     });
     return response.json();
 };
