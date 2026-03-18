@@ -14,12 +14,18 @@ const Inicioseccion = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:5001/users?email=${email}&password=${password}`);
+            const response = await fetch(`http://localhost:3007/users?email=${email}&password=${password}`);
             const users = await response.json();
 
             if (users.length > 0) {
-                localStorage.setItem('user', JSON.stringify(users[0]));
-                navigate('/');
+                const user = users[0];
+                localStorage.setItem('user', JSON.stringify(user));
+                
+                if (user.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setError('El correo electrónico o la contraseña son incorrectos.');
             }
