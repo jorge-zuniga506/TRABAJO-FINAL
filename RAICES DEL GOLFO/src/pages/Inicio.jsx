@@ -6,7 +6,8 @@ import Logros from '../components/INICIO/LOGROS/Logros'
 import Servicios from '../components/INICIO/SERVICIOS/Servicios'
 import Contenedor from '../components/INICIO/CONTENEDOR/Contenedor'
 import Carrusel from '../components/INICIO/CARRUSEL/Carrusel'
-import Footer from '../components/INICIO/IMGULTIMA/ImgUltima'
+import ImgUltima from '../components/INICIO/IMGULTIMA/ImgUltima'
+import Footer from '../components/INICIO/FOOTER/Footer'
 
  function Inicio() {
   return (
@@ -18,6 +19,7 @@ import Footer from '../components/INICIO/IMGULTIMA/ImgUltima'
       <Contenedor />
       <Carrusel />
       <Servicios />
+      <ImgUltima />
       <Footer />
     </div>
 
