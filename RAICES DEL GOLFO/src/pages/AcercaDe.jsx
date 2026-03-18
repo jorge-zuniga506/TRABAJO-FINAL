@@ -7,7 +7,7 @@ function AcercaDe() {
     <div className="acerca-de-page">
       <AcercaDeComponent variant="solid" />
       <Footer />
-      <h1>HistoriaIslasPage</h1>
+      <h1></h1>
     </div>
   );
 }
