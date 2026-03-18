@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './TourCard.css';
 
 function TourCard({ imagen, nombre, descripcion, precio, duracion }) {
@@ -21,7 +22,7 @@ function TourCard({ imagen, nombre, descripcion, precio, duracion }) {
             <span className="price-label">Precio</span>
             <span className="price-value">{precio}</span>
           </div>
-          <button className="tour-card-btn">Reservar</button>
+          <Link to="/login" className="tour-card-btn">Reservar</Link>
         </div>
       </div>
     </div>
