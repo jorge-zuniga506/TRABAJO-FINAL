@@ -61,7 +61,7 @@
 }
 
 .schedule-item {
-    border-left: 3px solid #2e7d32;
+    border-left: 3px solid #37a393;
     padding-left: 1rem;
 }
 
@@ -83,7 +83,7 @@
 
 .time-list li {
     background: #f1f8e9;
-    color: #2e7d32;
+    color: #32997c;
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.85rem;

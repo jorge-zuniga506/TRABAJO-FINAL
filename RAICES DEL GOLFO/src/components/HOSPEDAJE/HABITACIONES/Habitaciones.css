@@ -4,7 +4,7 @@
 }
 
 .habitaciones-hero {
-  background: linear-gradient(rgba(15, 118, 110, 0.8), rgba(13, 148, 136, 0.8)), url('/src/CHIRA/unnamed.jpg');
+  background: linear-gradient(rgba(70, 120, 120, 0.75), rgba(75, 130, 135, 0.75)), url('/src/CHIRA/unnamed.jpg');
   background-size: cover;
   background-position: center;
   height: 40vh;
@@ -59,7 +59,7 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
-  background: var(--primary-color, #0d9488);
+  background: rgba(91, 158, 160, 0.85);
   color: white;
   padding: 8px 15px;
   border-radius: 50px;
@@ -101,7 +101,7 @@
 .btn-reservar-hab {
   width: 100%;
   padding: 12px;
-  background: var(--primary-color, #0d9488);
+  background: #5b9ea0;
   color: white;
   border: none;
   border-radius: 8px;
@@ -111,7 +111,7 @@
 }
 
 .btn-reservar-hab:hover {
-  background: #0f766e;
+  background: #4a8c8c;
 }
 
 @media (max-width: 768px) {
