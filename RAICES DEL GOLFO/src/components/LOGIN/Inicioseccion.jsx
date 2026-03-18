@@ -20,8 +20,13 @@ const Inicioseccion = () => {
             if (user) {
                 localStorage.setItem('user', JSON.stringify(user));
                 
-                if (user.role === 'admin') {
+                // Normalizar el rol para evitar errores de mayúsculas o espacios
+                const role = user.role ? user.role.toLowerCase().trim() : '';
+                
+                if (role === 'admin') {
                     navigate('/admin');
+                } else if (role === 'cliente' || role === 'user') {
+                    navigate('/cliente');
                 } else {
                     navigate('/');
                 }

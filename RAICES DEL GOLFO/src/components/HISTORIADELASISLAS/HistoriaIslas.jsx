@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Navbar from '../INICIO/NAVBAR/Navbar';
-import Footer from '../INICIO/FOOTER/Footer';
 import './HistoriaIslas.css';
 
 const islandsData = [
@@ -102,7 +101,7 @@ function HistoriaIslas() {
         </section>
       </main>
 
-      <Footer />
+
     </div>
   );
 }

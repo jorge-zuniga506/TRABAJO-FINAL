@@ -10,6 +10,7 @@ import Transporte from '../pages/Transporte'
 import AcercaDe from '../pages/AcercaDe'
 import HistoriaIslasPage from '../pages/HistoriaIslasPage'
 import Admin from '../pages/Admin'
+import Cliente from '../pages/Cliente'
 import ProtectedRoute from './ProtectedRoute'
 
 function Routing() {
@@ -31,8 +32,16 @@ function Routing() {
         <Route 
           path="/admin" 
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['admin']}>
               <Admin />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/cliente" 
+          element={
+            <ProtectedRoute allowedRoles={['cliente']}>
+              <Cliente />
             </ProtectedRoute>
           } 
         />

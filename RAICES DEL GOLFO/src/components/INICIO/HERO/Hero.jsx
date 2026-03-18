@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 import bgVideo from '../../../VIDEOS/Costa Rica Whale Watching_ Why Golfo Dulce Is So Special.mp4';
 
@@ -21,25 +22,27 @@ function Hero() {
         </p>
 
         {/* BOTON PEZ */}
-        <div className="fish-btn">
-          <svg className="fish" viewBox="0 0 200 80">
+        <Link to="/historia-de-las-islas" className="fish-btn-link">
+          <div className="fish-btn">
+            <svg className="fish" viewBox="0 0 200 80">
 
-            {/* cuerpo */}
-            <ellipse cx="90" cy="40" rx="55" ry="25" className="fish-body" />
+              {/* cuerpo */}
+              <ellipse cx="90" cy="40" rx="55" ry="25" className="fish-body" />
 
-            {/* cola */}
-            <polygon points="140,40 180,15 180,65" className="fish-tail" />
+              {/* cola */}
+              <polygon points="140,40 180,15 180,65" className="fish-tail" />
 
-            {/* ojo */}
-            <circle cx="60" cy="35" r="4" className="fish-eye" />
+              {/* ojo */}
+              <circle cx="60" cy="35" r="4" className="fish-eye" />
 
-            {/* texto */}
-            <text x="90" y="47" textAnchor="middle" className="fish-text">
-              Explorar
-            </text>
+              {/* texto */}
+              <text x="90" y="47" textAnchor="middle" className="fish-text">
+                Explorar
+              </text>
 
-          </svg>
-        </div>
+            </svg>
+          </div>
+        </Link>
 
       </div>
     </div>

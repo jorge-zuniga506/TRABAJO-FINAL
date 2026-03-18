@@ -13,7 +13,31 @@ export const registerUser = async (user) => {
 };
 
 export const loginUser = async (email, password) => {
-    const response = await fetch(`${API}?email=${email}&password=${password}`);
-    const users = await response.json();
-    return users.length > 0 ? users[0] : null;
+    const cleanEmail = email.trim();
+    const cleanPassword = password.trim();
+    
+    console.log(`Intentando login para: ${cleanEmail}`);
+    
+    try {
+        const response = await fetch(`${API}?email=${cleanEmail}&password=${cleanPassword}`);
+        const users = await response.json();
+        
+        if (users.length > 0) {
+            console.log("Usuario encontrado:", users[0].email);
+            return users[0];
+        } else {
+            // Fallback: buscar manualmente por si json-server query falla
+            console.log("No encontrado vía query, intentando filtrado manual...");
+            const allResponse = await fetch(API);
+            const allUsers = await allResponse.json();
+            const foundUser = allUsers.find(u => 
+                u.email.toLowerCase().trim() === cleanEmail.toLowerCase() && 
+                u.password.toString().trim() === cleanPassword.toString()
+            );
+            return foundUser || null;
+        }
+    } catch (error) {
+        console.error("Error en loginUser:", error);
+        throw error;
+    }
 };
