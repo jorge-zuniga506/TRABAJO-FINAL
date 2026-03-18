@@ -7,16 +7,9 @@
       "id": "dc0b"
     },
     {
-      "id": "a1d7",
-      "name": "stacy",
-      "email": "stacy@gmail.com",
-      "password": "12345",
-      "role": "cliente"
-    },
-    {
-      "id": "10ff",
-      "name": "stay",
-      "email": "stay@gmail.com",
+      "id": "958f",
+      "name": "Jorge Luis ",
+      "email": "jzunigafwdcostarica@gmail.com",
       "password": "1234",
       "role": "cliente"
     },
@@ -28,6 +21,7 @@
       "role": "cliente"
     }
   ],
+<<<<<<< HEAD
   "reservations": [],
   "habitaciones": [
     {
@@ -65,6 +59,48 @@
       "capacidad": 2,
       "tipo": "Cabaña",
       "disponible": true
+=======
+  "reservations": [
+    {
+      "id": "e0d0",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Recorrido por los manglares",
+      "date": "2026-03-19",
+      "time": "10:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:00:21.939Z"
+    },
+    {
+      "id": "661e",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Tour en bote por el Golfo",
+      "date": "2026-03-20",
+      "time": "08:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:10.895Z"
+    },
+    {
+      "id": "46a1",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Avistamiento de aves marinas",
+      "date": "2026-03-28",
+      "time": "03:00 PM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:27.403Z"
+    },
+    {
+      "id": "7190",
+      "userId": "958f",
+      "userName": "Jorge Luis ",
+      "tourName": "Senderismo y tours ecológicos",
+      "date": "2026-03-20",
+      "time": "10:00 AM",
+      "status": "Aprobada",
+      "createdAt": "2026-03-18T20:12:51.003Z"
+>>>>>>> 115db69c5b67ead9a0ae9cccfdb8d597b5d6a1ac
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
