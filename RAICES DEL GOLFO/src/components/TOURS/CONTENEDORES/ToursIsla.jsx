@@ -13,36 +13,36 @@ function ToursIsla() {
     {
       id: 1,
       imagen: islaImg1,
-      nombre: 'Tour de pesca',
-      precio: 'Consultar',
+      nombre: 'Tour de pesca artesanal',
+      precio: '$15 – $25 USD',
       descripcion: 'Experiencia con pescadores locales y técnicas tradicionales.',
     },
     {
       id: 2,
       imagen: islaImg2,
       nombre: 'Tour en bote por el Golfo',
-      precio: 'Consultar',
+      precio: '$20 – $40 USD',
       descripcion: 'Paseos en lancha visitando otras islas cercanas del Golfo de Nicoya.',
     },
     {
       id: 3,
       imagen: islaImg3,
       nombre: 'Kayak y actividades acuáticas',
-      precio: 'Consultar',
+      precio: '$10 – $25 USD',
       descripcion: 'Recorridos en kayak y exploración del mar a tu propio ritmo.',
     },
     {
       id: 4,
       imagen: islaImg4,
       nombre: 'Senderismo y tours ecológicos',
-      precio: 'Consultar',
+      precio: '$10 – $20 USD',
       descripcion: 'Caminatas guiadas por la isla disfrutando de la naturaleza local.',
     },
     {
       id: 5,
       imagen: islaImg5,
       nombre: 'Experiencias de bienestar',
-      precio: 'Consultar',
+      precio: '$10 – $25 USD',
       descripcion: 'Actividades como yoga, meditación y relajación frente al mar.',
     }
   ];

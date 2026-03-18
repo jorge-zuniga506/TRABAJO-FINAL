@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Servicios.css';
 
 function Servicios() {
@@ -45,11 +46,11 @@ function Servicios() {
           </p>
           
           <div className="servicios-action">
-            <button className="servicios-reserve-btn">
+            <Link to="/login" className="servicios-reserve-btn">
               <span className="btn-icon">📅</span>
               RESERVAR AHORA
               <div className="btn-tail"></div>
-            </button>
+            </Link>
           </div>
         </div>
 

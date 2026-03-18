@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { loginUser } from '../../services/authService';
 
 const Inicioseccion = () => {
     const [email, setEmail] = useState('');
@@ -14,12 +15,21 @@ const Inicioseccion = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:3007/users?email=${email}&password=${password}`);
-            const users = await response.json();
+            const user = await loginUser(email, password);
 
-            if (users.length > 0) {
-                localStorage.setItem('user', JSON.stringify(users[0]));
-                navigate('/');
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+                
+                // Normalizar el rol para evitar errores de mayúsculas o espacios
+                const role = user.role ? user.role.toLowerCase().trim() : '';
+                
+                if (role === 'admin') {
+                    navigate('/admin');
+                } else if (role === 'cliente' || role === 'user') {
+                    navigate('/cliente');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setError('El correo electrónico o la contraseña son incorrectos.');
             }

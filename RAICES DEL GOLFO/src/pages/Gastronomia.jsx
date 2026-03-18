@@ -22,7 +22,6 @@ function Gastronomia() {
 
       <GastronomiaPosada />
       <GastronomiaIsla />
-      
       <Footer />
     </div>
   );
