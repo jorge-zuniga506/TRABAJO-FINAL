@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/INICIO/NAVBAR/Navbar';
 import Footer from '../components/INICIO/IMGULTIMA/ImgUltima';
 import TransporteComponent from '../components/TRANSPORTE/Transporte';
-import './AcercaDe.css'; // Reusing similar hero/layout styles if applicable, or we can add specific ones
+import "../components/AcercaDe/AcercaDe.css" // Reusing similar hero/layout styles if applicable, or we can add specific ones
 
 function Transporte() {
   return (

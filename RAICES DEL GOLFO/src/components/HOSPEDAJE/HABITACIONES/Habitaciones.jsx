@@ -9,7 +9,7 @@ const habitacionesData = [
     precio: 85,
     capacidad: 2,
     amenidades: ["Cama Queen", "Iluminación Solar", "Terraza Privada", "Desayuno Típico", "Senderos cercanos"],
-    imagenes: ["/src/CHIRA/unnamed.jpg"]
+    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const habitacionesData = [
     precio: 95,
     capacidad: 3,
     amenidades: ["Cama Matrimonial", "Balcón", "Aire Acondicionado", "TV por cable", "Vistas al mar"],
-    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
+    imagenes: ["https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg"]
   },
   {
     id: 5,
