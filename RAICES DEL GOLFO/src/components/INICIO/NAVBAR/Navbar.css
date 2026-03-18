@@ -194,6 +194,29 @@ body {
   box-shadow: none;
 }
 
+/* Estilos para Navbar Sólido (Transporte, Acerca De, etc.) */
+.navbar.navbar-solid {
+  background: #f8fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar-solid .logo-text,
+.navbar-solid .navbar-link {
+  color: #000;
+  text-shadow: none;
+}
+
+.navbar-solid .navbar-link:hover,
+.navbar-solid .navbar-link.active-link {
+  color: var(--primary-color);
+}
+
+.navbar-solid .menu-icon .bar {
+  background-color: #000;
+  box-shadow: none;
+}
+
 @media screen and (max-width: 960px) {
   .navbar-container {
     padding: 0 1.5rem;

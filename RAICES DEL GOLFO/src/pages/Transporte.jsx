@@ -7,7 +7,7 @@ import "../components/AcercaDe/AcercaDe.css" // Reusing similar hero/layout styl
 function Transporte() {
   return (
     <div className="transporte-page">
-      <Navbar />
+      <Navbar variant="solid" />
 
       <header className="transporte-hero" style={{ 
         backgroundColor: '#2e7d32', 

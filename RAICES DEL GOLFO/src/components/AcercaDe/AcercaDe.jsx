@@ -18,7 +18,7 @@ const sections = [
   }
 ];
 
-function AcercaDe() {
+function AcercaDe({ variant }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Mensaje enviado con éxito. ¡Gracias por contactarnos!');
@@ -26,7 +26,7 @@ function AcercaDe() {
 
   return (
     <div className="acerca-de-page">
-      <Navbar />
+      <Navbar variant={variant} />
 
       <header className="acerca-de-hero">
         <h1>Sobre Nosotros</h1>

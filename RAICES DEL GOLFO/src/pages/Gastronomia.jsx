@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import GastroNavbar from '../components/GASTRONOMIA/NAVBAR/GastroNavbar';
 import GastronomiaPosada from '../components/GASTRONOMIA/CONTENEDORES/GastronomiaPosada';
 import GastronomiaIsla from '../components/GASTRONOMIA/CONTENEDORES/GastronomiaIsla';
-import Footer from '../components/INICIO/FOOTER/Footer';
 
 function Gastronomia() {
   // Ensure the page scrolls to top when loaded (unless there's a hash in the URL)
@@ -22,8 +21,6 @@ function Gastronomia() {
 
       <GastronomiaPosada />
       <GastronomiaIsla />
-      
-      <Footer />
     </div>
   );
 }

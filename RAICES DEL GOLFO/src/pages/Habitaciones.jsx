@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/HOSPEDAJE/NAVBAR/Navbar';
 import HabitacionesComponent from '../components/HOSPEDAJE/HABITACIONES/Habitaciones';
 import '../components/HOSPEDAJE/HABITACIONES/Habitaciones.css';
-import Footer from '../components/INICIO/FOOTER/Footer';
 
 function Habitaciones() {
   return (
@@ -17,7 +16,6 @@ function Habitaciones() {
       <main className="habitaciones-container">
         <HabitacionesComponent />
       </main>
-      <Footer />
     </div>
   );
 }
