@@ -17,7 +17,6 @@ import SessionManager from '../components/common/SessionManager'
 function Routing() {
   return (
     <BrowserRouter>
-      <SessionManager />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/tours" element={<Tours />} />
