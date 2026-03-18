@@ -14,7 +14,7 @@ const Inicioseccion = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:5001/users?email=${email}&password=${password}`);
+            const response = await fetch(`http://localhost:3007/users?email=${email}&password=${password}`);
             const users = await response.json();
 
             if (users.length > 0) {
