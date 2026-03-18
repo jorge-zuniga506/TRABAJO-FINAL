@@ -22,7 +22,8 @@ function Navbar() {
     { name: 'Tours', path: '/tours' },
     { name: 'Gastronomía', path: '/gastronomia' },
     { name: 'Transporte', path: '/transporte' },
-    { name: 'Isla Venado', path: '/isla-venado' },
+    { name: 'Historia de la Isla', path: '/historia-de-la-isla' },
+    { name: 'Acerca de', path: '/acerca-de' },
   ];
 
   return (

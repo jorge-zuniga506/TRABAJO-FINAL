@@ -17,6 +17,7 @@ function Habitaciones() {
       <main className="habitaciones-container">
         <HabitacionesComponent />
       </main>
+      
       <Footer />
     </div>
   );

@@ -9,7 +9,7 @@ const habitacionesData = [
     precio: 85,
     capacidad: 2,
     amenidades: ["Cama Queen", "Iluminación Solar", "Terraza Privada", "Desayuno Típico", "Senderos cercanos"],
-    imagenes: ["/src/CHIRA/unnamed.jpg"]
+    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const habitacionesData = [
     precio: 95,
     capacidad: 3,
     amenidades: ["Cama Matrimonial", "Balcón", "Aire Acondicionado", "TV por cable", "Vistas al mar"],
-    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
+    imagenes: ["https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg"]
   },
   {
     id: 5,
@@ -46,6 +46,24 @@ const habitacionesData = [
     capacidad: 5,
     amenidades: ["Camas King y Individuales", "Cocineta", "Área de estar", "Servicio a la habitación", "Acceso a piscina"],
     imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.2.avif"]
+  },
+  {
+    id: 6,
+    nombre: "Isla San Lucas",
+    description: "Ideal para quienes buscan descanso, aventura y un toque de historia, este espacio ofrece comodidad en medio de un entorno natural protegido, Disfruta de atardeceres increíbles, caminatas por la isla y la paz de un destino poco explorado.",
+    precio: 150,
+    capacidad: 7,
+    amenidades: ["Camas King, cama Queen y literas dobles", "Cocineta", "Área de estar", "Servicio a la habitación", "Acceso a piscina"],
+    imagenes: ["https://a0.muscache.com/im/pictures/miso/Hosting-963071887857759256/original/ea191874-8dbd-461b-a48e-5c8901893413.jpeg"]
+  },
+   {
+    id: 7,
+    nombre: "Isla Caballo",
+    description: "Rodeada de aguas cálidas y paisajes naturales, la isla ofrece playas serenas, caminatas escénicas y la oportunidad de desconectarse del ritmo acelerado.",
+    precio: 150,
+    capacidad: 5,
+    amenidades: ["Espacio rústico o tipo cabaña frente al mar, Área de descanso con camas, Cocina básica o equipada, Zona exterior (terraza o rancho), Acceso a la playa y entorno natural, Ambiente tranquilo, ideal para desconectarse"],
+    imagenes: ["https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"]
   }
 ];
 
