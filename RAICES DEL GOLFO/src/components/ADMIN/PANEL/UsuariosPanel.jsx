@@ -6,6 +6,7 @@ const UsuariosPanel = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     const cargarUsuarios = async () => {
         try {
@@ -22,6 +23,11 @@ const UsuariosPanel = () => {
     useEffect(() => {
         cargarUsuarios();
     }, []);
+
+    // Filtrar usuarios por correo
+    const usuariosFiltrados = usuarios.filter(user => 
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const handleEliminar = async (id) => {
         const result = await Swal.fire({
@@ -74,8 +80,22 @@ const UsuariosPanel = () => {
 
     return (
         <div className="tab-content fade-in">
-            <h1>Gestión de Usuarios</h1>
-            <p>Directorio de usuarios registrados. Se omiten datos sensibles (contraseñas).</p>
+            <header className="panel-header">
+                <div>
+                    <h1>Gestión de Usuarios</h1>
+                    <p>Directorio de usuarios registrados. Se omiten datos sensibles (contraseñas).</p>
+                </div>
+                <div className="search-container">
+                    <i className="icon-search">🔍</i>
+                    <input 
+                        type="text" 
+                        placeholder="Buscar por correo electrónico..."
+                        className="search-input"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </header>
             
             <div className="table-responsive">
                 <table className="admin-table">
@@ -88,33 +108,41 @@ const UsuariosPanel = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios.map(user => (
-                            <tr key={user.id}>
-                                <td>{user.id}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    <span className={`badge-role ${user.role}`}>
-                                        {user.role}
-                                    </span>
-                                </td>
-                                <td>
-                                    <button 
-                                        className="btn-action edit"
-                                        onClick={() => handleCambiarRol(user.id, user.role)}
-                                        title="Cambiar Rol"
-                                    >
-                                        Cambiar Rol
-                                    </button>
-                                    <button 
-                                        className="btn-action delete"
-                                        onClick={() => handleEliminar(user.id)}
-                                        title="Eliminar"
-                                    >
-                                        Eliminar
-                                    </button>
+                        {usuariosFiltrados.length > 0 ? (
+                            usuariosFiltrados.map(user => (
+                                <tr key={user.id}>
+                                    <td>{user.id}</td>
+                                    <td>{user.email}</td>
+                                    <td>
+                                        <span className={`badge-role ${user.role}`}>
+                                            {user.role}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button 
+                                            className="btn-action edit"
+                                            onClick={() => handleCambiarRol(user.id, user.role)}
+                                            title="Cambiar Rol"
+                                        >
+                                            Cambiar Rol
+                                        </button>
+                                        <button 
+                                            className="btn-action delete"
+                                            onClick={() => handleEliminar(user.id)}
+                                            title="Eliminar"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="4" className="no-results">
+                                    No se encontraron usuarios con ese correo.
                                 </td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
