@@ -15,7 +15,7 @@ import ProtectedRoute from './ProtectedRoute'
 
 function Routing() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/tours" element={<Tours />} />
