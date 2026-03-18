@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { loginUser } from '../../services/authService';
 
 const Inicioseccion = () => {
     const [email, setEmail] = useState('');
@@ -14,11 +15,9 @@ const Inicioseccion = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:3007/users?email=${email}&password=${password}`);
-            const users = await response.json();
+            const user = await loginUser(email, password);
 
-            if (users.length > 0) {
-                const user = users[0];
+            if (user) {
                 localStorage.setItem('user', JSON.stringify(user));
                 
                 if (user.role === 'admin') {
