@@ -9,6 +9,7 @@ import Gastronomia from '../pages/Gastronomia'
 import Transporte from '../pages/Transporte'
 import AcercaDe from '../pages/AcercaDe'
 import HistoriaIslasPage from '../pages/HistoriaIslasPage'
+import Admin from '../pages/Admin'
 
 function Routing() {
   return (
@@ -26,6 +27,7 @@ function Routing() {
         {/* Aditionally mapping /isla-venado to AcercaDe as requested by navbar links */}
         <Route path="/isla-venado" element={<AcercaDe />} />
         <Route path="/historia-de-las-islas" element={<HistoriaIslasPage />} />
+        <Route path="/admin" element={<Admin />} />
        
       </Routes>
     </BrowserRouter>
