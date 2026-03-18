@@ -19,8 +19,46 @@
       "email": "stay@gmail.com",
       "password": "1234",
       "role": "cliente"
+    },
+    {
+      "id": "5167",
+      "name": "s",
+      "email": "ssalazarfwdcostarica@gmail.com",
+      "password": "1234",
+      "role": "cliente"
     }
   ],
-  "reservations": [],
+  "reservations": [
+    {
+      "id": "e0d0",
+      "userId": "5167",
+      "userName": "s",
+      "tourName": "Recorrido por los manglares",
+      "date": "2026-03-19",
+      "time": "10:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:00:21.939Z"
+    },
+    {
+      "id": "661e",
+      "userId": "5167",
+      "userName": "s",
+      "tourName": "Tour en bote por el Golfo",
+      "date": "2026-03-20",
+      "time": "08:00 AM",
+      "status": "Pendiente",
+      "createdAt": "2026-03-18T20:04:10.895Z"
+    },
+    {
+      "id": "46a1",
+      "userId": "5167",
+      "userName": "s",
+      "tourName": "Avistamiento de aves marinas",
+      "date": "2026-03-28",
+      "time": "03:00 PM",
+      "status": "Pendiente",
+      "createdAt": "2026-03-18T20:04:27.403Z"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

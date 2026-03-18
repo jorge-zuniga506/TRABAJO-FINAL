@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
+import ReservasPanel from './ReservasPanel';
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -31,12 +32,7 @@ function AdminPanel() {
                     </div>
                 );
             case 'orders':
-                return (
-                    <div className="tab-content fade-in">
-                        <h1>Reservaciones</h1>
-                        <p>Revise el estado de las reservaciones y cuentas por cobrar.</p>
-                    </div>
-                );
+                return <ReservasPanel />;
             case 'settings':
                 return (
                     <div className="tab-content fade-in">
