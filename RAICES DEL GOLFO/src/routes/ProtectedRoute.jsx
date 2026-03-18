@@ -1,25 +1,35 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, allowedRoles }) => {
   const userStr = localStorage.getItem('user');
   
   if (!userStr) {
-    // Si no hay usuario logueado, redirige al login
     return <Navigate to="/login" replace />;
   }
 
   try {
     const user = JSON.parse(userStr);
-    // Verificar si el usuario es administrador
-    if (user.role === 'admin') {
+    
+    // Si no se especifican roles permitidos, solo verificamos que esté logueado
+    if (!allowedRoles) {
+      return children;
+    }
+
+    // Normalizar el rol para evitar errores de comparación
+    const role = user.role ? user.role.toLowerCase().trim() : '';
+    
+    // Verificar si el rol del usuario está en la lista de roles permitidos
+    if (allowedRoles.includes(role)) {
       return children;
     } else {
-      // Si está logueado pero no es admin, redirige al inicio
+      // Si el rol no coincide (ej. un cliente intentando entrar a admin)
+      // Redirigir según su rol real
+      if (role === 'admin') return <Navigate to="/admin" replace />;
+      if (role === 'cliente' || role === 'user') return <Navigate to="/cliente" replace />;
       return <Navigate to="/" replace />;
     }
   } catch (error) {
-    // En caso de error al leer localStorage, redirige al login
     return <Navigate to="/login" replace />;
   }
 };

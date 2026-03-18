@@ -51,7 +51,7 @@ function Navbar({ variant }) {
           {/* Mobile Reservar link (shows in menu on small screens) */}
           <li className="navbar-item mobile-only">
              <Link 
-                to="/reservar" 
+                to="/login" 
                 className="navbar-link btn-reservar-mobile"
                 onClick={() => setMenuOpen(false)}
               >
@@ -62,7 +62,7 @@ function Navbar({ variant }) {
 
         {/* Action Buttons */}
         <div className="navbar-actions">
-          <Link to="/reservar" className="btn-reservar">
+          <Link to="/login" className="btn-reservar">
             Reservar
           </Link>
           <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>

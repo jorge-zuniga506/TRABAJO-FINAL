@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
+import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -24,12 +25,7 @@ function AdminPanel() {
             case 'users':
                 return <UsuariosPanel />;
             case 'products':
-                return (
-                    <div className="tab-content fade-in">
-                        <h1>Habitaciones</h1>
-                        <p>Añada, edite o elimine habitaciones del hotel.</p>
-                    </div>
-                );
+                return <ReservaHabitaciones />;
             case 'orders':
                 return (
                     <div className="tab-content fade-in">
