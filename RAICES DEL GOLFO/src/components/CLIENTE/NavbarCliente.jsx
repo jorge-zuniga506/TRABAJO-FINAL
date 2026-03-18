@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SharkLogo from '../common/SharkLogo';
 import './NavbarCliente.css';
 
 function NavbarCliente() {
@@ -28,8 +29,8 @@ function NavbarCliente() {
     <nav className="navbar-cliente">
       <div className="navbar-cliente-container">
         <div className="navbar-cliente-logo">
-          <Link to="/" className="logo-cliente-text">
-            Raíces del Golfo <span className="cliente-badge">Cliente</span>
+          <Link to="/">
+            <SharkLogo color="#0d9488" suffix="Cliente" />
           </Link>
         </div>
 

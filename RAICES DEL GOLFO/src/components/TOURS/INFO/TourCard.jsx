@@ -1,8 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './TourCard.css';
 
 function TourCard({ imagen, nombre, descripcion, precio, duracion }) {
+  const navigate = useNavigate();
+
+  const handleReserve = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      // Si está logueado, ir al panel de cliente con el nombre del tour seleccionado
+      navigate('/cliente', { state: { selectedTour: nombre, tab: 'reservas' } });
+    } else {
+      // Si no, ir al login
+      navigate('/login');
+    }
+  };
   return (
     <div className="tour-card">
       <div className="tour-card-image-wrapper">
@@ -22,7 +34,7 @@ function TourCard({ imagen, nombre, descripcion, precio, duracion }) {
             <span className="price-label">Precio</span>
             <span className="price-value">{precio}</span>
           </div>
-          <Link to="/login" className="tour-card-btn">Reservar</Link>
+          <button onClick={handleReserve} className="tour-card-btn">Reservar</button>
         </div>
       </div>
     </div>

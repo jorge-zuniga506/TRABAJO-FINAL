@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SharkLogo from '../../common/SharkLogo';
 import './Footer.css';
 
 function Footer() {
@@ -9,7 +10,7 @@ function Footer() {
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section brand-section">
-          <h2 className="footer-logo">Raíces del Golfo</h2>
+          <SharkLogo color="white" />
           <p className="footer-description">
             Descubre la magia del Golfo de Nicoya. Ofrecemos experiencias únicas de hospedaje, tours y gastronomía local con un compromiso hacia el turismo sostenible y la comunidad.
           </p>

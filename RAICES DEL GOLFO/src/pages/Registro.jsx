@@ -1,4 +1,5 @@
 import RegistroForm from "../components/REGISTRO/RegistroForm";
+import SharkLogo from "../components/common/SharkLogo";
 import "../styles/Auth.css";
 
 function Registro() {
@@ -7,7 +8,7 @@ function Registro() {
       <div className="auth-container">
         <RegistroForm />
         <div className="auth-info-container">
-          <h1>RAICES DEL GOLFO</h1>
+          <SharkLogo color="white" />
           <p>Descubre la belleza del Golfo de Nicoya. Un paraíso natural te espera.</p>
         </div>
       </div>

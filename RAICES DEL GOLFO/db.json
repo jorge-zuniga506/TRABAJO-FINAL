@@ -14,5 +14,47 @@
       "role": "cliente"
     }
   ],
+  "reservations": [
+    {
+      "id": "e0d0",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Recorrido por los manglares",
+      "date": "2026-03-19",
+      "time": "10:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:00:21.939Z"
+    },
+    {
+      "id": "661e",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Tour en bote por el Golfo",
+      "date": "2026-03-20",
+      "time": "08:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:10.895Z"
+    },
+    {
+      "id": "46a1",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Avistamiento de aves marinas",
+      "date": "2026-03-28",
+      "time": "03:00 PM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:27.403Z"
+    },
+    {
+      "id": "7190",
+      "userId": "958f",
+      "userName": "Jorge Luis ",
+      "tourName": "Senderismo y tours ecológicos",
+      "date": "2026-03-20",
+      "time": "10:00 AM",
+      "status": "Aprobada",
+      "createdAt": "2026-03-18T20:12:51.003Z"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
