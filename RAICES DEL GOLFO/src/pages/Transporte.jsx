@@ -1,8 +1,10 @@
 import React from 'react';
 import Navbar from '../components/INICIO/NAVBAR/Navbar';
-import Footer from '../components/INICIO/IMGULTIMA/ImgUltima';
+import IMGULTIMA from '../components/INICIO/IMGULTIMA/ImgUltima';
+import Footer from '../components/INICIO/FOOTER/Footer';
 import TransporteComponent from '../components/TRANSPORTE/Transporte';
 import "../components/AcercaDe/AcercaDe.css" // Reusing similar hero/layout styles if applicable, or we can add specific ones
+
 
 function Transporte() {
   return (
@@ -23,7 +25,7 @@ function Transporte() {
       <main className="transporte-container">
         <TransporteComponent />
       </main>
-
+      <IMGULTIMA />
       <Footer />
     </div>
   );
