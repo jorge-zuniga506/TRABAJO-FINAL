@@ -12,7 +12,7 @@ function Transporte() {
       <Navbar variant="solid" />
 
       <header className="transporte-hero" style={{ 
-        backgroundColor: '#2e7d32', 
+        backgroundColor: '#006666', 
         padding: '100px 20px', 
         textAlign: 'center', 
         color: 'white',
