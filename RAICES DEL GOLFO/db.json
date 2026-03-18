@@ -28,7 +28,52 @@
       "role": "cliente"
     }
   ],
-  "reservations": [],
+  "reservations": [
+    {
+      "id": "res001",
+      "userId": "a1d7",
+      "userName": "stacy",
+      "habId": "hab001",
+      "habName": "Habitación Estándar",
+      "precio": 45,
+      "fecha": "2026-03-20",
+      "status": "Aprobada",
+      "createdAt": "2026-03-18T10:00:00Z"
+    },
+    {
+      "id": "res002",
+      "userId": "10ff",
+      "userName": "stay",
+      "habId": "hab002",
+      "habName": "Habitación Deluxe",
+      "precio": 85,
+      "fecha": "2026-03-21",
+      "status": "Pendiente",
+      "createdAt": "2026-03-18T11:30:00Z"
+    },
+    {
+      "id": "res003",
+      "userId": "6b6a",
+      "userName": "Test Admin",
+      "habId": "hab003",
+      "habName": "Suite Familiar",
+      "precio": 125,
+      "fecha": "2026-03-22",
+      "status": "Aprobada",
+      "createdAt": "2026-03-18T12:15:00Z"
+    },
+    {
+      "id": "res004",
+      "userId": "a1d7",
+      "userName": "stacy",
+      "habId": "af61",
+      "habName": "Habitación doble",
+      "precio": 75,
+      "fecha": "2026-03-23",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T14:45:00Z"
+    }
+  ],
   "habitaciones": [
     {
       "nombre": "Habitación Estándar",
@@ -65,7 +110,18 @@
       "capacidad": 2,
       "tipo": "Cabaña",
       "disponible": true
+    },
+    {
+      "id": "708f",
+      "nombre": "HOLA ",
+      "descripcion": "muy amplio\n",
+      "precio": 90,
+      "capacidad": 2,
+      "tipo": "Cabaña",
+      "disponible": true,
+      "imagen": "https://scontent-gua1-1.xx.fbcdn.net/v/t39.30808-6/579635792_1658927928572715_445972822719760260_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7b2446&_nc_ohc=K5rXfcLzCk0Q7kNvwFVX7GF&_nc_oc=AdrUqX_3ZweUF3ZFnnW8dA1Lt3qiMMQRtCCcaer5GqxvQePBdQ6xLaRMw2xsYRY0m36IVuSkr1W6PJxVASLB6Hjn&_nc_zt=23&_nc_ht=scontent-gua1-1.xx&_nc_gid=S2XyC36TrrF9t0sEJnNb8w&_nc_ss=8&oh=00_AfwVd9g-GoxE5viWJHOnCnfICczTrJ89H06lBZCKEMC7lg&oe=69C10754"
     }
   ],
+  "balances": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

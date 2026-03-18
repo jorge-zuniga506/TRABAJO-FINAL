@@ -17,6 +17,7 @@ const FORM_INICIAL = {
     capacidad: '',
     tipo: 'Estándar',
     disponible: true,
+    imagen: '',
 };
 
 const ReservaHabitaciones = () => {
@@ -70,6 +71,7 @@ const ReservaHabitaciones = () => {
             capacidad: hab.capacidad,
             tipo: hab.tipo,
             disponible: hab.disponible,
+            imagen: hab.imagen || '',
         });
         setFormError('');
         setModalOpen(true);
@@ -199,8 +201,17 @@ const ReservaHabitaciones = () => {
                                 filtradas.map(hab => (
                                     <tr key={hab.id}>
                                         <td>
-                                            <div className="hab-nombre">{hab.nombre}</div>
-                                            <div className="hab-desc">{hab.descripcion}</div>
+                                            <div className="hab-info-flex">
+                                                {hab.imagen && (
+                                                    <div className="hab-table-img">
+                                                        <img src={hab.imagen} alt={hab.nombre} />
+                                                    </div>
+                                                )}
+                                                <div>
+                                                    <div className="hab-nombre">{hab.nombre}</div>
+                                                    <div className="hab-desc">{hab.descripcion}</div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <span className={`badge-tipo badge-${hab.tipo?.toLowerCase().replace(/\s/g, '-')}`}>
@@ -314,6 +325,24 @@ const ReservaHabitaciones = () => {
                                     rows={3}
                                     placeholder="Descripción de la habitación..."
                                 />
+                            </div>
+
+                            <div className="hab-form-group">
+                                <label>URL de la Imagen</label>
+                                <div className="img-input-container">
+                                    <input
+                                        type="url"
+                                        name="imagen"
+                                        value={form.imagen}
+                                        onChange={handleChange}
+                                        placeholder="https://ejemplo.com/foto.jpg"
+                                    />
+                                    {form.imagen && (
+                                        <div className="img-preview-mini">
+                                            <img src={form.imagen} alt="Vista previa" onError={(e) => e.target.style.display = 'none'} />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="hab-form-check">
