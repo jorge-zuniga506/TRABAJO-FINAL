@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../INICIO/NAVBAR/Navbar';
 import Footer from '../INICIO/IMGULTIMA/ImgUltima';
+import Swal from 'sweetalert2';
 import "../AcercaDe/AcercaDe.css"
 
 const sections = [
@@ -21,7 +22,12 @@ const sections = [
 function AcercaDe({ variant }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Mensaje enviado con éxito. ¡Gracias por contactarnos!');
+    Swal.fire({
+      title: '¡Enviado!',
+      text: 'Mensaje enviado con éxito. ¡Gracias por contactarnos!',
+      icon: 'success',
+      confirmButtonColor: '#0d9488'
+    });
   };
 
   return (
