@@ -28,8 +28,6 @@
       "role": "cliente"
     }
   ],
-<<<<<<< HEAD
-  "reservations": [],
   "habitaciones": [
     {
       "nombre": "Habitación Estándar",
@@ -66,86 +64,133 @@
       "capacidad": 2,
       "tipo": "Cabaña",
       "disponible": true
-=======
+    }
+  ],
   "reservations": [
-        {
-          "id": "e0d0",
-          "userId": null,
-          "userName": "s",
-          "tourName": "Recorrido por los manglares",
-          "date": "2026-03-19",
-          "time": "10:00 AM",
-          "status": "Denegada",
-          "createdAt": "2026-03-18T20:00:21.939Z"
-        },
-        {
-          "id": "661e",
-          "userId": null,
-          "userName": "s",
-          "tourName": "Tour en bote por el Golfo",
-          "date": "2026-03-20",
-          "time": "08:00 AM",
-          "status": "Denegada",
-          "createdAt": "2026-03-18T20:04:10.895Z"
-        },
-        {
-          "id": "46a1",
-          "userId": null,
-          "userName": "s",
-          "tourName": "Avistamiento de aves marinas",
-          "date": "2026-03-28",
-          "time": "03:00 PM",
-          "status": "Denegada",
-          "createdAt": "2026-03-18T20:04:27.403Z"
-        },
-        {
-          "id": "7190",
-          "userId": "958f",
-          "userName": "Jorge Luis ",
-          "tourName": "Senderismo y tours ecológicos",
-          "date": "2026-03-20",
-          "time": "10:00 AM",
-          "status": "Aprobada",
-          "createdAt": "2026-03-18T20:12:51.003Z"
->>>>>>> 115db69c5b67ead9a0ae9cccfdb8d597b5d6a1ac
-  "reservations": [],
-          "habitaciones": [
-            {
-              "nombre": "Habitación Estándar",
-              "descripcion": "Cómoda habitación con vista al jardín, cama doble y baño privado.",
-              "precio": 45,
-              "capacidad": 5,
-              "tipo": "Suite",
-              "disponible": true,
-              "id": "hab001"
-            },
-            {
-              "id": "hab002",
-              "nombre": "Habitación Deluxe",
-              "descripcion": "Amplia habitación con vista al mar, cama king y amenidades premium.",
-              "precio": 85,
-              "capacidad": 2,
-              "tipo": "Deluxe",
-              "disponible": true
-            },
-            {
-              "nombre": "Suite Familiar",
-              "descripcion": "Espaciosa suite con sala de estar, perfecta para familias de hasta 4 personas.",
-              "precio": 125,
-              "capacidad": 7,
-              "tipo": "Suite",
-              "disponible": true,
-              "id": "hab003"
-            },
-            {
-              "id": "af61",
-              "nombre": "Habitación doble ",
-              "descripcion": "Habitación doble con cama doble, aire acondicionado, TV y baño privado",
-              "precio": 75,
-              "capacidad": 2,
-              "tipo": "Cabaña",
-              "disponible": true
-            }
-          ],
-          "$schema": "./node_modules/json-server/schema.json"
-        }
+    {
+      "id": "e0d0",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Recorrido por los manglares",
+      "date": "2026-03-19",
+      "time": "10:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:00:21.939Z"
+    },
+    {
+      "id": "661e",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Tour en bote por el Golfo",
+      "date": "2026-03-20",
+      "time": "08:00 AM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:10.895Z"
+    },
+    {
+      "id": "46a1",
+      "userId": null,
+      "userName": "s",
+      "tourName": "Avistamiento de aves marinas",
+      "date": "2026-03-28",
+      "time": "03:00 PM",
+      "status": "Denegada",
+      "createdAt": "2026-03-18T20:04:27.403Z"
+    },
+    {
+      "id": "7190",
+      "userId": "958f",
+      "userName": "Jorge Luis ",
+      "tourName": "Senderismo y tours ecológicos",
+      "date": "2026-03-20",
+      "time": "10:00 AM",
+      "status": "Aprobada",
+      "createdAt": "2026-03-18T20:12:51.003Z"
+    }
+  ],
+  "tours": [
+    {
+      "id": "t001",
+      "nombre": "Tour de pesca artesanal",
+      "descripcion": "Experiencia con pescadores locales donde se aprenden técnicas tradicionales y se participa en la pesca.",
+      "precio": 15,
+      "duracion": "4 horas",
+      "tipo": "Posada",
+      "disponible": true
+    },
+    {
+      "id": "t002",
+      "nombre": "Taller de artesanías",
+      "descripcion": "Taller para crear artesanías locales con materiales de la zona.",
+      "precio": 10,
+      "duracion": "3 horas",
+      "tipo": "Posada",
+      "disponible": true
+    },
+    {
+      "id": "t003",
+      "nombre": "Avistamiento de aves marinas",
+      "descripcion": "Tour guiado para observar aves en la isla y alrededores.",
+      "precio": 12,
+      "duracion": "1 hora",
+      "tipo": "Posada",
+      "disponible": true
+    },
+    {
+      "id": "t004",
+      "nombre": "Recorrido por los manglares",
+      "descripcion": "Paseo en bote por manglares con guía local, observando fauna y ecosistemas.",
+      "precio": 14,
+      "duracion": "2 horas",
+      "tipo": "Posada",
+      "disponible": true
+    },
+    {
+      "id": "t005",
+      "nombre": "Tour en bote por el Golfo",
+      "descripcion": "Paseos en lancha visitando otras islas cercanas del Golfo de Nicoya.",
+      "precio": 30,
+      "duracion": "3 horas",
+      "tipo": "Isla",
+      "disponible": true
+    },
+    {
+      "id": "t006",
+      "nombre": "Kayak y actividades acuáticas",
+      "descripcion": "Recorridos en kayak y exploración del mar a tu propio ritmo.",
+      "precio": 20,
+      "duracion": "2 horas",
+      "tipo": "Isla",
+      "disponible": true
+    },
+    {
+      "id": "t007",
+      "nombre": "Senderismo y tours ecológicos",
+      "descripcion": "Caminatas guiadas por la isla disfrutando de la naturaleza local.",
+      "precio": 15,
+      "duracion": "2 horas",
+      "tipo": "Isla",
+      "disponible": true
+    },
+    {
+      "id": "t008",
+      "nombre": "Experiencias de bienestar",
+      "descripcion": "Actividades como yoga, meditación y relajación frente al mar.",
+      "precio": 18,
+      "duracion": "1.5 horas",
+      "tipo": "Isla",
+      "disponible": true
+    },
+    {
+      "id": "4940",
+      "nombre": "La torre ",
+      "descripcion": "jsjsjdj",
+      "precio": 20,
+      "duracion": "2h",
+      "imagen": "https://parquediversiones.com/sites/default/files/styles/pd_card/public/2024-05/asset-h5-torre.jpg.webp?itok=hsRXS5c5",
+      "tipo": "Isla",
+      "disponible": true
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
