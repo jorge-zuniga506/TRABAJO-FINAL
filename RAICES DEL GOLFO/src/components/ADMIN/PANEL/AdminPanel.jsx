@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
-import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
-import ReservacionesPanel from './ReservacionesPanel';
+import HabitacionesPanel from './HabitacionesPanel';
+import ResevaTours from '../TOURS/ResevaTours';
+import ReservasPanel from './ReservasPanel';
+
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -22,7 +24,7 @@ function AdminPanel() {
                 fetch('http://localhost:3007/users'),
                 fetch('http://localhost:3007/reservations')
             ]);
-            
+
             const users = await usersRes.json();
             const reservations = await resRes.json();
 
@@ -76,12 +78,12 @@ function AdminPanel() {
                 );
             case 'users':
                 return <UsuariosPanel />;
-            case 'products':
-                return <ReservaHabitaciones />;
+            case 'rooms':
+                return <HabitacionesPanel />;
             case 'tours':
                 return <ResevaTours />;
             case 'orders':
-                return <ReservacionesPanel />;
+                return <ReservasPanel />;
             case 'settings':
                 return (
                     <div className="tab-content fade-in">
@@ -121,14 +123,14 @@ function AdminPanel() {
                         </li>
                         <li>
                             <button
-                                className={`sidebar-btn ${activeTab === 'products' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('products')}
+                                className={`sidebar-btn ${activeTab === 'rooms' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('rooms')}
                             >
                                 Habitaciones
                             </button>
                         </li>
                         <li>
-                            <button 
+                            <button
                                 className={`sidebar-btn ${activeTab === 'tours' ? 'active' : ''}`}
                                 onClick={() => setActiveTab('tours')}
                             >
@@ -143,6 +145,7 @@ function AdminPanel() {
                                 Reservaciones
                             </button>
                         </li>
+
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'settings' ? 'active' : ''}`}
