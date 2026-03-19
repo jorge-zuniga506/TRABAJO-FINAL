@@ -5,7 +5,7 @@ import Opiniones from '../INICIO/OPINIONES/Opiniones';
 import { getTours } from '../../services/CrudTours';
 import { getReservasByUser, createReserva } from '../../services/CrudReservas';
 import { getRoomReservasByUser, createRoomReserva } from '../../services/CrudReservasHabitaciones';
-import { getHabitaciones } from '../../services/CrudHabitaciones';
+import { updateUserProfile } from '../../services/CrudParaUsuarios';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -50,6 +50,13 @@ function ClientePag() {
     checkOut: '',
     time: '12:00 PM',
     price: 0
+  });
+
+  // Estados para edición de perfil
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedUser, setEditedUser] = useState({
+    name: '',
+    photo: ''
   });
 
   useEffect(() => {
@@ -537,29 +544,111 @@ function ClientePag() {
           </div>
         );
       case 'perfil':
-        const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+        const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+        
+        const handleStartEditing = () => {
+          setEditedUser({
+            name: userName,
+            photo: currentUser.photo || ''
+          });
+          setIsEditing(true);
+        };
+
+        const handleSaveProfile = async () => {
+          try {
+            const updated = await updateUserProfile(currentUser.id, editedUser);
+            
+            // Actualizar localStorage
+            const newUser = { ...currentUser, ...updated };
+            localStorage.setItem('user', JSON.stringify(newUser));
+            
+            // Actualizar estados locales
+            setUserName(updated.name || userName);
+            setIsEditing(false);
+            alert('Perfil actualizado con éxito');
+          } catch (error) {
+            alert('Error al actualizar el perfil');
+          }
+        };
+
         return (
           <div className="cliente-tab-content fade-in">
             <h2>Mi Perfil</h2>
             <div className="profile-details-card">
               <div className="profile-header-info">
-                <div className="avatar-large">{userName.substring(0, 2).toUpperCase()}</div>
-                <div>
-                  <h3>{userName}</h3>
-                  <p>Miembro de Raíces del Golfo</p>
-                </div>
+                {isEditing ? (
+                  <div className="avatar-edit-container">
+                    <div className="avatar-large">
+                      {editedUser.photo ? (
+                        <img src={editedUser.photo} alt="Profile" className="avatar-img" />
+                      ) : (
+                        editedUser.name.substring(0, 2).toUpperCase()
+                      )}
+                    </div>
+                    <div className="input-group-modern">
+                      <label>URL de Foto de Perfil:</label>
+                      <input 
+                        type="text" 
+                        value={editedUser.photo} 
+                        onChange={(e) => setEditedUser({...editedUser, photo: e.target.value})}
+                        placeholder="https://ejemplo.com/foto.jpg"
+                        className="input-custom-style"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="avatar-large">
+                      {currentUser.photo ? (
+                        <img src={currentUser.photo} alt="Profile" className="avatar-img" />
+                      ) : (
+                        userName.substring(0, 2).toUpperCase()
+                      )}
+                    </div>
+                    <div>
+                      <h3>{userName}</h3>
+                      <p>Cliente de Raíces del Golfo</p>
+                    </div>
+                  </>
+                )}
               </div>
+              
               <div className="details-list">
                 <div className="detail-item">
-                  <span className="detail-label">Email:</span>
-                  <span className="detail-value">{storedUser.email || 'No disponible'}</span>
+                  <span className="detail-label">Nombre:</span>
+                  {isEditing ? (
+                    <input 
+                      type="text" 
+                      value={editedUser.name} 
+                      onChange={(e) => setEditedUser({...editedUser, name: e.target.value})}
+                      className="input-custom-style"
+                    />
+                  ) : (
+                    <span className="detail-value">{userName}</span>
+                  )}
                 </div>
                 <div className="detail-item">
-                  <span className="detail-label">Rol:</span>
-                  <span className="detail-value">{storedUser.role || 'Cliente'}</span>
+                  <span className="detail-label">Email:</span>
+                  <span className="detail-value">{currentUser.email || 'No disponible'}</span>
                 </div>
+                {!isEditing && (
+                  <div className="detail-item">
+                    <span className="detail-label">Rol:</span>
+                    <span className="detail-value">{currentUser.role || 'Cliente'}</span>
+                  </div>
+                )}
               </div>
-              <button className="btn-edit" onClick={() => alert('Próximamente: Edición de perfil')}>Editar Perfil</button>
+              
+              <div className="profile-actions-footer">
+                {isEditing ? (
+                  <>
+                    <button className="btn-save-modern" onClick={handleSaveProfile}>Guardar Cambios</button>
+                    <button className="btn-cancel-modern" onClick={() => setIsEditing(false)}>Cancelar</button>
+                  </>
+                ) : (
+                  <button className="btn-edit" onClick={handleStartEditing}>Editar Perfil</button>
+                )}
+              </div>
             </div>
           </div>
         );
