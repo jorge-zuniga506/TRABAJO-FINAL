@@ -28,6 +28,7 @@
       "role": "cliente"
     }
   ],
+<<<<<<< HEAD
   "reservations": [],
   "habitaciones": [
     {
@@ -65,7 +66,86 @@
       "capacidad": 2,
       "tipo": "Cabaña",
       "disponible": true
-    }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
-}
+=======
+  "reservations": [
+        {
+          "id": "e0d0",
+          "userId": null,
+          "userName": "s",
+          "tourName": "Recorrido por los manglares",
+          "date": "2026-03-19",
+          "time": "10:00 AM",
+          "status": "Denegada",
+          "createdAt": "2026-03-18T20:00:21.939Z"
+        },
+        {
+          "id": "661e",
+          "userId": null,
+          "userName": "s",
+          "tourName": "Tour en bote por el Golfo",
+          "date": "2026-03-20",
+          "time": "08:00 AM",
+          "status": "Denegada",
+          "createdAt": "2026-03-18T20:04:10.895Z"
+        },
+        {
+          "id": "46a1",
+          "userId": null,
+          "userName": "s",
+          "tourName": "Avistamiento de aves marinas",
+          "date": "2026-03-28",
+          "time": "03:00 PM",
+          "status": "Denegada",
+          "createdAt": "2026-03-18T20:04:27.403Z"
+        },
+        {
+          "id": "7190",
+          "userId": "958f",
+          "userName": "Jorge Luis ",
+          "tourName": "Senderismo y tours ecológicos",
+          "date": "2026-03-20",
+          "time": "10:00 AM",
+          "status": "Aprobada",
+          "createdAt": "2026-03-18T20:12:51.003Z"
+>>>>>>> 115db69c5b67ead9a0ae9cccfdb8d597b5d6a1ac
+  "reservations": [],
+          "habitaciones": [
+            {
+              "nombre": "Habitación Estándar",
+              "descripcion": "Cómoda habitación con vista al jardín, cama doble y baño privado.",
+              "precio": 45,
+              "capacidad": 5,
+              "tipo": "Suite",
+              "disponible": true,
+              "id": "hab001"
+            },
+            {
+              "id": "hab002",
+              "nombre": "Habitación Deluxe",
+              "descripcion": "Amplia habitación con vista al mar, cama king y amenidades premium.",
+              "precio": 85,
+              "capacidad": 2,
+              "tipo": "Deluxe",
+              "disponible": true
+            },
+            {
+              "nombre": "Suite Familiar",
+              "descripcion": "Espaciosa suite con sala de estar, perfecta para familias de hasta 4 personas.",
+              "precio": 125,
+              "capacidad": 7,
+              "tipo": "Suite",
+              "disponible": true,
+              "id": "hab003"
+            },
+            {
+              "id": "af61",
+              "nombre": "Habitación doble ",
+              "descripcion": "Habitación doble con cama doble, aire acondicionado, TV y baño privado",
+              "precio": 75,
+              "capacidad": 2,
+              "tipo": "Cabaña",
+              "disponible": true
+            }
+          ],
+          "$schema": "./node_modules/json-server/schema.json"
+        }
