@@ -28,6 +28,7 @@
       "role": "cliente"
     }
   ],
+  "reservations": [],
   "habitaciones": [
     {
       "nombre": "Habitación Estándar",
@@ -64,148 +65,16 @@
       "capacidad": 2,
       "tipo": "Cabaña",
       "disponible": true
-    }
-  ],
-  "reservations": [
-    {
-      "id": "e0d0",
-      "userId": null,
-      "userName": "s",
-      "tourName": "Recorrido por los manglares",
-      "date": "2026-03-19",
-      "time": "10:00 AM",
-      "status": "Denegada",
-      "createdAt": "2026-03-18T20:00:21.939Z"
     },
     {
-      "id": "661e",
-      "userId": null,
-      "userName": "s",
-      "tourName": "Tour en bote por el Golfo",
-      "date": "2026-03-20",
-      "time": "08:00 AM",
-      "status": "Denegada",
-      "createdAt": "2026-03-18T20:04:10.895Z"
-    },
-    {
-      "id": "46a1",
-      "userId": null,
-      "userName": "s",
-      "tourName": "Avistamiento de aves marinas",
-      "date": "2026-03-28",
-      "time": "03:00 PM",
-      "status": "Denegada",
-      "createdAt": "2026-03-18T20:04:27.403Z"
-    },
-    {
-      "id": "7190",
-      "userId": "958f",
-      "userName": "Jorge Luis ",
-      "tourName": "Senderismo y tours ecológicos",
-      "date": "2026-03-20",
-      "time": "10:00 AM",
-      "status": "Aprobada",
-      "createdAt": "2026-03-18T20:12:51.003Z"
-    }
-  ],
-  "tours": [
-    {
-      "id": "t001",
-      "nombre": "Tour de pesca artesanal",
-      "descripcion": "Experiencia con pescadores locales donde se aprenden técnicas tradicionales y se participa en la pesca.",
-      "precio": 15,
-      "duracion": "4 horas",
-      "tipo": "Posada",
-      "disponible": true
-    },
-    {
-      "id": "t002",
-      "nombre": "Taller de artesanías",
-      "descripcion": "Taller para crear artesanías locales con materiales de la zona.",
-      "precio": 10,
-      "duracion": "3 horas",
-      "tipo": "Posada",
-      "disponible": true
-    },
-    {
-      "id": "t003",
-      "nombre": "Avistamiento de aves marinas",
-      "descripcion": "Tour guiado para observar aves en la isla y alrededores.",
-      "precio": 12,
-      "duracion": "1 hora",
-      "tipo": "Posada",
-      "disponible": true
-    },
-    {
-      "id": "t004",
-      "nombre": "Recorrido por los manglares",
-      "descripcion": "Paseo en bote por manglares con guía local, observando fauna y ecosistemas.",
-      "precio": 14,
-      "duracion": "2 horas",
-      "tipo": "Posada",
-      "disponible": true
-    },
-    {
-      "id": "t005",
-      "nombre": "Tour en bote por el Golfo",
-      "descripcion": "Paseos en lancha visitando otras islas cercanas del Golfo de Nicoya.",
-      "precio": 30,
-      "duracion": "3 horas",
-      "tipo": "Isla",
-      "disponible": true
-    },
-    {
-      "id": "t006",
-      "nombre": "Kayak y actividades acuáticas",
-      "descripcion": "Recorridos en kayak y exploración del mar a tu propio ritmo.",
-      "precio": 20,
-      "duracion": "2 horas",
-      "tipo": "Isla",
-      "disponible": true
-    },
-    {
-      "id": "t007",
-      "nombre": "Senderismo y tours ecológicos",
-      "descripcion": "Caminatas guiadas por la isla disfrutando de la naturaleza local.",
-      "precio": 15,
-      "duracion": "2 horas",
-      "tipo": "Isla",
-      "disponible": true
-    },
-    {
-      "id": "t008",
-      "nombre": "Experiencias de bienestar",
-      "descripcion": "Actividades como yoga, meditación y relajación frente al mar.",
-      "precio": 18,
-      "duracion": "1.5 horas",
-      "tipo": "Isla",
-      "disponible": true
-    }
-  ],
-  "room_reservations": [
-    {
-      "id": "hr001",
-      "userId": "a1d7",
-      "userName": "stacy",
-      "roomName": "Habitación Deluxe",
-      "roomId": "hab002",
-      "checkIn": "2026-04-10",
-      "checkOut": "2026-04-15",
-      "price": 425,
-      "status": "Aprobada",
-      "createdAt": "2026-03-19T10:00:00.000Z"
-    },
-    {
-      "id": "hr002",
-      "userId": "dc0b",
-      "userName": "admin",
-      "roomName": "Suite Familiar",
-      "roomId": "hab003",
-      "checkIn": "2026-05-01",
-      "checkOut": "2026-05-05",
-      "price": 500,
-      "status": "Pendiente",
-      "createdAt": "2026-03-19T11:00:00.000Z"
+      "id": "708f",
+      "nombre": "HOLA ",
+      "descripcion": "muy amplio\n",
+      "precio": 90,
+      "capacidad": 2,
+      "tipo": "Cabaña",
+      "disponible": true,
+      "imagen": "https://scontent-gua1-1.xx.fbcdn.net/v/t39.30808-6/579635792_1658927928572715_445972822719760260_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7b2446&_nc_ohc=K5rXfcLzCk0Q7kNvwFVX7GF&_nc_oc=AdrUqX_3ZweUF3ZFnnW8dA1Lt3qiMMQRtCCcaer5GqxvQePBdQ6xLaRMw2xsYRY0m36IVuSkr1W6PJxVASLB6Hjn&_nc_zt=23&_nc_ht=scontent-gua1-1.xx&_nc_gid=S2XyC36TrrF9t0sEJnNb8w&_nc_ss=8&oh=00_AfwVd9g-GoxE5viWJHOnCnfICczTrJ89H06lBZCKEMC7lg&oe=69C10754"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
