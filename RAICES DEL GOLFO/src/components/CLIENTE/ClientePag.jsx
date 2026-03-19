@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import NavbarCliente from './NavbarCliente';
+import Opiniones from '../INICIO/OPINIONES/Opiniones';
 import { getTours } from '../../services/CrudTours';
 import { getReservasByUser, createReserva } from '../../services/CrudReservas';
 import { getRoomReservasByUser, createRoomReserva } from '../../services/CrudReservasHabitaciones';
-import { updateUserProfile } from '../../services/CrudParaUsuarios';
+import { getHabitaciones } from '../../services/CrudHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -74,7 +75,7 @@ function ClientePag() {
 
         const [toursRes, habRes] = await Promise.all([
           getTours(),
-          fetch('http://localhost:3007/habitaciones').then(res => res.json())
+          getHabitaciones()
         ]);
 
         setAllTours(toursRes.filter(t => t.disponible));
@@ -539,25 +540,7 @@ function ClientePag() {
       case 'servicios':
         return (
           <div className="cliente-tab-content fade-in">
-            <h2>Nuestros Servicios</h2>
-            <p>Descubre todo lo que Raíces del Golfo tiene preparado para ti.</p>
-            <div className="services-grid">
-              <div className="service-promo-card">
-                <h3>Tours de Isla</h3>
-                <p>Navega y descubre la magia del golfo.</p>
-                <button className="btn-outline">Ver más</button>
-              </div>
-              <div className="service-promo-card">
-                <h3>Gastronomía</h3>
-                <p>Sabores auténticos de la zona.</p>
-                <button className="btn-outline">Ver menú</button>
-              </div>
-              <div className="service-promo-card">
-                <h3>Hospedaje</h3>
-                <p>Descanso total frente al mar.</p>
-                <button className="btn-outline">Ver disponibilidad</button>
-              </div>
-            </div>
+            <Opiniones />
           </div>
         );
       case 'perfil':
@@ -709,7 +692,7 @@ function ClientePag() {
                 className={`client-nav-btn ${activeTab === 'servicios' ? 'active' : ''}`}
                 onClick={() => setActiveTab('servicios')}
               >
-                <span className="nav-icon">🌴</span> Servicios
+                <span className="nav-icon">⭐</span> Opiniones
               </button>
             </li>
             <li>
