@@ -103,7 +103,7 @@ function ClientePag() {
             fetchReservasHab(user.id);
         }
       } catch (e) {
-        console.error("Error al leer usuario", e);
+         console.error("Error al leer usuario", e);
       }
     }
   }, [location.state]);
