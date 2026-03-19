@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import NavbarCliente from './NavbarCliente';
 import { getTours } from '../../services/CrudTours';
 import { getReservasByUser, createReserva } from '../../services/CrudReservas';
+import { getRoomReservasByUser } from '../../services/CrudReservasHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -26,8 +27,11 @@ function ClientePag() {
   const [activeTab, setActiveTab] = useState('inicio');
   const [userName, setUserName] = useState('Cliente');
   const [reservas, setReservas] = useState([]);
+  const [reservasHab, setReservasHab] = useState([]);
   const [allTours, setAllTours] = useState([]);
+  const [allHabitaciones, setAllHabitaciones] = useState([]);
   const [loadingTours, setLoadingTours] = useState(true);
+  const [loadingHab, setLoadingHab] = useState(true);
   
   // Estado para el formulario de nueva reserva
   const [newReserva, setNewReserva] = useState({
@@ -56,6 +60,19 @@ function ClientePag() {
         }
     };
 
+    const fetchHabitaciones = async () => {
+        try {
+            const response = await fetch('http://localhost:3007/habitaciones');
+            const data = await response.json();
+            setAllHabitaciones(data);
+        } catch (error) {
+            console.error("Error fetching habitaciones:", error);
+        } finally {
+            setLoadingHab(false);
+        }
+    };
+
+    fetchHabitaciones();
     fetchTours();
 
     const fetchReservas = async (userId) => {
@@ -66,13 +83,25 @@ function ClientePag() {
             console.error("Error al cargar reservas", error);
         }
     };
+
+    const fetchReservasHab = async (userId) => {
+        try {
+            const data = await getRoomReservasByUser(userId);
+            setReservasHab(data);
+        } catch (error) {
+            console.error("Error al cargar reservas de habitaciones", error);
+        }
+    };
     // Intentar obtener el nombre del usuario desde localStorage si existe
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
         const user = JSON.parse(storedUser);
         if (user.name) setUserName(user.name);
-        if (user.id) fetchReservas(user.id);
+        if (user.id) {
+            fetchReservas(user.id);
+            fetchReservasHab(user.id);
+        }
       } catch (e) {
         console.error("Error al leer usuario", e);
       }
@@ -300,6 +329,63 @@ function ClientePag() {
             </div>
           </div>
         );
+      case 'hospedajes':
+        // Reutilizar el mismo estilo visual que 'reservas' (tours)
+        return (
+          <div className="cliente-tab-content fade-in">
+            <div className="reservas-layout-new">
+              <section className="history-section-visual">
+                <div className="section-header-flex">
+                  <h2>Mis Reservas de Habitaciones</h2>
+                  <p>Consulta el estado de tus estancias solicitadas en Raíces del Golfo.</p>
+                </div>
+
+                {reservasHab.length === 0 ? (
+                  <div className="empty-state-visual">
+                    <div className="empty-icon">🏠</div>
+                    <p>Aún no tienes ninguna reserva de habitación en tu historial.</p>
+                  </div>
+                ) : (
+                  <div className="reservation-cards-grid">
+                    {reservasHab.slice().reverse().map((res) => {
+                      const roomInfo = allHabitaciones.find(h => h.id === res.roomId || h.nombre === res.roomName);
+                      // Imágenes por defecto como en Habitaciones.jsx
+                      const IMAGENES_DEFECTO = [
+                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
+                        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
+                        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80",
+                        "https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80"
+                      ];
+                      
+                      return (
+                        <div className="reserva-card-item" key={res.id}>
+                          <div className="reserva-card-img">
+                            <img 
+                              src={roomInfo?.imagenes ? roomInfo.imagenes[0] : IMAGENES_DEFECTO[0]} 
+                              alt={res.roomName} 
+                              onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
+                            />
+                            <span className={`reserva-status-tag ${res.status.toLowerCase()}`}>
+                              {res.status}
+                            </span>
+                          </div>
+                          <div className="reserva-card-body">
+                            <h3>{res.roomName}</h3>
+                            <div className="reserva-meta">
+                              <span>📅 {res.checkIn} al {res.checkOut}</span>
+                              <span style={{fontWeight: '700', color: '#0d9488'}}>💰 ${res.price} USD</span>
+                            </div>
+                            {roomInfo && <p className="reserva-desc-short">{roomInfo.descripcion.substring(0, 80)}...</p>}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+            </div>
+          </div>
+        );
       case 'servicios':
         return (
           <div className="cliente-tab-content fade-in">
@@ -375,7 +461,15 @@ function ClientePag() {
                 className={`client-nav-btn ${activeTab === 'reservas' ? 'active' : ''}`}
                 onClick={() => setActiveTab('reservas')}
               >
-                <span className="nav-icon">📋</span> Mis Reservas
+                <span className="nav-icon">📋</span> Mis Tours
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`client-nav-btn ${activeTab === 'hospedajes' ? 'active' : ''}`}
+                onClick={() => setActiveTab('hospedajes')}
+              >
+                <span className="nav-icon">🏠</span> Reservas de Habitaciones
               </button>
             </li>
             <li>
