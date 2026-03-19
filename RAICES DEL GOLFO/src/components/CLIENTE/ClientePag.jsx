@@ -200,7 +200,7 @@ function ClientePag() {
               <div className="client-stat-card">
                 <div className="stat-icon">⭐</div>
                 <div className="stat-info">
-                  <h3>Puntos Raíces</h3>
+                  <h3>Puntos de Canjeo</h3>
                   <p>150 pts</p>
                 </div>
               </div>
