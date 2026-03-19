@@ -402,6 +402,33 @@
     to { left: 100%; }
 }
 
+.price-preview-total {
+    background: #f0fdfa;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccfbf1;
+    margin: 10px 0;
+}
+
+.price-preview-total span {
+    font-size: 0.9rem;
+    color: #0f766e;
+    font-weight: 500;
+}
+
+.price-preview-total strong {
+    font-size: 1.2rem;
+    color: #0d9488;
+}
+
+.small-text {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
 .mt-10 {
     margin-top: 10px;
 }

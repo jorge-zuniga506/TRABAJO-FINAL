@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
-import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
+import HabitacionesPanel from './HabitacionesPanel';
 import ResevaTours from '../TOURS/ResevaTours';
 import ReservasPanel from './ReservasPanel';
 
@@ -78,12 +78,12 @@ function AdminPanel() {
                 );
             case 'users':
                 return <UsuariosPanel />;
-            case 'products':
-                return <ReservaHabitaciones />;
+            case 'rooms':
+                return <HabitacionesPanel />;
             case 'tours':
                 return <ResevaTours />;
             case 'orders':
-                return <ReservacionesPanel />;
+                return <ReservasPanel />;
             case 'settings':
                 return (
                     <div className="tab-content fade-in">
@@ -130,7 +130,7 @@ function AdminPanel() {
                             </button>
                         </li>
                         <li>
-                            <button 
+                            <button
                                 className={`sidebar-btn ${activeTab === 'tours' ? 'active' : ''}`}
                                 onClick={() => setActiveTab('tours')}
                             >

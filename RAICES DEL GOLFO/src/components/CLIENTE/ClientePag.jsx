@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import NavbarCliente from './NavbarCliente';
 import { getTours } from '../../services/CrudTours';
 import { getReservasByUser, createReserva } from '../../services/CrudReservas';
-import { getRoomReservasByUser } from '../../services/CrudReservasHabitaciones';
+import { getRoomReservasByUser, createRoomReserva } from '../../services/CrudReservasHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -32,109 +32,142 @@ function ClientePag() {
   const [allHabitaciones, setAllHabitaciones] = useState([]);
   const [loadingTours, setLoadingTours] = useState(true);
   const [loadingHab, setLoadingHab] = useState(true);
-  
-  // Estado para el formulario de nueva reserva
+
+  // Estado para el formulario de nueva reserva de tour
   const [newReserva, setNewReserva] = useState({
     tour: '',
     fecha: '',
     horario: ''
   });
 
+  // Estado para el formulario de nueva reserva de habitación
+  const [newRoomReserva, setNewRoomReserva] = useState({
+    roomId: '',
+    roomName: '',
+    checkIn: '',
+    checkOut: '',
+    time: '12:00 PM',
+    price: 0
+  });
+
   useEffect(() => {
     // Verificar si venimos desde un botón de "Reservar" en un Tour
     if (location.state && location.state.tab) {
-        setActiveTab(location.state.tab);
-        if (location.state.selectedTour) {
-            setNewReserva(prev => ({ ...prev, tour: location.state.selectedTour }));
-        }
-    }
-
-    const fetchTours = async () => {
-        try {
-            const data = await getTours();
-            setAllTours(data.filter(t => t.disponible));
-        } catch (error) {
-            console.error("Error fetching tours:", error);
-        } finally {
-            setLoadingTours(false);
-        }
-    };
-
-    const fetchHabitaciones = async () => {
-        try {
-            const response = await fetch('http://localhost:3007/habitaciones');
-            const data = await response.json();
-            setAllHabitaciones(data);
-        } catch (error) {
-            console.error("Error fetching habitaciones:", error);
-        } finally {
-            setLoadingHab(false);
-        }
-    };
-
-    fetchHabitaciones();
-    fetchTours();
-
-    const fetchReservas = async (userId) => {
-        try {
-            const data = await getReservasByUser(userId);
-            setReservas(data);
-        } catch (error) {
-            console.error("Error al cargar reservas", error);
-        }
-    };
-
-    const fetchReservasHab = async (userId) => {
-        try {
-            const data = await getRoomReservasByUser(userId);
-            setReservasHab(data);
-        } catch (error) {
-            console.error("Error al cargar reservas de habitaciones", error);
-        }
-    };
-    // Intentar obtener el nombre del usuario desde localStorage si existe
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      try {
-        const user = JSON.parse(storedUser);
-        if (user.name) setUserName(user.name);
-        if (user.id) {
-            fetchReservas(user.id);
-            fetchReservasHab(user.id);
-        }
-      } catch (e) {
-        console.error("Error al leer usuario", e);
+      setActiveTab(location.state.tab);
+      if (location.state.selectedTour) {
+        setNewReserva(prev => ({ ...prev, tour: location.state.selectedTour }));
       }
     }
+
+    const fetchData = async () => {
+      try {
+        setLoadingTours(true);
+        setLoadingHab(true);
+
+        const [toursRes, habRes] = await Promise.all([
+          getTours(),
+          fetch('http://localhost:3007/habitaciones').then(res => res.json())
+        ]);
+
+        setAllTours(toursRes.filter(t => t.disponible));
+        setAllHabitaciones(habRes);
+
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          if (user.name) setUserName(user.name);
+          if (user.id) {
+            const [resTours, resHab] = await Promise.all([
+              getReservasByUser(user.id),
+              getRoomReservasByUser(user.id)
+            ]);
+            setReservas(resTours);
+            setReservasHab(resHab);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoadingTours(false);
+        setLoadingHab(false);
+      }
+    };
+
+    fetchData();
   }, [location.state]);
 
   const handleCreateReserva = async (e) => {
     e.preventDefault();
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-    
+
     if (!newReserva.tour || !newReserva.fecha || !newReserva.horario) {
-        alert("Por favor completa todos los campos");
-        return;
+      alert("Por favor completa todos los campos");
+      return;
     }
 
     const reservaData = {
-        userId: storedUser.id,
-        userName: storedUser.name || storedUser.email,
-        tourName: newReserva.tour,
-        date: newReserva.fecha,
-        time: newReserva.horario,
-        status: 'Pendiente',
-        createdAt: new Date().toISOString()
+      userId: storedUser.id,
+      userName: storedUser.name || storedUser.email,
+      tourName: newReserva.tour,
+      date: newReserva.fecha,
+      time: newReserva.horario,
+      status: 'Pendiente',
+      createdAt: new Date().toISOString()
     };
 
     try {
-        const added = await createReserva(reservaData);
-        setReservas([...reservas, added]);
-        setNewReserva({ tour: '', fecha: '', horario: '' });
-        alert("¡Solicitud de reserva enviada con éxito!");
+      const added = await createReserva(reservaData);
+      setReservas([...reservas, added]);
+      setNewReserva({ tour: '', fecha: '', horario: '' });
+      alert("¡Solicitud de reserva enviada con éxito!");
     } catch (error) {
-        alert("Error al enviar la reserva");
+      alert("Error al enviar la reserva");
     }
+  };
+
+  const handleCreateRoomReserva = async (e) => {
+    e.preventDefault();
+    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (!newRoomReserva.roomId || !newRoomReserva.checkIn || !newRoomReserva.checkOut) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
+
+    const reservaData = {
+      userId: storedUser.id,
+      userName: storedUser.name || storedUser.email,
+      roomId: newRoomReserva.roomId,
+      roomName: newRoomReserva.roomName,
+      checkIn: newRoomReserva.checkIn,
+      checkOut: newRoomReserva.checkOut,
+      time: newRoomReserva.time,
+      price: newRoomReserva.price,
+      status: 'Pendiente',
+      createdAt: new Date().toISOString()
+    };
+
+    try {
+      const added = await createRoomReserva(reservaData);
+      setReservasHab([...reservasHab, added]);
+      setNewRoomReserva({ roomId: '', roomName: '', checkIn: '', checkOut: '', time: '12:00 PM', price: 0 });
+      alert("¡Solicitud de reserva de habitación enviada con éxito!");
+    } catch (error) {
+      alert("Error al enviar la reserva de habitación");
+    }
+  };
+
+  const calculateTotalPrice = (roomId, checkIn, checkOut) => {
+    const room = allHabitaciones.find(h => h.id === roomId);
+    if (room && checkIn && checkOut) {
+      const start = new Date(checkIn);
+      const end = new Date(checkOut);
+      const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+      if (nights > 0) {
+        return room.precio * nights;
+      }
+    }
+    return 0;
   };
 
   const renderContent = () => {
@@ -146,13 +179,13 @@ function ClientePag() {
               <h1>¡Hola, {userName}! 👋</h1>
               <p>Bienvenido a tu panel personal de Raíces del Golfo.</p>
             </header>
-            
+
             <div className="client-stats-grid">
               <div className="client-stat-card">
                 <div className="stat-icon">📅</div>
                 <div className="stat-info">
                   <h3>Próximo Viaje</h3>
-                  <p>Aún sin reservas</p>
+                  <p>{reservasHab.length > 0 ? reservasHab[reservasHab.length - 1].checkIn : 'Aún sin reservas'}</p>
                 </div>
               </div>
               <div className="client-stat-card">
@@ -166,7 +199,7 @@ function ClientePag() {
                 <div className="stat-icon">⛵</div>
                 <div className="stat-info">
                   <h3>Tours Hechos</h3>
-                  <p>0</p>
+                  <p>{reservas.length}</p>
                 </div>
               </div>
             </div>
@@ -178,7 +211,7 @@ function ClientePag() {
                   <span className="action-emoji">🛶</span>
                   <span>Explorar Tours</span>
                 </button>
-                <button className="action-card" onClick={() => setActiveTab('servicios')}>
+                <button className="action-card" onClick={() => setActiveTab('hospedajes')}>
                   <span className="action-emoji">🏨</span>
                   <span>Ver Habitaciones</span>
                 </button>
@@ -197,7 +230,6 @@ function ClientePag() {
         return (
           <div className="cliente-tab-content fade-in">
             <div className="reservas-layout-new">
-              {/* Sección Superior: Solicitud con Previsualización */}
               <section className="booking-section">
                 <div className="section-header-flex">
                   <h2>Solicitar Nueva Reserva</h2>
@@ -207,7 +239,6 @@ function ClientePag() {
                 <div className="booking-container-flex">
                   <div className="booking-form-wrapper">
                     <form className="reserva-form-compact" onSubmit={handleCreateReserva}>
-                      {/* Selector de Tour Visual (Horizontal Scroll) */}
                       <div className="form-group">
                         <label>1. Selecciona tu aventura:</label>
                         <div className="tour-selection-mini">
@@ -215,10 +246,10 @@ function ClientePag() {
                             <p>Cargando tours...</p>
                           ) : (
                             allTours.map(t => (
-                              <div 
-                                key={t.id} 
+                              <div
+                                key={t.id}
                                 className={`tour-mini-option ${newReserva.tour === t.nombre ? 'selected' : ''}`}
-                                onClick={() => setNewReserva({...newReserva, tour: t.nombre})}
+                                onClick={() => setNewReserva({ ...newReserva, tour: t.nombre })}
                               >
                                 <div className="mini-img"><img src={t.imagen || IMAGES_MAP[t.id] || posada1} alt={t.nombre} /></div>
                                 <span className="mini-name">{t.nombre}</span>
@@ -228,17 +259,17 @@ function ClientePag() {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="form-row-vertical">
                         <div className="form-group">
                           <label>2. ¿Cuándo vienes?</label>
-                          <input 
-                              type="date" 
-                              className="input-custom-style"
-                              min={new Date().toISOString().split('T')[0]}
-                              value={newReserva.fecha}
-                              onChange={(e) => setNewReserva({...newReserva, fecha: e.target.value})}
-                              required
+                          <input
+                            type="date"
+                            className="input-custom-style"
+                            min={new Date().toISOString().split('T')[0]}
+                            value={newReserva.fecha}
+                            onChange={(e) => setNewReserva({ ...newReserva, fecha: e.target.value })}
+                            required
                           />
                         </div>
 
@@ -246,10 +277,10 @@ function ClientePag() {
                           <label>3. Elige el horario:</label>
                           <div className="time-slots-grid">
                             {horariosDisponibles.map(h => (
-                              <div 
-                                key={h} 
+                              <div
+                                key={h}
                                 className={`time-slot ${newReserva.horario === h ? 'selected' : ''}`}
-                                onClick={() => setNewReserva({...newReserva, horario: h})}
+                                onClick={() => setNewReserva({ ...newReserva, horario: h })}
                               >
                                 {h}
                               </div>
@@ -265,7 +296,6 @@ function ClientePag() {
                     </form>
                   </div>
 
-                  {/* Previsualización del Tour seleccionado */}
                   <div className={`tour-preview-card ${selectedTourInfo ? 'active' : 'inactive'}`}>
                     {selectedTourInfo ? (
                       <>
@@ -288,7 +318,6 @@ function ClientePag() {
                 </div>
               </section>
 
-              {/* Historial de Reservas como Tarjetas */}
               <section className="history-section-visual">
                 <div className="section-header-flex">
                   <h2>Mi Historial de Reservas</h2>
@@ -330,14 +359,135 @@ function ClientePag() {
           </div>
         );
       case 'hospedajes':
-        // Reutilizar el mismo estilo visual que 'reservas' (tours)
+        const selectedRoomInfo = allHabitaciones.find(h => h.id === newRoomReserva.roomId);
+        const IMAGENES_DEFECTO = [
+          "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
+          "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
+          "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80",
+          "https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80"
+        ];
+
         return (
           <div className="cliente-tab-content fade-in">
             <div className="reservas-layout-new">
+              {/* Nueva sección: Formulario de Reserva de Habitación */}
+              <section className="booking-section">
+                <div className="section-header-flex">
+                  <h2>Reservar Habitación</h2>
+                  <p>Selecciona tu habitación ideal y las fechas de tu estancia.</p>
+                </div>
+
+                <div className="booking-container-flex">
+                  <div className="booking-form-wrapper">
+                    <form className="reserva-form-compact" onSubmit={handleCreateRoomReserva}>
+                      <div className="form-group">
+                        <label>1. Elige tu habitación:</label>
+                        <div className="tour-selection-mini">
+                          {loadingHab ? (
+                            <p>Cargando habitaciones...</p>
+                          ) : (
+                            allHabitaciones.map(h => (
+                              <div
+                                key={h.id}
+                                className={`tour-mini-option ${newRoomReserva.roomId === h.id ? 'selected' : ''}`}
+                                onClick={() => {
+                                  const totalPrice = calculateTotalPrice(h.id, newRoomReserva.checkIn, newRoomReserva.checkOut);
+                                  setNewRoomReserva({ ...newRoomReserva, roomId: h.id, roomName: h.nombre, price: totalPrice });
+                                }}
+                              >
+                                <div className="mini-img"><img src={h.imagen || IMAGENES_DEFECTO[0]} alt={h.nombre} /></div>
+                                <span className="mini-name">{h.nombre}</span>
+                                {newRoomReserva.roomId === h.id && <div className="mini-check">✓</div>}
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="form-row-vertical">
+                        <div className="form-group">
+                          <label>2. Fecha de Entrada (Check-in):</label>
+                          <input
+                            type="date"
+                            className="input-custom-style"
+                            min={new Date().toISOString().split('T')[0]}
+                            value={newRoomReserva.checkIn}
+                            onChange={(e) => {
+                              const totalPrice = calculateTotalPrice(newRoomReserva.roomId, e.target.value, newRoomReserva.checkOut);
+                              setNewRoomReserva({ ...newRoomReserva, checkIn: e.target.value, price: totalPrice });
+                            }}
+                            required
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <label>3. Fecha de Salida (Check-out):</label>
+                          <input
+                            type="date"
+                            className="input-custom-style"
+                            min={newRoomReserva.checkIn || new Date().toISOString().split('T')[0]}
+                            value={newRoomReserva.checkOut}
+                            onChange={(e) => {
+                              const totalPrice = calculateTotalPrice(newRoomReserva.roomId, newRoomReserva.checkIn, e.target.value);
+                              setNewRoomReserva({ ...newRoomReserva, checkOut: e.target.value, price: totalPrice });
+                            }}
+                            required
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <label>4. Hora de llegada aproximada:</label>
+                          <input
+                            type="time"
+                            className="input-custom-style"
+                            value={newRoomReserva.time}
+                            onChange={(e) => setNewRoomReserva({ ...newRoomReserva, time: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      {newRoomReserva.price > 0 && (
+                        <div className="price-preview-total">
+                          <span>Total Estimado:</span>
+                          <strong>${newRoomReserva.price} USD</strong>
+                        </div>
+                      )}
+
+                      <button type="submit" className={`btn-booking-modern ${newRoomReserva.roomId && newRoomReserva.checkIn && newRoomReserva.checkOut ? 'ready' : ''}`}>
+                        <span>SOLICITAR RESERVA</span>
+                        <div className="btn-shine"></div>
+                      </button>
+                    </form>
+                  </div>
+
+                  <div className={`tour-preview-card ${selectedRoomInfo ? 'active' : 'inactive'}`}>
+                    {selectedRoomInfo ? (
+                      <>
+                        <div className="preview-image-container">
+                          <img src={selectedRoomInfo.imagen || IMAGENES_DEFECTO[0]} alt={selectedRoomInfo.nombre} />
+                          <div className="preview-price-badge">${selectedRoomInfo.precio} / noche</div>
+                        </div>
+                        <div className="preview-info">
+                          <h3>{selectedRoomInfo.nombre}</h3>
+                          <p><strong>Capacidad:</strong> {selectedRoomInfo.capacidad} personas</p>
+                          <p>{selectedRoomInfo.descripcion}</p>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="preview-placeholder">
+                        <div className="placeholder-icon">🛏️</div>
+                        <p>Selecciona una habitación para ver los detalles.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+
+              {/* Historial de Reservas */}
               <section className="history-section-visual">
                 <div className="section-header-flex">
                   <h2>Mis Reservas de Habitaciones</h2>
-                  <p>Consulta el estado de tus estancias solicitadas en Raíces del Golfo.</p>
+                  <p>Consulta el estado de tus estancias solicitadas.</p>
                 </div>
 
                 {reservasHab.length === 0 ? (
@@ -349,20 +499,12 @@ function ClientePag() {
                   <div className="reservation-cards-grid">
                     {reservasHab.slice().reverse().map((res) => {
                       const roomInfo = allHabitaciones.find(h => h.id === res.roomId || h.nombre === res.roomName);
-                      // Imágenes por defecto como en Habitaciones.jsx
-                      const IMAGENES_DEFECTO = [
-                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
-                        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
-                        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80",
-                        "https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80"
-                      ];
-                      
                       return (
                         <div className="reserva-card-item" key={res.id}>
                           <div className="reserva-card-img">
-                            <img 
-                              src={roomInfo?.imagenes ? roomInfo.imagenes[0] : IMAGENES_DEFECTO[0]} 
-                              alt={res.roomName} 
+                            <img
+                              src={roomInfo?.imagen || IMAGENES_DEFECTO[0]}
+                              alt={res.roomName}
                               onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
                             />
                             <span className={`reserva-status-tag ${res.status.toLowerCase()}`}>
@@ -373,9 +515,9 @@ function ClientePag() {
                             <h3>{res.roomName}</h3>
                             <div className="reserva-meta">
                               <span>📅 {res.checkIn} al {res.checkOut}</span>
-                              <span style={{fontWeight: '700', color: '#0d9488'}}>💰 ${res.price} USD</span>
+                              <span style={{ fontWeight: '700', color: '#0d9488' }}>💰 ${res.price} USD</span>
                             </div>
-                            {roomInfo && <p className="reserva-desc-short">{roomInfo.descripcion.substring(0, 80)}...</p>}
+                            {res.time && <div className="small-text" style={{ marginTop: '5px' }}>⏰ LLegada: {res.time}</div>}
                           </div>
                         </div>
                       );
@@ -449,7 +591,7 @@ function ClientePag() {
         <aside className="cliente-sidebar">
           <ul className="client-nav-list">
             <li>
-              <button 
+              <button
                 className={`client-nav-btn ${activeTab === 'inicio' ? 'active' : ''}`}
                 onClick={() => setActiveTab('inicio')}
               >
@@ -457,7 +599,7 @@ function ClientePag() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className={`client-nav-btn ${activeTab === 'reservas' ? 'active' : ''}`}
                 onClick={() => setActiveTab('reservas')}
               >
@@ -465,7 +607,7 @@ function ClientePag() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className={`client-nav-btn ${activeTab === 'hospedajes' ? 'active' : ''}`}
                 onClick={() => setActiveTab('hospedajes')}
               >
@@ -473,7 +615,7 @@ function ClientePag() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className={`client-nav-btn ${activeTab === 'servicios' ? 'active' : ''}`}
                 onClick={() => setActiveTab('servicios')}
               >
@@ -481,7 +623,7 @@ function ClientePag() {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className={`client-nav-btn ${activeTab === 'perfil' ? 'active' : ''}`}
                 onClick={() => setActiveTab('perfil')}
               >
