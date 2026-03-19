@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Habitaciones.css';
 
 // ── Habitaciones estáticas (con imágenes y amenidades propias) ──
@@ -81,6 +82,7 @@ const IMAGENES_DEFECTO = [
 ];
 
 function Habitaciones() {
+  const navigate = useNavigate();
   const [habitacionesAdmin, setHabitacionesAdmin] = useState([]);
   const [cargando, setCargando] = useState(true);
 
@@ -141,7 +143,12 @@ function Habitaciones() {
               </div>
             )}
 
-            <button className="btn-reservar-hab">Reservar Habitación</button>
+            <button 
+              className="btn-reservar-hab"
+              onClick={() => navigate('/login')}
+            >
+              Reservar Habitación
+            </button>
           </div>
         </div>
       ))}
