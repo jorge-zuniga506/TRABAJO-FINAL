@@ -41,3 +41,19 @@ export const updateUserRole = async (id, currentRole) => {
         throw error;
     }
 };
+export const updateUserProfile = async (id, userData) => {
+    try {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+        if (!response.ok) throw new Error('Error al actualizar el perfil');
+        return await response.json();
+    } catch (error) {
+        console.error("Error updateUserProfile:", error);
+        throw error;
+    }
+};
