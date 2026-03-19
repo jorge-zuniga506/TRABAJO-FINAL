@@ -187,16 +187,32 @@
       "duracion": "1.5 horas",
       "tipo": "Isla",
       "disponible": true
+    }
+  ],
+  "room_reservations": [
+    {
+      "id": "hr001",
+      "userId": "a1d7",
+      "userName": "stacy",
+      "roomName": "Habitación Deluxe",
+      "roomId": "hab002",
+      "checkIn": "2026-04-10",
+      "checkOut": "2026-04-15",
+      "price": 425,
+      "status": "Aprobada",
+      "createdAt": "2026-03-19T10:00:00.000Z"
     },
     {
-      "id": "4940",
-      "nombre": "La torre ",
-      "descripcion": "jsjsjdj",
-      "precio": 20,
-      "duracion": "2h",
-      "imagen": "https://parquediversiones.com/sites/default/files/styles/pd_card/public/2024-05/asset-h5-torre.jpg.webp?itok=hsRXS5c5",
-      "tipo": "Isla",
-      "disponible": true
+      "id": "hr002",
+      "userId": "dc0b",
+      "userName": "admin",
+      "roomName": "Suite Familiar",
+      "roomId": "hab003",
+      "checkIn": "2026-05-01",
+      "checkOut": "2026-05-05",
+      "price": 500,
+      "status": "Pendiente",
+      "createdAt": "2026-03-19T11:00:00.000Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
