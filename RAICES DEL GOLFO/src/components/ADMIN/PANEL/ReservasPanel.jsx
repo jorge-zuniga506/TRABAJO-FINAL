@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { getAllReservas, updateReserva } from '../../../services/CrudReservas';
+import './ReservasPanel.css';
 
 function ReservasPanel() {
   const [reservas, setReservas] = useState([]);
@@ -10,8 +12,7 @@ function ReservasPanel() {
 
   const fetchReservas = async () => {
     try {
-      const response = await fetch('http://localhost:3007/reservations');
-      const data = await response.json();
+      const data = await getAllReservas();
       // Ordenar por fecha de creación (más recientes primero)
       data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setReservas(data);
@@ -25,18 +26,11 @@ function ReservasPanel() {
   const handleStatusUpdate = async (id, newStatus) => {
     try {
       const reservaToUpdate = reservas.find(r => r.id === id);
-      const updatedReserva = { ...reservaToUpdate, status: newStatus };
+      const updatedData = { ...reservaToUpdate, status: newStatus };
 
-      const response = await fetch(`http://localhost:3007/reservations/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedReserva)
-      });
-
-      if (response.ok) {
-        setReservas(reservas.map(r => r.id === id ? updatedReserva : r));
-        alert(`Reserva ${newStatus.toLowerCase()} con éxito`);
-      }
+      await updateReserva(id, updatedData);
+      setReservas(reservas.map(r => r.id === id ? updatedData : r));
+      alert(`Reserva ${newStatus.toLowerCase()} con éxito`);
     } catch (error) {
       alert("Error al actualizar la reserva");
     }
@@ -117,101 +111,6 @@ function ReservasPanel() {
           </tbody>
         </table>
       </div>
-
-      <style jsx>{`
-        .panel-header {
-          margin-bottom: 30px;
-        }
-        
-        .panel-header h1 {
-          font-size: 2rem;
-          color: #0f172a;
-          margin-bottom: 8px;
-        }
-
-        .admin-table-container {
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
-        }
-
-        .admin-table {
-          width: 100%;
-          border-collapse: collapse;
-          text-align: left;
-        }
-
-        .admin-table th {
-          background-color: #f8fafc;
-          padding: 16px 20px;
-          color: #64748b;
-          font-size: 0.85rem;
-          font-weight: 600;
-          text-transform: uppercase;
-        }
-
-        .admin-table td {
-          padding: 16px 20px;
-          border-bottom: 1px solid #f1f5f9;
-        }
-
-        .client-cell {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .user-id {
-          font-size: 0.75rem;
-          color: #94a3b8;
-        }
-
-        .status-badge {
-          padding: 4px 10px;
-          border-radius: 6px;
-          font-size: 0.75rem;
-          font-weight: 700;
-        }
-
-        .status-badge.pendiente { background: #fef3c7; color: #92400e; }
-        .status-badge.aprobada { background: #dcfce7; color: #166534; }
-        .status-badge.denegada { background: #fee2e2; color: #991b1b; }
-
-        .action-buttons {
-          display: flex;
-          gap: 10px;
-        }
-
-        .btn-approve, .btn-deny {
-          width: 32px;
-          height: 32px;
-          border-radius: 6px;
-          border: none;
-          cursor: pointer;
-          font-weight: bold;
-          transition: all 0.2s;
-        }
-
-        .btn-approve {
-          background: #0d9488;
-          color: white;
-        }
-
-        .btn-approve:hover { background: #0f766e; }
-
-        .btn-deny {
-          background: #ef4444;
-          color: white;
-        }
-
-        .btn-deny:hover { background: #dc2626; }
-
-        .action-complete {
-          font-size: 0.85rem;
-          color: #94a3b8;
-          font-style: italic;
-        }
-      `}</style>
     </div>
   );
 }

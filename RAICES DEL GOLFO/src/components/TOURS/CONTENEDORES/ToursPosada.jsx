@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TourCard from '../INFO/TourCard';
+import { getTours } from '../../../services/CrudTours';
 import './ToursSection.css'; // Shared CSS for both sections
 
 import posadaImg1 from '../img toures/posada1.jpg';
@@ -7,41 +8,31 @@ import posadaImg2 from '../img toures/posada2.jpg';
 import posadaImg3 from '../img toures/posada3.jpg';
 import posadaImg4 from '../img toures/posada4.jpg';
 
+const IMAGES = {
+  't001': posadaImg1,
+  't002': posadaImg2,
+  't003': posadaImg3,
+  't004': posadaImg4,
+};
+
 function ToursPosada() {
-  const tours = [
-    {
-      id: 1,
-      imagen: posadaImg1,
-      nombre: 'Tour de pesca artesanal',
-      duracion: '4 horas',
-      precio: '$15 USD',
-      descripcion: 'Experiencia con pescadores locales donde se aprenden técnicas tradicionales y se participa en la pesca.',
-    },
-    {
-      id: 2,
-      imagen: posadaImg2,
-      nombre: 'Taller de artesanías',
-      duracion: '3 horas',
-      precio: '$10 USD',
-      descripcion: 'Taller para crear artesanías locales con materiales de la zona.',
-    },
-    {
-      id: 3,
-      imagen: posadaImg3,
-      nombre: 'Avistamiento de aves marinas',
-      duracion: '1 hora',
-      precio: '$12 - $16 USD',
-      descripcion: 'Tour guiado para observar aves en la isla y alrededores.',
-    },
-    {
-      id: 4,
-      imagen: posadaImg4,
-      nombre: 'Recorrido por los manglares',
-      duracion: '2 horas',
-      precio: '$12 - $16 USD',
-      descripcion: 'Paseo en bote por manglares con guía local, observando fauna y ecosistemas.',
-    }
-  ];
+  const [tours, setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const data = await getTours();
+        // Filter only Posada tours
+        setTours(data.filter(t => t.tipo === 'Posada' && t.disponible));
+      } catch (error) {
+        console.error("Error fetching tours:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTours();
+  }, []);
 
   return (
     <section id="tours-posada" className="tours-section posada-bg">
@@ -55,9 +46,20 @@ function ToursPosada() {
         </div>
         
         <div className="tours-grid">
-          {tours.map(tour => (
-            <TourCard key={tour.id} {...tour} />
-          ))}
+          {loading ? (
+            <p>Cargando tours...</p>
+          ) : tours.length > 0 ? (
+            tours.map(tour => (
+              <TourCard 
+                key={tour.id} 
+                {...tour} 
+                imagen={tour.imagen || IMAGES[tour.id] || posadaImg1} 
+                precio={`$${tour.precio} USD`}
+              />
+            ))
+          ) : (
+            <p>No hay tours disponibles en este momento.</p>
+          )}
         </div>
       </div>
     </section>

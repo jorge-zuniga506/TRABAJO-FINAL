@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import NavbarCliente from './NavbarCliente';
+import { getTours } from '../../services/CrudTours';
+import { getReservasByUser, createReserva } from '../../services/CrudReservas';
+import { getRoomReservasByUser } from '../../services/CrudReservasHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -14,23 +17,21 @@ import isla3 from '../TOURS/img toures/isla3.jpg';
 import isla4 from '../TOURS/img toures/isla4.jpg';
 import isla5 from '../TOURS/img toures/isla5.jpg';
 
-const TOUR_DATA = [
-  { id: 'p1', nombre: 'Tour de pesca artesanal', imagen: posada1, precio: '$15 USD', descripcion: 'Experiencia con pescadores locales donde se aprenden técnicas tradicionales.' },
-  { id: 'p2', nombre: 'Taller de artesanías', imagen: posada2, precio: '$10 USD', descripcion: 'Taller para crear artesanías locales con materiales de la zona.' },
-  { id: 'p3', nombre: 'Avistamiento de aves marinas', imagen: posada3, precio: '$12 - $16 USD', descripcion: 'Tour guiado para observar aves en la isla y alrededores.' },
-  { id: 'p4', nombre: 'Recorrido por los manglares', imagen: posada4, precio: '$12 - $16 USD', descripcion: 'Paseo en bote por manglares con guía local.' },
-  { id: 'i1', nombre: 'Tour de pesca artesanal Isla', imagen: isla1, precio: '$15 – $25 USD', descripcion: 'Experiencia con pescadores locales y técnicas tradicionales en la isla.' },
-  { id: 'i2', nombre: 'Tour en bote por el Golfo', imagen: isla2, precio: '$20 – $40 USD', descripcion: 'Paseos en lancha visitando otras islas cercanas del Golfo de Nicoya.' },
-  { id: 'i3', nombre: 'Kayak y actividades acuáticas', imagen: isla3, precio: '$10 – $25 USD', descripcion: 'Recorridos en kayak y exploración del mar a tu propio ritmo.' },
-  { id: 'i4', nombre: 'Senderismo y tours ecológicos', imagen: isla4, precio: '$10 – $20 USD', descripcion: 'Caminatas guiadas por la isla disfrutando de la naturaleza local.' },
-  { id: 'i5', nombre: 'Experiencias de bienestar', imagen: isla5, precio: '$10 – $25 USD', descripcion: 'Actividades como yoga, meditación y relajación frente al mar.' },
-];
+const IMAGES_MAP = {
+  't001': posada1, 't002': posada2, 't003': posada3, 't004': posada4,
+  't005': isla1, 't006': isla2, 't007': isla3, 't008': isla4, 't009': isla5,
+};
 
 function ClientePag() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('inicio');
   const [userName, setUserName] = useState('Cliente');
   const [reservas, setReservas] = useState([]);
+  const [reservasHab, setReservasHab] = useState([]);
+  const [allTours, setAllTours] = useState([]);
+  const [allHabitaciones, setAllHabitaciones] = useState([]);
+  const [loadingTours, setLoadingTours] = useState(true);
+  const [loadingHab, setLoadingHab] = useState(true);
   
   // Estado para el formulario de nueva reserva
   const [newReserva, setNewReserva] = useState({
@@ -48,13 +49,47 @@ function ClientePag() {
         }
     }
 
+    const fetchTours = async () => {
+        try {
+            const data = await getTours();
+            setAllTours(data.filter(t => t.disponible));
+        } catch (error) {
+            console.error("Error fetching tours:", error);
+        } finally {
+            setLoadingTours(false);
+        }
+    };
+
+    const fetchHabitaciones = async () => {
+        try {
+            const response = await fetch('http://localhost:3007/habitaciones');
+            const data = await response.json();
+            setAllHabitaciones(data);
+        } catch (error) {
+            console.error("Error fetching habitaciones:", error);
+        } finally {
+            setLoadingHab(false);
+        }
+    };
+
+    fetchHabitaciones();
+    fetchTours();
+
     const fetchReservas = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:3007/reservations?userId=${userId}`);
-            const data = await response.json();
+            const data = await getReservasByUser(userId);
             setReservas(data);
         } catch (error) {
             console.error("Error al cargar reservas", error);
+        }
+    };
+
+    const fetchReservasHab = async (userId) => {
+        try {
+            const data = await getRoomReservasByUser(userId);
+            setReservasHab(data);
+        } catch (error) {
+            console.error("Error al cargar reservas de habitaciones", error);
         }
     };
     // Intentar obtener el nombre del usuario desde localStorage si existe
@@ -63,7 +98,10 @@ function ClientePag() {
       try {
         const user = JSON.parse(storedUser);
         if (user.name) setUserName(user.name);
-        if (user.id) fetchReservas(user.id);
+        if (user.id) {
+            fetchReservas(user.id);
+            fetchReservasHab(user.id);
+        }
       } catch (e) {
         console.error("Error al leer usuario", e);
       }
@@ -90,18 +128,10 @@ function ClientePag() {
     };
 
     try {
-        const response = await fetch('http://localhost:3007/reservations', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(reservaData)
-        });
-
-        if (response.ok) {
-            const added = await response.json();
-            setReservas([...reservas, added]);
-            setNewReserva({ tour: '', fecha: '', horario: '' });
-            alert("¡Solicitud de reserva enviada con éxito!");
-        }
+        const added = await createReserva(reservaData);
+        setReservas([...reservas, added]);
+        setNewReserva({ tour: '', fecha: '', horario: '' });
+        alert("¡Solicitud de reserva enviada con éxito!");
     } catch (error) {
         alert("Error al enviar la reserva");
     }
@@ -161,7 +191,7 @@ function ClientePag() {
           </div>
         );
       case 'reservas':
-        const selectedTourInfo = TOUR_DATA.find(t => t.nombre === newReserva.tour);
+        const selectedTourInfo = allTours.find(t => t.nombre === newReserva.tour);
         const horariosDisponibles = ["08:00 AM", "10:00 AM", "01:00 PM", "03:00 PM"];
 
         return (
@@ -181,17 +211,21 @@ function ClientePag() {
                       <div className="form-group">
                         <label>1. Selecciona tu aventura:</label>
                         <div className="tour-selection-mini">
-                          {TOUR_DATA.map(t => (
-                            <div 
-                              key={t.id} 
-                              className={`tour-mini-option ${newReserva.tour === t.nombre ? 'selected' : ''}`}
-                              onClick={() => setNewReserva({...newReserva, tour: t.nombre})}
-                            >
-                              <div className="mini-img"><img src={t.imagen} alt={t.nombre} /></div>
-                              <span className="mini-name">{t.nombre}</span>
-                              {newReserva.tour === t.nombre && <div className="mini-check">✓</div>}
-                            </div>
-                          ))}
+                          {loadingTours ? (
+                            <p>Cargando tours...</p>
+                          ) : (
+                            allTours.map(t => (
+                              <div 
+                                key={t.id} 
+                                className={`tour-mini-option ${newReserva.tour === t.nombre ? 'selected' : ''}`}
+                                onClick={() => setNewReserva({...newReserva, tour: t.nombre})}
+                              >
+                                <div className="mini-img"><img src={t.imagen || IMAGES_MAP[t.id] || posada1} alt={t.nombre} /></div>
+                                <span className="mini-name">{t.nombre}</span>
+                                {newReserva.tour === t.nombre && <div className="mini-check">✓</div>}
+                              </div>
+                            ))
+                          )}
                         </div>
                       </div>
                       
@@ -236,8 +270,8 @@ function ClientePag() {
                     {selectedTourInfo ? (
                       <>
                         <div className="preview-image-container">
-                          <img src={selectedTourInfo.imagen} alt={selectedTourInfo.nombre} />
-                          <div className="preview-price-badge">{selectedTourInfo.precio}</div>
+                          <img src={selectedTourInfo.imagen || IMAGES_MAP[selectedTourInfo.id] || posada1} alt={selectedTourInfo.nombre} />
+                          <div className="preview-price-badge">${selectedTourInfo.precio} USD</div>
                         </div>
                         <div className="preview-info">
                           <h3>{selectedTourInfo.nombre}</h3>
@@ -269,11 +303,11 @@ function ClientePag() {
                 ) : (
                   <div className="reservation-cards-grid">
                     {reservas.slice().reverse().map((res) => {
-                      const tourInfo = TOUR_DATA.find(t => t.nombre === res.tourName);
+                      const tourInfo = allTours.find(t => t.nombre === res.tourName);
                       return (
                         <div className="reserva-card-item" key={res.id}>
                           <div className="reserva-card-img">
-                            <img src={tourInfo ? tourInfo.imagen : ''} alt={res.tourName} />
+                            <img src={tourInfo ? (tourInfo.imagen || IMAGES_MAP[tourInfo.id] || posada1) : posada1} alt={res.tourName} />
                             <span className={`reserva-status-tag ${res.status.toLowerCase()}`}>
                               {res.status}
                             </span>
@@ -285,6 +319,63 @@ function ClientePag() {
                               <span>⏰ {res.time}</span>
                             </div>
                             {tourInfo && <p className="reserva-desc-short">{tourInfo.descripcion.substring(0, 60)}...</p>}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+            </div>
+          </div>
+        );
+      case 'hospedajes':
+        // Reutilizar el mismo estilo visual que 'reservas' (tours)
+        return (
+          <div className="cliente-tab-content fade-in">
+            <div className="reservas-layout-new">
+              <section className="history-section-visual">
+                <div className="section-header-flex">
+                  <h2>Mis Reservas de Habitaciones</h2>
+                  <p>Consulta el estado de tus estancias solicitadas en Raíces del Golfo.</p>
+                </div>
+
+                {reservasHab.length === 0 ? (
+                  <div className="empty-state-visual">
+                    <div className="empty-icon">🏠</div>
+                    <p>Aún no tienes ninguna reserva de habitación en tu historial.</p>
+                  </div>
+                ) : (
+                  <div className="reservation-cards-grid">
+                    {reservasHab.slice().reverse().map((res) => {
+                      const roomInfo = allHabitaciones.find(h => h.id === res.roomId || h.nombre === res.roomName);
+                      // Imágenes por defecto como en Habitaciones.jsx
+                      const IMAGENES_DEFECTO = [
+                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
+                        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
+                        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80",
+                        "https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80"
+                      ];
+                      
+                      return (
+                        <div className="reserva-card-item" key={res.id}>
+                          <div className="reserva-card-img">
+                            <img 
+                              src={roomInfo?.imagenes ? roomInfo.imagenes[0] : IMAGENES_DEFECTO[0]} 
+                              alt={res.roomName} 
+                              onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
+                            />
+                            <span className={`reserva-status-tag ${res.status.toLowerCase()}`}>
+                              {res.status}
+                            </span>
+                          </div>
+                          <div className="reserva-card-body">
+                            <h3>{res.roomName}</h3>
+                            <div className="reserva-meta">
+                              <span>📅 {res.checkIn} al {res.checkOut}</span>
+                              <span style={{fontWeight: '700', color: '#0d9488'}}>💰 ${res.price} USD</span>
+                            </div>
+                            {roomInfo && <p className="reserva-desc-short">{roomInfo.descripcion.substring(0, 80)}...</p>}
                           </div>
                         </div>
                       );
@@ -370,7 +461,15 @@ function ClientePag() {
                 className={`client-nav-btn ${activeTab === 'reservas' ? 'active' : ''}`}
                 onClick={() => setActiveTab('reservas')}
               >
-                <span className="nav-icon">📋</span> Mis Reservas
+                <span className="nav-icon">📋</span> Mis Tours
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`client-nav-btn ${activeTab === 'hospedajes' ? 'active' : ''}`}
+                onClick={() => setActiveTab('hospedajes')}
+              >
+                <span className="nav-icon">🏠</span> Reservas de Habitaciones
               </button>
             </li>
             <li>
