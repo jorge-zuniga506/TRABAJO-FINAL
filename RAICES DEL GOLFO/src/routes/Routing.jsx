@@ -13,6 +13,7 @@ import Admin from '../pages/Admin'
 import Cliente from '../pages/Cliente'
 import ProtectedRoute from './ProtectedRoute'
 import SessionManager from '../components/common/SessionManager'
+import Chatbot from '../components/CHATBOT/Chatbot';
 
 function Routing() {
   return (
@@ -48,6 +49,7 @@ function Routing() {
         />
 
       </Routes>
+      <Chatbot />
     </BrowserRouter>
   );
 }
