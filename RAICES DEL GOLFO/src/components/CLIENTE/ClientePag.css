@@ -851,3 +851,71 @@
         padding: 20px;
     }
 }
+
+/* Profile Editing Styles */
+.avatar-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.input-group-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.input-group-modern label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.profile-actions-footer {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-save-modern {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-save-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel-modern {
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel-modern:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
