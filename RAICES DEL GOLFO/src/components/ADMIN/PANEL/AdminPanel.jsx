@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
-import HabitacionesPanel from './HabitacionesPanel';
-import ReservacionesPanel from './ReservacionesPanel';
+import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
+import ResevaTours from '../TOURS/ResevaTours';
+import ReservasPanel from './ReservasPanel';
+
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -76,8 +78,10 @@ function AdminPanel() {
                 );
             case 'users':
                 return <UsuariosPanel />;
-            case 'rooms':
-                return <HabitacionesPanel />;
+            case 'products':
+                return <ReservaHabitaciones />;
+            case 'tours':
+                return <ResevaTours />;
             case 'orders':
                 return <ReservacionesPanel />;
             case 'settings':
@@ -123,6 +127,14 @@ function AdminPanel() {
                                 onClick={() => setActiveTab('rooms')}
                             >
                                 Habitaciones
+                            </button>
+                        </li>
+                        <li>
+                            <button 
+                                className={`sidebar-btn ${activeTab === 'tours' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('tours')}
+                            >
+                                Tours
                             </button>
                         </li>
                         <li>
