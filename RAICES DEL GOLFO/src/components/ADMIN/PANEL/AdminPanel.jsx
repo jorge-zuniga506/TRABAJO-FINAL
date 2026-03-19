@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
+<<<<<<< HEAD
+import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
+=======
+import ReservasPanel from './ReservasPanel';
+>>>>>>> 115db69c5b67ead9a0ae9cccfdb8d597b5d6a1ac
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
