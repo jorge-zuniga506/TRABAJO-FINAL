@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
-import ReservaHabitaciones from '../HABITACIONES/ResevaHabitaciones';
+import HabitacionesPanel from './HabitacionesPanel';
 import ReservacionesPanel from './ReservacionesPanel';
 
 function AdminPanel() {
@@ -22,7 +22,7 @@ function AdminPanel() {
                 fetch('http://localhost:3007/users'),
                 fetch('http://localhost:3007/reservations')
             ]);
-            
+
             const users = await usersRes.json();
             const reservations = await resRes.json();
 
@@ -76,8 +76,8 @@ function AdminPanel() {
                 );
             case 'users':
                 return <UsuariosPanel />;
-            case 'products':
-                return <ReservaHabitaciones />;
+            case 'rooms':
+                return <HabitacionesPanel />;
             case 'orders':
                 return <ReservacionesPanel />;
             case 'settings':
@@ -119,8 +119,8 @@ function AdminPanel() {
                         </li>
                         <li>
                             <button
-                                className={`sidebar-btn ${activeTab === 'products' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('products')}
+                                className={`sidebar-btn ${activeTab === 'rooms' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('rooms')}
                             >
                                 Habitaciones
                             </button>
@@ -133,6 +133,7 @@ function AdminPanel() {
                                 Reservaciones
                             </button>
                         </li>
+
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'settings' ? 'active' : ''}`}
