@@ -114,7 +114,7 @@ function Habitaciones() {
         <div key={hab.id} className="habitacion-card">
           <div className="hab-image-container">
             <img
-              src={hab.imagenes ? hab.imagenes[0] : IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length]}
+              src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
               alt={hab.nombre}
               onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
             />
