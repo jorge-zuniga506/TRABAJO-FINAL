@@ -16,7 +16,7 @@ import SessionManager from '../components/common/SessionManager'
 
 function Routing() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/tours" element={<Tours />} />
@@ -30,23 +30,23 @@ function Routing() {
         {/* Aditionally mapping /isla-venado to AcercaDe as requested by navbar links */}
         <Route path="/isla-venado" element={<AcercaDe />} />
         <Route path="/historia-de-las-islas" element={<HistoriaIslasPage />} />
-        <Route 
-          path="/admin" 
+        <Route
+          path="/admin"
           element={
             <ProtectedRoute allowedRoles={['admin']}>
               <Admin />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/cliente" 
+        <Route
+          path="/cliente"
           element={
             <ProtectedRoute allowedRoles={['cliente']}>
               <Cliente />
             </ProtectedRoute>
-          } 
+          }
         />
-       
+
       </Routes>
     </BrowserRouter>
   );
