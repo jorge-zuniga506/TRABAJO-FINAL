@@ -26,6 +26,13 @@
       "email": "test@test.com",
       "password": "admin",
       "role": "cliente"
+    },
+    {
+      "id": "540f",
+      "name": "Sefora",
+      "email": "yarledvillanueva@gmail.com",
+      "password": "123456",
+      "role": "cliente"
     }
   ],
   "habitaciones": [
