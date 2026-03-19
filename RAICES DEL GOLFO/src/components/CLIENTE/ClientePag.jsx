@@ -216,7 +216,7 @@ function ClientePag() {
             <section className="quick-actions">
               <h2>¿Qué te gustaría hacer hoy?</h2>
               <div className="actions-grid">
-                <button className="action-card" onClick={() => setActiveTab('servicios')}>
+                <button className="action-card" onClick={() => setActiveTab('reservas')}>
                   <span className="action-emoji">🛶</span>
                   <span>Explorar Tours</span>
                 </button>
