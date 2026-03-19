@@ -21,10 +21,10 @@
       "role": "cliente"
     },
     {
-      "id": "6b6a",
-      "name": "Test Admin",
-      "email": "test@test.com",
-      "password": "admin",
+      "id": "a1ce",
+      "name": "JORGE",
+      "email": "jzunigafwdcostarica@gmail.com",
+      "password": "1234",
       "role": "cliente"
     }
   ],
@@ -72,6 +72,16 @@
       "fecha": "2026-03-23",
       "status": "Denegada",
       "createdAt": "2026-03-18T14:45:00Z"
+    },
+    {
+      "id": "06a1",
+      "userId": "a1ce",
+      "userName": "JORGE",
+      "tourName": "Kayak y actividades acuáticas",
+      "date": "2026-03-20",
+      "time": "08:00 AM",
+      "status": "Pendiente",
+      "createdAt": "2026-03-19T16:00:09.005Z"
     }
   ],
   "habitaciones": [
