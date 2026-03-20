@@ -6,6 +6,7 @@ import { getTours } from '../../services/CrudTours';
 import { getReservasByUser, createReserva } from '../../services/CrudReservas';
 import { getRoomReservasByUser, createRoomReserva } from '../../services/CrudReservasHabitaciones';
 import { updateUserProfile } from '../../services/CrudParaUsuarios';
+import { getHabitaciones } from '../../services/CrudHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
