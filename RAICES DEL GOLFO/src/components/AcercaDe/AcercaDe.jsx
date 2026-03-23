@@ -7,15 +7,15 @@ import "../AcercaDe/AcercaDe.css"
 const sections = [
   {
     title: "Nuestra Historia",
-    content: "Raíces del Golfo nació del sueño de compartir la belleza inigualable del Golfo de Nicoya con el mundo. Lo que comenzó como un pequeño emprendimiento familiar en Isla Venado ha crecido hasta convertirse en un referente de turismo sostenible en la región."
+    content: "Raíces del Golfo nació del sueño de compartir la belleza inigualable del Golfo de Nicoya con el mundo. Lo que comenzó como un pequeño emprendimiento familiar en Isla de Chira ha crecido hasta convertirse en un referente de turismo sostenible en la región."
   },
   {
     title: "Misión",
-    content: "Proveer experiencias turísticas auténticas en Isla Venado a través de la Posada Rural La Amistad, celebrando la identidad isleña y promoviendo el desarrollo socioeconómico local mediante un turismo sostenible y responsable."
+    content: "Proveer experiencias turísticas auténticas en Isla de Chira a través de la Posada Rural La Amistad, celebrando la identidad isleña y promoviendo el desarrollo socioeconómico local mediante un turismo sostenible y responsable."
   },
   {
     title: "Visión",
-    content: "Consolidar a la Posada Rural La Amistad como el referente principal de hospitalidad en Isla Venado, siendo reconocidos por nuestra conexión profunda con la naturaleza y nuestro impacto positivo en la comunidad del Golfo de Nicoya."
+    content: "Consolidar a la Posada Rural La Amistad como el referente principal de hospitalidad en Isla de Chira, siendo reconocidos por nuestra conexión profunda con la naturaleza y nuestro impacto positivo en la comunidad del Golfo de Nicoya."
   }
 ];
 
