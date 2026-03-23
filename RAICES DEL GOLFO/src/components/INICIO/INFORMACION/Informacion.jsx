@@ -10,7 +10,7 @@ function Informacion() {
           <h2 className="info-title">Sobre Raíces del Golfo</h2>
           <div className="info-divider"></div>
           <p className="info-description">
-            Raíces del Golfo nace del amor por la naturaleza y la cultura única de la región del Golfo Dulce en Costa Rica.
+            Raíces del Golfo nace del amor por la naturaleza y la cultura única de la región del Golfo de Nicoya en Costa Rica.
             Nuestro propósito es conectar a los viajeros con la esencia más pura del ecosistema marino y terrestre,
             ofreciendo experiencias sostenibles que benefician a las comunidades locales.
           </p>
