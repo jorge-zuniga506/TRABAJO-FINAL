@@ -8,7 +8,7 @@ function Contenedor() {
   const caracteristicas = [
     {
       titulo: 'Exploración Sin Límites',
-      descripcion: 'Navega por los rincones más vírgenes del Golfo Dulce, desde manglares remotos hasta playas de aguas cristalinas.'
+      descripcion: 'Navega por los rincones más vírgenes del Golfo de Nicoya, desde manglares remotos hasta playas de aguas cristalinas.'
     },
     {
       titulo: 'Gastronomía con Propósito',
@@ -48,7 +48,7 @@ function Contenedor() {
               <img src={aventuraImg} alt="Aventura Golfo" className="gallery-img" />
               <div className="gallery-info">
                 <h3>Tours de Aventura</h3>
-                <p>Avistamiento de delfines y ballenas.</p>
+                <p>Avistamiento de delfines y fauna marina.</p>
               </div>
             </div>
           </div>

@@ -5,11 +5,11 @@ import './HistoriaIslas.css';
 const islandsData = [
   {
     name: "Isla Chira",
-    description: "La más grande del golfo. Históricamente conocida por su producción de sal y su rica herencia pesquera. Es un santuario de biodiversidad marina."
+    description: "La más grande del golfo y hogar de la Posada Rural La Amistad. Históricamente conocida por su producción de sal, su rica herencia pesquera y su hospitalidad rural."
   },
   {
     name: "Isla Venado",
-    description: "Hogar de la Posada Rural La Amistad. Famosa por su hospitalidad, sus manglares vírgenes y su comunidad dedicada a la pesca artesanal y el turismo rural."
+    description: "Famosa por sus manglares vírgenes y su comunidad dedicada a la pesca artesanal y el turismo rural. Un rincón de paz en el corazón del Golfo de Nicoya."
   },
   {
     name: "Isla San Lucas",
@@ -41,7 +41,7 @@ function HistoriaIslas() {
           <div className="historia-content">
             <h2>Posada Rural La Amistad</h2>
             <p>
-              Nuestra historia comienza con un sueño familiar en las costas de Isla Venado. Lo que nació como 
+              Nuestra historia comienza con un sueño familiar en las costas de Isla de Chira. Lo que nació como 
               un pequeño emprendimiento para ofrecer refugio a los pescadores y viajeros, se transformó con 
               el tiempo en la <strong>Posada Rural La Amistad</strong>.
             </p>

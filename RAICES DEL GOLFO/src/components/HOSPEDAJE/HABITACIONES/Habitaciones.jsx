@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Habitaciones.css';
+import ReservaModal from '../../MODAL/ReservaModal';
+import { WHATSAPP_HABITACIONES } from '../../../config/whatsapp';
 
 // ── Habitaciones estáticas (con imágenes y amenidades propias) ──
 const habitacionesEstaticas = [
   {
     id: 'static-1',
-    nombre: "Glamping Ecológico Isla Venado",
-    descripcion: "Vive la experiencia de acampar con lujo en el corazón de Isla Venado. Estructuras elevadas con vistas inigualables al Golfo de Nicoya.",
+    nombre: "Glamping Ecológico Isla de Chira",
+    descripcion: "Vive la experiencia de acampar con lujo en el corazón de Isla de Chira. Estructuras elevadas con vistas inigualables al Golfo de Nicoya.",
     precio: 85,
     capacidad: 2,
     amenidades: ["Cama Queen", "Iluminación Solar", "Terraza Privada", "Desayuno Típico", "Senderos cercanos"],
@@ -43,28 +44,28 @@ const habitacionesEstaticas = [
   {
     id: 'static-5',
     nombre: "Suite Familiar Raíces",
-    descripcion: "Espacio ideal para familias que buscan comodidad y cercanía a la naturaleza. Cuenta con múltiples ambientes y servicios.",
+    descripcion: "Espacio ideal para familias que buscan comodidad y cercanía a la naturaleza en un entorno seguro y espacioso.",
     precio: 150,
     capacidad: 5,
-    amenidades: ["Camas King y Individuales", "Cocineta", "Área de estar", "Servicio a la habitación", "Acceso a piscina"],
+    amenidades: ["Camas King y Individuales", "Cocineta equipada", "Área de estar familiar", "Vistas al jardín", "Wifi en áreas comunes"],
     imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.2.avif"]
   },
   {
     id: 'static-6',
-    nombre: "Isla San Lucas",
-    descripcion: "Ideal para quienes buscan descanso, aventura y un toque de historia, este espacio ofrece comodidad en medio de un entorno natural protegido.",
-    precio: 150,
-    capacidad: 7,
-    amenidades: ["Camas King, cama Queen y literas dobles", "Cocineta", "Área de estar", "Servicio a la habitación", "Acceso a piscina"],
+    nombre: "Refugio Histórico San Lucas",
+    descripcion: "Ideal para quienes buscan descanso, aventura y un toque de historia en la antigua isla prisión, hoy santuario de vida silvestre.",
+    precio: 120,
+    capacidad: 4,
+    amenidades: ["Camas Matrimoniales", "Decoración Temática", "Tour histórico opcional", "Ventilación Natural", "Balcón con vista"],
     imagenes: ["https://a0.muscache.com/im/pictures/miso/Hosting-963071887857759256/original/ea191874-8dbd-461b-a48e-5c8901893413.jpeg"]
   },
   {
     id: 'static-7',
-    nombre: "Isla Caballo",
-    descripcion: "Rodeada de aguas cálidas y paisajes naturales, la isla ofrece playas serenas, caminatas escénicas y la oportunidad de desconectarse del ritmo acelerado.",
-    precio: 150,
-    capacidad: 5,
-    amenidades: ["Espacio rústico o tipo cabaña frente al mar", "Área de descanso con camas", "Cocina básica o equipada", "Acceso a la playa", "Ambiente tranquilo"],
+    nombre: "Cabaña Serena Isla Caballo",
+    descripcion: "Rodeada de aguas cálidas y paisajes naturales, ofrece playas serenas y la oportunidad de desconectarse del ritmo acelerado.",
+    precio: 110,
+    capacidad: 4,
+    amenidades: ["Cama King", "Frente al Mar", "Hamacas Privadas", "Cocina de leña", "Ambiente de retiro"],
     imagenes: ["https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"]
   }
 ];
@@ -82,9 +83,10 @@ const IMAGENES_DEFECTO = [
 ];
 
 function Habitaciones() {
-  const navigate = useNavigate();
   const [habitacionesAdmin, setHabitacionesAdmin] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [habitacionSeleccionada, setHabitacionSeleccionada] = useState(null);
 
   // ── Cargar habitaciones del panel admin ──
   useEffect(() => {
@@ -110,56 +112,80 @@ function Habitaciones() {
 
   const todasLasHabitaciones = [...habitacionesEstaticas, ...habitacionesNuevas];
 
+  // ── Manejar apertura del modal ──
+  const handleReservar = (habitacion) => {
+    setHabitacionSeleccionada(habitacion);
+    setIsModalOpen(true);
+  };
+
+  // ── Cerrar modal ──
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setHabitacionSeleccionada(null);
+  };
+
   return (
-    <div className="habitaciones-grid">
-      {todasLasHabitaciones.map(hab => (
-        <div key={hab.id} className="habitacion-card">
-          <div className="hab-image-container">
-            <img
-              src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
-              alt={hab.nombre}
-              onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
-            />
-            <div className="hab-price">${hab.precio}/noche</div>
+    <>
+      <div className="habitaciones-grid">
+        {todasLasHabitaciones.map(hab => (
+          <div key={hab.id} className="habitacion-card">
+            <div className="hab-image-container">
+              <img
+                src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
+                alt={hab.nombre}
+                onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
+              />
+              <div className="hab-price">${hab.precio}/noche</div>
+            </div>
+            <div className="hab-info">
+              <h3>{hab.nombre}</h3>
+              <p>{hab.descripcion || hab.description}</p>
+
+              {/* Amenidades (solo si las tiene) */}
+              {hab.amenidades && hab.amenidades.length > 0 && (
+                <div className="hab-amenidades">
+                  {hab.amenidades.map((amenidad, index) => (
+                    <span key={index} className="amenidad-tag">{amenidad}</span>
+                  ))}
+                </div>
+              )}
+
+              {/* Info extra para habitaciones del admin */}
+              {!hab.imagenes && (
+                <div className="hab-amenidades">
+                  <span className="amenidad-tag">👥 Capacidad: {hab.capacidad} personas</span>
+                  <span className="amenidad-tag">🏷️ {hab.tipo}</span>
+                </div>
+              )}
+
+              <button 
+                className="btn-reservar-hab"
+                onClick={() => handleReservar(hab)}
+              >
+                Reservar Habitación
+              </button>
+            </div>
           </div>
-          <div className="hab-info">
-            <h3>{hab.nombre}</h3>
-            <p>{hab.descripcion || hab.description}</p>
+        ))}
 
-            {/* Amenidades (solo si las tiene) */}
-            {hab.amenidades && hab.amenidades.length > 0 && (
-              <div className="hab-amenidades">
-                {hab.amenidades.map((amenidad, index) => (
-                  <span key={index} className="amenidad-tag">{amenidad}</span>
-                ))}
-              </div>
-            )}
+        {/* Indicador de carga */}
+        {cargando && (
+          <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b' }}>
+            Cargando habitaciones adicionales...
+          </p>
+        )}
+      </div>
 
-            {/* Info extra para habitaciones del admin */}
-            {!hab.imagenes && (
-              <div className="hab-amenidades">
-                <span className="amenidad-tag">👥 Capacidad: {hab.capacidad} personas</span>
-                <span className="amenidad-tag">🏷️ {hab.tipo}</span>
-              </div>
-            )}
-
-            <button 
-              className="btn-reservar-hab"
-              onClick={() => navigate('/login')}
-            >
-              Reservar Habitación
-            </button>
-          </div>
-        </div>
-      ))}
-
-      {/* Indicador de carga */}
-      {cargando && (
-        <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b' }}>
-          Cargando habitaciones adicionales...
-        </p>
+      {/* Modal flotante de reserva */}
+      {habitacionSeleccionada && (
+        <ReservaModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          tourName={habitacionSeleccionada.nombre}
+          whatsappNumber={WHATSAPP_HABITACIONES}
+        />
       )}
-    </div>
+    </>
   );
 }
 
