@@ -16,6 +16,7 @@ import Admin from '../pages/Admin';
 import Cliente from '../pages/Cliente';
 import ProtectedRoute from './ProtectedRoute';
 import Chatbot from '../components/CHATBOT/Chatbot';
+import AccessibilityWidget from '../components/ACCESSIBILITY/AccessibilityWidget';
 
 function Routing() {
   return (
@@ -64,6 +65,9 @@ function Routing() {
       
       {/* Chatbot global */}
       <Chatbot />
+      
+      {/* Widget de Accesibilidad Global */}
+      <AccessibilityWidget />
     </BrowserRouter>
   );
 }
