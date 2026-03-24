@@ -455,7 +455,57 @@
     color: var(--text-muted);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .admin-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        margin-left: 0 !important;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 10px 0;
+        height: auto;
+    }
+    
+    .sidebar-header {
+        display: none;
+    }
+    
+    .sidebar-menu {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 15px;
+        margin: 0;
+        gap: 10px;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    .sidebar-menu::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .sidebar-btn {
+        white-space: nowrap;
+        padding: 10px 15px;
+        border-radius: 8px;
+        width: auto;
+    }
+    
+    .sidebar-btn.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-color);
+        padding-left: 15px;
+    }
+
+    .main-content {
+        padding: 20px;
+        overflow-x: hidden;
+    }
+
     .panel-header {
         flex-direction: column;
         align-items: stretch;
@@ -468,44 +518,15 @@
     .search-container {
         width: 100%;
         min-width: unset;
-        flex-wrap: wrap;
-        box-sizing: border-box;
     }
 
-    .search-input {
-        flex: 1;
-        min-width: 200px;
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
     }
-}
-
-/* Modal Responsiveness */
-.modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 1.5rem !important;
 }
 
 @media (max-width: 480px) {
-    .modal-content {
-        width: 95% !important;
-        padding: 1rem !important;
-    }
-
-    .modal-content h2 {
-        font-size: 1.25rem;
-    }
-}
-
-/* Tables spacing for text */
-.user-info .small-text {
-    max-width: 250px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@media (max-width: 768px) {
-    .admin-table th, .admin-table td {
-        padding: 12px 15px;
+   .stats-grid {
+        grid-template-columns: 1fr;
     }
 }
