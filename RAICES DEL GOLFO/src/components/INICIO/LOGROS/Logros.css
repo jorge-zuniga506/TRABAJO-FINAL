@@ -54,6 +54,10 @@
 
 /* Responsive */
 @media screen and (max-width: 960px) {
+  .logros-section {
+    padding: 60px 0;
+  }
+
   .logros-grid {
     grid-template-columns: 1fr; /* 1 columna en tablets/móviles */
     gap: 1.5rem;
@@ -65,7 +69,20 @@
 }
 
 @media screen and (max-width: 480px) {
+  .logros-section {
+    padding: 40px 0;
+  }
+
   .logro-card {
-    padding: 35px 20px;
+    padding: 30px 20px;
+  }
+  
+  .logro-dato {
+    font-size: 2.2rem;
+  }
+  
+  .logro-descripcion {
+    font-size: 1rem;
   }
 }
+

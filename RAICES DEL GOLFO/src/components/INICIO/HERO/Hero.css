@@ -125,22 +125,31 @@
 
 /* responsive */
 
-@media screen and (max-width:768px){
-
+@media screen and (max-width: 768px){
   .hero-title{
-    font-size:2.8rem;
+    font-size: 2.5rem; /* Reduced from 2.8rem */
   }
 
   .hero-subtitle{
-    font-size:1.2rem;
+    font-size: 1.1rem; /* Reduced from 1.2rem */
+    margin-bottom: 30px;
   }
-
+  
+  .fish {
+    width: 180px; /* Scale down fish button */
+  }
 }
 
-@media screen and (max-width:480px){
-
+@media screen and (max-width: 480px){
   .hero-title{
-    font-size:2.2rem;
+    font-size: 2rem; /* Reduced from 2.2rem */
   }
-
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .fish {
+    width: 150px;
+  }
 }

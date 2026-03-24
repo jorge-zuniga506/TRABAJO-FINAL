@@ -145,16 +145,33 @@
 
 @media screen and (max-width: 960px) {
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .contact-info li {
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 640px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  
   .footer-container {
     padding: 3rem 1.5rem 1.5rem 1.5rem;
   }
@@ -162,5 +179,12 @@
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom-links {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }
+

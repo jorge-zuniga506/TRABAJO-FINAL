@@ -120,3 +120,53 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Transporte Hero Styles */
+.transporte-hero {
+  background-color: #006666; 
+  padding: 100px 20px; 
+  text-align: center; 
+  color: white;
+  margin-top: 80px; /* Matching navbar height */
+}
+
+.transporte-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.transporte-hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .transporte-hero {
+    padding: 60px 20px;
+    margin-top: 80px;
+  }
+  
+  .transporte-hero h1 {
+    font-size: 2.22rem;
+  }
+  
+  .transporte-hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .transporte-hero {
+    padding: 40px 15px;
+  }
+  
+  .transporte-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .transporte-hero p {
+    font-size: 1rem;
+  }
+}
+

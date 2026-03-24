@@ -114,8 +114,44 @@
   background: #4a8c8c;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .habitaciones-hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
+  }
+  
+  .habitaciones-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px auto;
   }
 }
+
+@media (max-width: 768px) {
+  .habitaciones-hero {
+    height: 35vh;
+  }
+
+  .habitaciones-hero h1 {
+    font-size: 2.22rem;
+  }
+  
+  .habitaciones-hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .habitaciones-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .habitaciones-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .habitacion-card {
+    margin-bottom: 1rem;
+  }
+}
+
