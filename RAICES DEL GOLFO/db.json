@@ -301,5 +301,31 @@
     }
   ],
   "balances": [],
+  "formularioContacto": [
+    {
+      "id": "2775",
+      "nombre": "Test User Node Native",
+      "correo": "node@test.com",
+      "asunto": "Prueba de script nativo",
+      "mensaje": "Verificando persistencia con fetch nativo de Node.js",
+      "fecha": "2026-03-24"
+    },
+    {
+      "id": "8d69",
+      "nombre": "stacy",
+      "correo": "hola@gmail.com",
+      "asunto": "hola",
+      "mensaje": "hola ",
+      "fecha": "2026-03-24"
+    },
+    {
+      "id": "1864",
+      "nombre": "stacy",
+      "correo": "mmmm@gmail.com",
+      "asunto": "hola",
+      "mensaje": "hola",
+      "fecha": "2026-03-24"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
