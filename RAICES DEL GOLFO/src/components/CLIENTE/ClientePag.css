@@ -918,4 +918,47 @@
 .btn-cancel-modern:hover {
     background: #e2e8f0;
     color: #0f172a;
-}
+}
+
+/* Mobile Dashboard Overrides */
+@media (max-width: 900px) {
+    .cliente-container {
+        flex-direction: column;
+    }
+    
+    .cliente-sidebar {
+        width: 100%;
+        padding: 15px 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .client-nav-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 15px;
+        gap: 10px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .client-nav-list::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .client-nav-btn {
+        white-space: nowrap;
+        width: auto;
+        padding: 10px 15px;
+    }
+    
+    .cliente-main {
+        padding: 20px;
+        overflow-x: hidden;
+    }
+    
+    .client-stats-grid {
+         grid-template-columns: 1fr;
+    }
+}
+
