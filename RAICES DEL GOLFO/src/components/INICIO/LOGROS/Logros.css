@@ -1,28 +1,33 @@
 .logros-section {
-  padding: 80px 0;
-  background-color: #f1f5f9; /* Fondo ligeramente gris para que resalten las tarjetas blancas */
+  padding: clamp(60px, 8vw, 100px) 0;
+  background-color: #f1f5f9;
   width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .logros-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  box-sizing: border-box;
 }
 
 .logros-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas como en la imagen */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
 }
 
 .logro-card {
   background: #ffffff;
-  padding: 50px 30px;
+  padding: clamp(30px, 4vw, 50px) clamp(20px, 3vw, 30px);
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,59 +35,24 @@
 }
 
 .logro-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .logro-dato {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
   font-weight: 800;
-  color: var(--primary-color, #0d9488); /* Mantenemos el color teal del proyecto */
+  color: #0d9488;
   margin: 0;
   line-height: 1;
   margin-bottom: 20px;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 }
 
 .logro-descripcion {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.2vw + 0.4rem, 1.15rem);
   color: #475569;
-  line-height: 1.5;
-  max-width: 250px; /* Para que el texto se envuelva similar a la imagen */
+  line-height: 1.6;
+  max-width: 300px;
   margin: 0;
 }
-
-/* Responsive */
-@media screen and (max-width: 960px) {
-  .logros-section {
-    padding: 60px 0;
-  }
-
-  .logros-grid {
-    grid-template-columns: 1fr; /* 1 columna en tablets/móviles */
-    gap: 1.5rem;
-  }
-  
-  .logro-dato {
-    font-size: 2.8rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .logros-section {
-    padding: 40px 0;
-  }
-
-  .logro-card {
-    padding: 30px 20px;
-  }
-  
-  .logro-dato {
-    font-size: 2.2rem;
-  }
-  
-  .logro-descripcion {
-    font-size: 1rem;
-  }
-}
-
