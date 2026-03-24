@@ -53,6 +53,14 @@ function AdminPanel() {
         }
     }, [activeTab]);
 
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+        // Cerrar sidebar en móvil al seleccionar una pestaña
+        if (window.innerWidth <= 768) {
+            setIsSidebarOpen(false);
+        }
+    };
+
     const renderContent = () => {
         switch (activeTab) {
             case 'dashboard':
@@ -108,7 +116,7 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('dashboard')}
+                                onClick={() => handleTabChange('dashboard')}
                             >
                                 Dashboard
                             </button>
@@ -116,7 +124,7 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'users' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('users')}
+                                onClick={() => handleTabChange('users')}
                             >
                                 Usuarios
                             </button>
@@ -124,7 +132,7 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'rooms' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('rooms')}
+                                onClick={() => handleTabChange('rooms')}
                             >
                                 Habitaciones
                             </button>
@@ -132,7 +140,7 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'tours' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('tours')}
+                                onClick={() => handleTabChange('tours')}
                             >
                                 Tours
                             </button>
@@ -140,7 +148,7 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'orders' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('orders')}
+                                onClick={() => handleTabChange('orders')}
                             >
                                 Reservaciones
                             </button>
@@ -149,13 +157,17 @@ function AdminPanel() {
                         <li>
                             <button
                                 className={`sidebar-btn ${activeTab === 'settings' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('settings')}
+                                onClick={() => handleTabChange('settings')}
                             >
                                 Configuración
                             </button>
                         </li>
                     </ul>
                 </aside>
+                <div 
+                    className={`sidebar-overlay ${isSidebarOpen ? 'active' : ''}`} 
+                    onClick={() => setIsSidebarOpen(false)}
+                ></div>
                 <main className="main-content">
                     {renderContent()}
                 </main>

@@ -186,12 +186,28 @@
 
 @media (max-width: 768px) {
     .admin-name,
-    .btn-logout,
     .admin-badge {
         display: none;
+    }
+
+    .navbar-admin-container {
+        padding: 0 15px;
+    }
+
+    .btn-logout {
+        padding: 5px 12px;
+        font-size: 0.8rem;
+    }
+
+    .sidebar-toggle-btn {
+        display: none; /* Ocultamos el toggle del logo en móvil para usar el hamburger tradicional */
     }
     
     .menu-icon-admin {
         display: flex;
+    }
+
+    .navbar-admin-actions {
+        gap: 12px;
     }
 }
