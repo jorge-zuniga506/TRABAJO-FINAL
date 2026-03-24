@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import GastroNavbar from '../components/GASTRONOMIA/NAVBAR/GastroNavbar';
 import GastronomiaPosada from '../components/GASTRONOMIA/CONTENEDORES/GastronomiaPosada';

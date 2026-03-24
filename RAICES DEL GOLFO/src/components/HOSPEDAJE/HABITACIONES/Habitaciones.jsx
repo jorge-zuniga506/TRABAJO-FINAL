@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Habitaciones.css';
+import ReservaModal from '../../MODAL/ReservaModal';
+import { WHATSAPP_HABITACIONES } from '../../../config/whatsapp';
 
 // ── Habitaciones estáticas (con imágenes y amenidades propias) ──
 const habitacionesEstaticas = [
@@ -82,9 +83,10 @@ const IMAGENES_DEFECTO = [
 ];
 
 function Habitaciones() {
-  const navigate = useNavigate();
   const [habitacionesAdmin, setHabitacionesAdmin] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [habitacionSeleccionada, setHabitacionSeleccionada] = useState(null);
 
   // ── Cargar habitaciones del panel admin ──
   useEffect(() => {
@@ -110,56 +112,80 @@ function Habitaciones() {
 
   const todasLasHabitaciones = [...habitacionesEstaticas, ...habitacionesNuevas];
 
+  // ── Manejar apertura del modal ──
+  const handleReservar = (habitacion) => {
+    setHabitacionSeleccionada(habitacion);
+    setIsModalOpen(true);
+  };
+
+  // ── Cerrar modal ──
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setHabitacionSeleccionada(null);
+  };
+
   return (
-    <div className="habitaciones-grid">
-      {todasLasHabitaciones.map(hab => (
-        <div key={hab.id} className="habitacion-card">
-          <div className="hab-image-container">
-            <img
-              src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
-              alt={hab.nombre}
-              onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
-            />
-            <div className="hab-price">${hab.precio}/noche</div>
+    <>
+      <div className="habitaciones-grid">
+        {todasLasHabitaciones.map(hab => (
+          <div key={hab.id} className="habitacion-card">
+            <div className="hab-image-container">
+              <img
+                src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
+                alt={hab.nombre}
+                onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
+              />
+              <div className="hab-price">${hab.precio}/noche</div>
+            </div>
+            <div className="hab-info">
+              <h3>{hab.nombre}</h3>
+              <p>{hab.descripcion || hab.description}</p>
+
+              {/* Amenidades (solo si las tiene) */}
+              {hab.amenidades && hab.amenidades.length > 0 && (
+                <div className="hab-amenidades">
+                  {hab.amenidades.map((amenidad, index) => (
+                    <span key={index} className="amenidad-tag">{amenidad}</span>
+                  ))}
+                </div>
+              )}
+
+              {/* Info extra para habitaciones del admin */}
+              {!hab.imagenes && (
+                <div className="hab-amenidades">
+                  <span className="amenidad-tag">👥 Capacidad: {hab.capacidad} personas</span>
+                  <span className="amenidad-tag">🏷️ {hab.tipo}</span>
+                </div>
+              )}
+
+              <button 
+                className="btn-reservar-hab"
+                onClick={() => handleReservar(hab)}
+              >
+                Reservar Habitación
+              </button>
+            </div>
           </div>
-          <div className="hab-info">
-            <h3>{hab.nombre}</h3>
-            <p>{hab.descripcion || hab.description}</p>
+        ))}
 
-            {/* Amenidades (solo si las tiene) */}
-            {hab.amenidades && hab.amenidades.length > 0 && (
-              <div className="hab-amenidades">
-                {hab.amenidades.map((amenidad, index) => (
-                  <span key={index} className="amenidad-tag">{amenidad}</span>
-                ))}
-              </div>
-            )}
+        {/* Indicador de carga */}
+        {cargando && (
+          <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b' }}>
+            Cargando habitaciones adicionales...
+          </p>
+        )}
+      </div>
 
-            {/* Info extra para habitaciones del admin */}
-            {!hab.imagenes && (
-              <div className="hab-amenidades">
-                <span className="amenidad-tag">👥 Capacidad: {hab.capacidad} personas</span>
-                <span className="amenidad-tag">🏷️ {hab.tipo}</span>
-              </div>
-            )}
-
-            <button 
-              className="btn-reservar-hab"
-              onClick={() => navigate('/login')}
-            >
-              Reservar Habitación
-            </button>
-          </div>
-        </div>
-      ))}
-
-      {/* Indicador de carga */}
-      {cargando && (
-        <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b' }}>
-          Cargando habitaciones adicionales...
-        </p>
+      {/* Modal flotante de reserva */}
+      {habitacionSeleccionada && (
+        <ReservaModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          tourName={habitacionSeleccionada.nombre}
+          whatsappNumber={WHATSAPP_HABITACIONES}
+        />
       )}
-    </div>
+    </>
   );
 }
 
