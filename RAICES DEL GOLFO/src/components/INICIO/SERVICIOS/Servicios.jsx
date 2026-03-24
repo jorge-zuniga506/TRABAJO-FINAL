@@ -13,7 +13,7 @@ function Servicios() {
     {
       id: 2,
       titulo: 'Tours & Aventura',
-      descripcion: 'Explora Isla Venado y el Golfo Dulce con guías locales certificados y apasionados.',
+      descripcion: 'Explora Isla Venado y el Golfo de Nicoya con guías locales certificados y apasionados.',
       icono: '🛶'
     },
     {
@@ -42,7 +42,7 @@ function Servicios() {
             En Raíces del Golfo no solo te ofrecemos un lugar donde quedarte, te brindamos una conexión real con la biodiversidad de Costa Rica. Cada servicio está diseñado bajo principios de sostenibilidad y apoyo comunitario.
           </p>
           <p className="servicios-description">
-            Tu visita apoya la economía local y contribuye a la protección de los ecosistemas marinos que rodean nuestra hermosa Isla Venado.
+            Tu visita apoya la economía local y contribuye a la protección de los ecosistemas marinos que rodean nuestras hermosas islas.
           </p>
           
           <div className="servicios-action">
