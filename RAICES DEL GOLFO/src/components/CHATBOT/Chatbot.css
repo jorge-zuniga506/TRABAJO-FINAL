@@ -2,7 +2,7 @@
 .chatbot-wrapper {
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    left: 25px;
     z-index: 9999;
     font-family: 'Outfit', sans-serif;
 }
@@ -61,7 +61,7 @@
 .chat-window {
     position: absolute;
     bottom: 85px;
-    right: 0;
+    left: 0;
     width: 360px;
     height: 500px;
     background: #ffffff;
@@ -74,7 +74,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom right;
+    transform-origin: bottom left;
 }
 
 .chatbot-wrapper.open .chat-window {
@@ -271,7 +271,7 @@
 @media (max-width: 480px) {
     .chat-window {
         width: calc(100vw - 40px);
-        right: -10px;
+        left: -10px;
         bottom: 75px;
     }
 }

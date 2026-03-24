@@ -46,26 +46,34 @@ function Opiniones() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!newReview.comentario.trim()) {
+      alert("Por favor escribe un comentario");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
     const userName = storedUser.name || "Cliente Satisfecho";
-    
-    // Imagen por defecto si no tiene avatar
-    const defaultImage = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop";
+    const userPhoto = storedUser.photo || "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop";
 
     const feedbackData = {
       ...newReview,
       nombre: userName,
-      imagen: defaultImage,
-      calificacion: parseInt(newReview.calificacion)
+      imagen: userPhoto,
+      calificacion: parseInt(newReview.calificacion),
+      createdAt: new Date().toISOString()
     };
 
     try {
       const addedReview = await createOpinion(feedbackData);
-      setReviews([...reviews, addedReview]);
+      setReviews(prev => [...prev, addedReview]);
       setNewReview({ calificacion: 5, comentario: '', experiencia: 'General' });
       alert("¡Gracias por tu comentario!");
+      
+      // Mover al nuevo comentario
+      setCurrentIndex(reviews.length);
     } catch (error) {
       alert("Error al enviar el comentario");
     } finally {

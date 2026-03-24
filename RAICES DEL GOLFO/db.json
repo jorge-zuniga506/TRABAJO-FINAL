@@ -300,6 +300,41 @@
       "createdAt": "2026-03-20T20:48:43.937Z"
     }
   ],
+  "opiniones": [
+    {
+      "id": "op001",
+      "nombre": "Ana García",
+      "imagen": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "calificacion": 5,
+      "comentario": "Una experiencia inolvidable. El servicio es excelente y la vista al Golfo es simplemente espectacular.",
+      "experiencia": "Hospedaje de Lujo"
+    },
+    {
+      "id": "op002",
+      "nombre": "Carlos Rodríguez",
+      "imagen": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "calificacion": 4,
+      "comentario": "Muy buen tour de pesca. El guía fue muy amable y aprendimos mucho sobre las técnicas locales.",
+      "experiencia": "Tour de Pesca"
+    },
+    {
+      "id": "op003",
+      "nombre": "Elena Martínez",
+      "imagen": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+      "calificacion": 5,
+      "comentario": "Los manglares son mágicos. ¡Recomiendo totalmente el tour al atardecer!",
+      "experiencia": "Recorrido Manglares"
+    },
+    {
+      "id": "6f3e",
+      "calificacion": 4,
+      "comentario": "bueno",
+      "experiencia": "General",
+      "nombre": "stay",
+      "imagen": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "createdAt": "2026-03-24T19:34:47.380Z"
+    }
+  ],
   "balances": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
