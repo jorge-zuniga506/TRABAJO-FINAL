@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { registerUser } from '../../services/authService';
+import { registerUserLocal } from '../../services/fetchLocal/authService';
 
 const RegistroForm = () => {
     const [name, setName] = useState('');
@@ -13,7 +14,7 @@ const RegistroForm = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        
+
         if (!name || !email || !password) {
             setError('Por favor, completa todos los campos.');
             return;
@@ -34,7 +35,8 @@ const RegistroForm = () => {
         try {
             setLoading(true);
             setError('');
-            await registerUser({ name, email, password });
+            const response = await registerUserLocal({ name, email, password })
+            console.log(response);
             navigate('/login');
         } catch (err) {
             setError('Ocurrió un error al registrarse. Inténtelo de nuevo más tarde.');
@@ -48,13 +50,13 @@ const RegistroForm = () => {
         <div className="auth-form-container">
             <h2>Crear Cuenta</h2>
             <p className="auth-subtitle">Únete a Raíces del Golfo</p>
-            
+
             {error && (
                 <div className="error-message" role="alert">
                     <span>⚠️</span> {error}
                 </div>
             )}
-            
+
             <form onSubmit={handleRegister} noValidate>
                 <div className="input-group">
                     <label htmlFor="name">Nombre completo</label>
@@ -84,7 +86,7 @@ const RegistroForm = () => {
                         aria-label="Correo electrónico"
                     />
                 </div>
-                
+
                 <div className="input-group">
                     <label htmlFor="password">Contraseña</label>
                     <input
@@ -99,12 +101,12 @@ const RegistroForm = () => {
                         aria-label="Contraseña"
                     />
                 </div>
-                
+
                 <button type="submit" disabled={loading}>
                     {loading ? 'Creando cuenta...' : 'Registrarse'}
                 </button>
             </form>
-            
+
             <div className="auth-options">
                 <p>
                     ¿Ya tienes una cuenta?{' '}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Hero.css';
-import bgVideo from '../../../VIDEOS/Hero.mp4';
+import bgVideo from '../../../VIDEOS/Herooo.mp4';
 
 function Hero() {
   return (
