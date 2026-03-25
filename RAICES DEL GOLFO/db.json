@@ -8,10 +8,10 @@
     },
     {
       "id": "a1d7",
-      "name": "Gato enojado",
-      "email": "gato@gmail.com",
+      "name": "admin",
+      "email": "admin@gmail.com",
       "password": "12345",
-      "role": "cliente",
+      "role": "admin  ",
       "photo": "https://i.pinimg.com/736x/96/53/f7/9653f749c03eb888c0dde626b925437b.jpg"
     },
     {
@@ -60,6 +60,7 @@
       "capacidad": 2,
       "tipo": "Glamping",
       "disponible": true,
+
       "imagen": "/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"
     },
     {

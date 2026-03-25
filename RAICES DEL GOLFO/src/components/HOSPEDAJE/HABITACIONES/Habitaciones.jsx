@@ -67,7 +67,8 @@ const habitacionesEstaticas = [
     precio: 110,
     capacidad: 4,
     amenidades: ["Cama King", "Frente al Mar", "Hamacas Privadas", "Cocina de leña", "Ambiente de retiro"],
-    imagenes: ["https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"]
+    imagenes: ["https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"],
+    disponible: true
   }
 ];
 
@@ -94,9 +95,8 @@ function Habitaciones() {
     fetch(ENDPOINTS.HABITACIONES)
       .then(res => res.json())
       .then(data => {
-        // Solo mostrar las que estén disponibles
-        const disponibles = data.filter(h => h.disponible);
-        setHabitacionesAdmin(disponibles);
+        // Mostrar todas las habitaciones del admin
+        setHabitacionesAdmin(data);
       })
       .catch(() => {
         // Si no hay conexión al servidor, simplemente no se agregan extras
@@ -105,13 +105,25 @@ function Habitaciones() {
       .finally(() => setCargando(false));
   }, []);
 
-  // ── Combinar estáticas + las del admin (evitar duplicados por nombre) ──
+  // ── Combinar estáticas + las del admin (respetando la disponibilidad de la API) ──
+  const todasLasHabitaciones = habitacionesEstaticas.map(staticHab => {
+    // Buscar si esta habitación existe en los datos del admin para obtener su disponibilidad real
+    const adminData = habitacionesAdmin.find(
+      h => h.nombre.toLowerCase().trim() === staticHab.nombre.toLowerCase().trim()
+    );
+    
+    return adminData 
+      ? { ...staticHab, disponible: adminData.disponible } 
+      : staticHab;
+  });
+
+  // Agregar habitaciones nuevas que solo están en el admin
   const nombresEstaticos = new Set(habitacionesEstaticas.map(h => h.nombre.toLowerCase().trim()));
   const habitacionesNuevas = habitacionesAdmin.filter(
     h => !nombresEstaticos.has(h.nombre.toLowerCase().trim())
   );
 
-  const todasLasHabitaciones = [...habitacionesEstaticas, ...habitacionesNuevas];
+  const listaCompleta = [...todasLasHabitaciones, ...habitacionesNuevas];
 
   // ── Manejar apertura del modal ──
   const handleReservar = (habitacion) => {
@@ -128,18 +140,23 @@ function Habitaciones() {
   return (
     <>
       <div className="habitaciones-grid">
-        {todasLasHabitaciones.map(hab => (
+        {listaCompleta.map(hab => (
           <div key={hab.id} className="habitacion-card">
             <div className="hab-image-container">
               <img
-                src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
+                src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[listaCompleta.indexOf(hab) % IMAGENES_DEFECTO.length])}
                 alt={hab.nombre}
                 onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
               />
               <div className="hab-price">${hab.precio}/noche</div>
             </div>
             <div className="hab-info">
-              <h3>{hab.nombre}</h3>
+              <div className="hab-header-info">
+                <h3>{hab.nombre}</h3>
+                <span className={`availability-badge ${hab.disponible !== false ? 'available' : 'unavailable'}`}>
+                  {hab.disponible !== false ? '● Disponible' : '● No Disponible'}
+                </span>
+              </div>
               <p>{hab.descripcion || hab.description}</p>
 
               {/* Amenidades (solo si las tiene) */}
@@ -162,8 +179,9 @@ function Habitaciones() {
               <button 
                 className="btn-reservar-hab"
                 onClick={() => handleReservar(hab)}
+                disabled={hab.disponible === false}
               >
-                Reservar Habitación
+                {hab.disponible !== false ? 'Reservar Habitación' : 'No Disponible'}
               </button>
             </div>
           </div>

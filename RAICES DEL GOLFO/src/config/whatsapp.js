@@ -10,7 +10,7 @@ export const WHATSAPP_RESERVAS = '50687654321'; // ← CAMBIAR POR TU NÚMERO
 
 // Si tienes múltiples departamentos o números:
 export const WHATSAPP_TOURS = '50687654321';        // ← CAMBIAR POR TU NÚMERO
-export const WHATSAPP_HABITACIONES = '50687654321'; // ← CAMBIAR POR TU NÚMERO
+export const WHATSAPP_HABITACIONES = '50672922828'; // ← CAMBIAR POR TU NÚMERO
 export const WHATSAPP_GASTRONOMIA = '50687654321';  // ← CAMBIAR POR TU NÚMERO
 
 // Función auxiliar para construir URL de WhatsApp
