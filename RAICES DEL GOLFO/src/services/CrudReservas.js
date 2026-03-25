@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/reservations';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.RESERVATIONS;
 
 export const getReservasByUser = async (userId) => {
     try {

@@ -8,11 +8,11 @@
     },
     {
       "id": "a1d7",
-      "name": "stay",
-      "email": "stacy@gmail.com",
+      "name": "Gato enojado",
+      "email": "gato@gmail.com",
       "password": "12345",
       "role": "cliente",
-      "photo": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+      "photo": "https://i.pinimg.com/736x/96/53/f7/9653f749c03eb888c0dde626b925437b.jpg"
     },
     {
       "id": "10ff",
@@ -41,6 +41,13 @@
       "name": "a",
       "email": "a@gmail.com",
       "password": "a",
+      "role": "cliente"
+    },
+    {
+      "id": "f19a",
+      "name": "Sefora",
+      "email": "admin@admin.com",
+      "password": "123456",
       "role": "cliente"
     }
   ],
@@ -342,42 +349,17 @@
       "nombre": "stay",
       "imagen": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
       "createdAt": "2026-03-24T19:43:53.822Z"
+    },
+    {
+      "id": "88a5",
+      "calificacion": 1,
+      "comentario": "se para todo",
+      "experiencia": "General",
+      "nombre": "stay",
+      "imagen": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "createdAt": "2026-03-24T22:05:27.937Z"
     }
   ],
   "balances": [],
-  "formularioContacto": [
-    {
-      "id": "2775",
-      "nombre": "Test User Node Native",
-      "correo": "node@test.com",
-      "asunto": "Prueba de script nativo",
-      "mensaje": "Verificando persistencia con fetch nativo de Node.js",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "8d69",
-      "nombre": "stacy",
-      "correo": "hola@gmail.com",
-      "asunto": "hola",
-      "mensaje": "hola ",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "1864",
-      "nombre": "stacy",
-      "correo": "mmmm@gmail.com",
-      "asunto": "hola",
-      "mensaje": "hola",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "628a",
-      "nombre": "JORGE",
-      "correo": "jzunigafwdcostarica@gmail.com",
-      "asunto": "jdjjdjs",
-      "mensaje": "jdsnisnsdin",
-      "fecha": "2026-03-24"
-    }
-  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

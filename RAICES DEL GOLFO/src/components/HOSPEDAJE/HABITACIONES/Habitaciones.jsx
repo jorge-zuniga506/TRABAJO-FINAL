@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ENDPOINTS } from '../../../config/api';
 import './Habitaciones.css';
 import ReservaModal from '../../MODAL/ReservaModal';
 import { WHATSAPP_HABITACIONES } from '../../../config/whatsapp';
@@ -90,7 +91,7 @@ function Habitaciones() {
 
   // ── Cargar habitaciones del panel admin ──
   useEffect(() => {
-    fetch('http://localhost:3007/habitaciones')
+    fetch(ENDPOINTS.HABITACIONES)
       .then(res => res.json())
       .then(data => {
         // Solo mostrar las que estén disponibles

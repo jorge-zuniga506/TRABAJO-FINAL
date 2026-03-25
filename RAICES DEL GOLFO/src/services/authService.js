@@ -1,4 +1,6 @@
-export const API = 'http://localhost:3007/users';
+import { ENDPOINTS } from '../config/api';
+
+export const API = ENDPOINTS.USERS;
 
 export const registerUser = async (user) => {
     const userWithRole = { ...user, role: 'cliente' };

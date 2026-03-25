@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/tours';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.TOURS;
 
 export const getTours = async () => {
     try {

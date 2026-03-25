@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/room_reservations';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.RESERVAS_HABITACIONES;
 
 export const getRoomReservasByUser = async (userId) => {
     try {

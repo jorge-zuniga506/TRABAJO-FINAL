@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/habitaciones';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.HABITACIONES;
 
 export const getHabitaciones = async () => {
     try {
