@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getAllReservas, updateReserva } from '../../../services/CrudReservas';
-import { getAllRoomReservas, updateRoomReserva } from '../../../services/CrudReservasHabitaciones';
+import Swal from 'sweetalert2';
+import { getAllReservas, updateReserva, deleteReserva } from '../../../services/CrudReservas';
+import { getAllRoomReservas, updateRoomReserva, deleteRoomReserva } from '../../../services/CrudReservasHabitaciones';
 import './ReservasPanel.css';
 
 function ReservasPanel() {
@@ -36,20 +37,83 @@ function ReservasPanel() {
   };
 
   const handleStatusUpdate = async (id, newStatus, tipo) => {
-    try {
-      const reservaToUpdate = reservas.find(r => r.id === id);
-      const updatedData = { ...reservaToUpdate, status: newStatus };
+    const actionText = newStatus === 'Aprobada' ? 'aprobar' : 'denegar';
+    
+    const result = await Swal.fire({
+      title: `¿${actionText.charAt(0).toUpperCase() + actionText.slice(1)} reserva?`,
+      text: `¿Estás seguro de que deseas ${actionText} esta solicitud?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: newStatus === 'Aprobada' ? '#0d9488' : '#ef4444',
+      cancelButtonColor: '#64748b',
+      confirmButtonText: `Sí, ${actionText}`,
+      cancelButtonText: 'Cancelar'
+    });
 
-      if (tipo === 'Habitación') {
-        await updateRoomReserva(id, updatedData);
-      } else {
-        await updateReserva(id, updatedData);
+    if (result.isConfirmed) {
+      try {
+        const reservaToUpdate = reservas.find(r => r.id === id);
+        const updatedData = { ...reservaToUpdate, status: newStatus };
+
+        if (tipo === 'Habitación') {
+          await updateRoomReserva(id, updatedData);
+        } else {
+          await updateReserva(id, updatedData);
+        }
+
+        setReservas(reservas.map(r => r.id === id ? updatedData : r));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Actualizado!',
+          text: `La reserva ha sido ${newStatus.toLowerCase()} con éxito.`,
+          confirmButtonColor: '#0d9488'
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo actualizar la reserva.',
+          confirmButtonColor: '#0d9488'
+        });
       }
+    }
+  };
 
-      setReservas(reservas.map(r => r.id === id ? updatedData : r));
-      alert(`Reserva ${newStatus.toLowerCase()} con éxito`);
-    } catch (error) {
-      alert("Error al actualizar la reserva");
+  const handleDelete = async (id, tipo, itemName) => {
+    const result = await Swal.fire({
+      title: '¿Eliminar reserva?',
+      text: `Se eliminará permanentemente la reserva de ${itemName}. Esta acción no se puede deshacer.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#64748b',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        if (tipo === 'Habitación') {
+          await deleteRoomReserva(id);
+        } else {
+          await deleteReserva(id);
+        }
+
+        setReservas(reservas.filter(r => r.id !== id));
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado',
+          text: 'La reserva ha sido eliminada correctamente.',
+          confirmButtonColor: '#0d9488'
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo eliminar la reserva.',
+          confirmButtonColor: '#0d9488'
+        });
+      }
     }
   };
 
@@ -126,6 +190,13 @@ function ReservasPanel() {
                       ) : (
                         <span className="action-complete">Procesada</span>
                       )}
+                      <button
+                        className="btn-delete-reserva"
+                        onClick={() => handleDelete(res.id, res.tipo, res.item)}
+                        title="Eliminar"
+                      >
+                        🗑️
+                      </button>
                     </div>
                   </td>
                 </tr>
