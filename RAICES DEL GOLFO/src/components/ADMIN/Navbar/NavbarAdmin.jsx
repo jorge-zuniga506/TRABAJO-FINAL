@@ -47,11 +47,11 @@ function NavbarAdmin({ toggleSidebar }) {
              Salir
            </button>
 
-           {/* Mobile menu icon */}
-           <div className="menu-icon-admin" onClick={() => setMenuOpen(!menuOpen)}>
-             <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
-             <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
-             <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+           {/* Mobile menu icon (Hamburger) */}
+           <div className="menu-icon-admin" onClick={toggleSidebar}>
+             <div className="bar"></div>
+             <div className="bar"></div>
+             <div className="bar"></div>
            </div>
         </div>
       </div>

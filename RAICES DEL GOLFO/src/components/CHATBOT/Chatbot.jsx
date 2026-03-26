@@ -61,7 +61,7 @@ const Chatbot = () => {
 
         // Lógica de Comida
         if (text.includes("comida") || text.includes("restaurante") || text.includes("gastronomia") || text.includes("comer") || text.includes("menu")) {
-            return "En Raíces del Golfo servimos comida criolla y maricscos frescos capturados por pescadores locales. ¡No te puedes ir sin probar nuestro pescado entero! Disponemos de área de restaurante frente al mar.";
+            return "En Raíces del Golfo servimos comida criolla y mariscos frescos capturados por pescadores locales. ¡No te puedes ir sin probar nuestro pescado entero! Disponemos de área de restaurante frente al mar.";
         }
 
         // Lógica de Transporte

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import NavbarCliente from './NavbarCliente';
 import Opiniones from '../INICIO/OPINIONES/Opiniones';
 import { getTours } from '../../services/CrudTours';
@@ -111,7 +112,12 @@ function ClientePag() {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (!newReserva.tour || !newReserva.fecha || !newReserva.horario) {
-      alert("Por favor completa todos los campos");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos para tu reserva de tour.',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
@@ -129,9 +135,19 @@ function ClientePag() {
       const added = await createReserva(reservaData);
       setReservas([...reservas, added]);
       setNewReserva({ tour: '', fecha: '', horario: '' });
-      alert("¡Solicitud de reserva enviada con éxito!");
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reserva Enviada!',
+        text: 'Tu solicitud de reserva de tour ha sido enviada con éxito.',
+        confirmButtonColor: '#0d9488'
+      });
     } catch (error) {
-      alert("Error al enviar la reserva");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al enviar tu reserva. Por favor intenta de nuevo.',
+        confirmButtonColor: '#0d9488'
+      });
     }
   };
 
@@ -140,7 +156,12 @@ function ClientePag() {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (!newRoomReserva.roomId || !newRoomReserva.checkIn || !newRoomReserva.checkOut) {
-      alert("Por favor completa todos los campos obligatorios");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos obligatorios para la reserva de habitación.',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
@@ -161,9 +182,19 @@ function ClientePag() {
       const added = await createRoomReserva(reservaData);
       setReservasHab([...reservasHab, added]);
       setNewRoomReserva({ roomId: '', roomName: '', checkIn: '', checkOut: '', time: '12:00 PM', price: 0 });
-      alert("¡Solicitud de reserva de habitación enviada con éxito!");
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reserva de Habitación Enviada!',
+        text: 'Tu solicitud ha sido enviada con éxito. Revisa el historial para ver el estado.',
+        confirmButtonColor: '#0d9488'
+      });
     } catch (error) {
-      alert("Error al enviar la reserva de habitación");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo enviar la reserva de habitación.',
+        confirmButtonColor: '#0d9488'
+      });
     }
   };
 
@@ -566,9 +597,19 @@ function ClientePag() {
             // Actualizar estados locales
             setUserName(updated.name || userName);
             setIsEditing(false);
-            alert('Perfil actualizado con éxito');
+            Swal.fire({
+              icon: 'success',
+              title: 'Perfil Actualizado',
+              text: 'Tus cambios han sido guardados correctamente.',
+              confirmButtonColor: '#0d9488'
+            });
           } catch (error) {
-            alert('Error al actualizar el perfil');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo actualizar el perfil.',
+              confirmButtonColor: '#ef4444'
+            });
           }
         };
 

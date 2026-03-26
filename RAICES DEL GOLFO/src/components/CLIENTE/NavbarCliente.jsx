@@ -5,6 +5,7 @@ import './NavbarCliente.css';
 
 function NavbarCliente() {
   const [userName, setUserName] = useState('Cliente');
+  const [userPhoto, setUserPhoto] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,6 +15,7 @@ function NavbarCliente() {
         const user = JSON.parse(storedUser);
         if (user.name) setUserName(user.name);
         else if (user.email) setUserName(user.email.split('@')[0]);
+        if (user.photo) setUserPhoto(user.photo);
       } catch (e) {
         console.error("Error al leer usuario", e);
       }
@@ -37,7 +39,13 @@ function NavbarCliente() {
         <div className="navbar-cliente-actions">
            {/* Perfil del Usuario */}
            <div className="cliente-profile">
-             <div className="avatar">{userName.substring(0, 2).toUpperCase()}</div>
+             <div className="avatar">
+               {userPhoto ? (
+                 <img src={userPhoto} alt="Profile" className="avatar-img" />
+               ) : (
+                 userName.substring(0, 2).toUpperCase()
+               )}
+             </div>
              <span className="cliente-name">{userName}</span>
            </div>
 
