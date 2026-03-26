@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SharkLogo from '../../common/SharkLogo';
 import './NavbarAdmin.css';
 
 function NavbarAdmin({ toggleSidebar }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
     navigate('/login');
+  };
+
+  const getInitials = (name) => {
+    if (!name) return 'AD';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
   };
 
   return (
@@ -37,9 +49,15 @@ function NavbarAdmin({ toggleSidebar }) {
            </button>
            
            {/* Perfil del Usuario */}
-           <div className="admin-profile">
-             <div className="avatar">AD</div>
-             <span className="admin-name">Administrador</span>
+           <div className="admin-profile" onClick={() => navigate('/admin/configuracion')}>
+             <div className="avatar">
+               {user?.photo ? (
+                 <img src={user.photo} alt={user.name} className="avatar-img" />
+               ) : (
+                 getInitials(user?.name)
+               )}
+             </div>
+             <span className="admin-name">{user?.name || 'Administrador'}</span>
            </div>
 
            {/* Botón Salir */}
