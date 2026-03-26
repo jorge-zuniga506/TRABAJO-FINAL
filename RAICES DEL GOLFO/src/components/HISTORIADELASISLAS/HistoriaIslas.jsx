@@ -65,18 +65,13 @@ function HistoriaIslas() {
           <div className="historia-content">
             <h2>Islas del Golfo de Nicoya</h2>
             <p>
-              El Golfo de Nicoya no es solo un cuerpo de agua; es un archipiélago de historias. Desde tiempos 
-              ancestrales, estas islas han sido hogar de culturas vibrantes que han sabido vivir en armonía 
-              con el mar.
+              El Golfo de Nicoya no es solo un cuerpo de agua; es un archipiélago de historias. Con una extensión de 90 km, este entrante de mar —el más profundo de Costa Rica— recibe las aguas de los ríos Tempisque y Grande de Tárcoles, creando un ecosistema estuarino vital.
             </p>
             <p>
-              Cada isla posee su propia identidad. La formación geológica del golfo ha permitido la creación 
-              de diversos microclimas y ecosistemas de manglares que son vitales para la reproducción 
-              de especies marinas en el Pacífico Central.
+              Su historia se remonta a siglos de tradición. Documentado por primera vez en 1519 por la expedición de Juan de Castañeda, este territorio fue el hogar del Reino de Nicoya, una prominente nación de origen chorotega que dejó un legado imborrable en la cultura local.
             </p>
             <p>
-              Explorar las islas es viajar en el tiempo, desde las minas de sal de Chira hasta los senderos 
-              históricos de San Lucas, sintiendo siempre la brisa y el sol que han bañado estas tierras por siglos.
+              Hoy, el golfo alberga diversos microclimas y manglares que son cuna de biodiversidad marina. Explorar sus islas es viajar en el tiempo, sintiendo la brisa que ha bañado estas tierras desde la época precolombina hasta nuestra era de turismo regenerativo.
             </p>
           </div>
           <div className="historia-image-wrapper">

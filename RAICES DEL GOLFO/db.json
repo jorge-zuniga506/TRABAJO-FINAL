@@ -60,8 +60,13 @@
       "capacidad": 2,
       "tipo": "Glamping",
       "disponible": true,
-
-      "imagen": "/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"
+      "imagen": "/src/components/HOSPEDAJE/IMGEN/Habi.1.webp",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab002",
@@ -71,7 +76,13 @@
       "capacidad": 4,
       "tipo": "Habitación",
       "disponible": true,
-      "imagen": "/src/CHIRA/IMG_1019 (2).JPG"
+      "imagen": "/src/CHIRA/IMG_1019 (2).JPG",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab003",
@@ -81,7 +92,13 @@
       "capacidad": 2,
       "tipo": "Refugio",
       "disponible": true,
-      "imagen": "/src/CHIRA/IMG_0984 (2).JPG"
+      "imagen": "/src/CHIRA/IMG_0984 (2).JPG",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab004",
@@ -91,7 +108,13 @@
       "capacidad": 3,
       "tipo": "Habitación",
       "disponible": true,
-      "imagen": "https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg"
+      "imagen": "https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab005",
@@ -101,7 +124,13 @@
       "capacidad": 5,
       "tipo": "Suite",
       "disponible": true,
-      "imagen": "/src/components/HOSPEDAJE/IMGEN/Habi.2.avif"
+      "imagen": "/src/components/HOSPEDAJE/IMGEN/Habi.2.avif",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab006",
@@ -111,7 +140,13 @@
       "capacidad": 4,
       "tipo": "Suite",
       "disponible": true,
-      "imagen": "https://a0.muscache.com/im/pictures/miso/Hosting-963071887857759256/original/ea191874-8dbd-461b-a48e-5c8901893413.jpeg"
+      "imagen": "https://a0.muscache.com/im/pictures/miso/Hosting-963071887857759256/original/ea191874-8dbd-461b-a48e-5c8901893413.jpeg",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     },
     {
       "id": "hab007",
@@ -121,7 +156,13 @@
       "capacidad": 4,
       "tipo": "Cabaña",
       "disponible": true,
-      "imagen": "https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"
+      "imagen": "https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg",
+      "status": "disponible",
+      "features": [
+        "WiFi",
+        "Vista al Mar",
+        "Aire Acondicionado"
+      ]
     }
   ],
   "tours": [
@@ -362,5 +403,31 @@
     }
   ],
   "balances": [],
+  "settings": {
+    "hotelName": "Raíces del Golfo",
+    "address": "Isla de Chira, Puntarenas, Costa Rica",
+    "contact": {
+      "phone": "+506 8888 8888",
+      "email": "info@raicesdelgolfo.com"
+    },
+    "timezone": "America/Costa_Rica",
+    "currency": "USD",
+    "languages": [
+      "es",
+      "en"
+    ],
+    "policies": {
+      "checkIn": "14:00",
+      "checkOut": "11:00",
+      "cancellation": "Cancelación gratuita hasta 24 horas antes.",
+      "pets": "Se permiten mascotas con cargo adicional.",
+      "rules": "Prohibido fumar en las habitaciones. Silencio después de las 10 PM. Respetar la flora y fauna local.",
+      "requireAcceptance": true
+    },
+    "appearance": {
+      "primaryColor": "#2c3e50",
+      "logo": "/logo.png"
+    }
+  },
   "$schema": "./node_modules/json-server/schema.json"
 }

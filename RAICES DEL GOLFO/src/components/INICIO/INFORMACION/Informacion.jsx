@@ -7,16 +7,13 @@ function Informacion() {
     <section className="info-section">
       <div className="info-container">
         <div className="info-content">
-          <h2 className="info-title">Sobre Raíces del Golfo</h2>
+          <h2 className="info-title">El Majestuoso Golfo de Nicoya</h2>
           <div className="info-divider"></div>
           <p className="info-description">
-            Raíces del Golfo nace del amor por la naturaleza y la cultura única de la región del Golfo de Nicoya en Costa Rica.
-            Nuestro propósito es conectar a los viajeros con la esencia más pura del ecosistema marino y terrestre,
-            ofreciendo experiencias sostenibles que benefician a las comunidades locales.
+            El Golfo de Nicoya es el entrante de mar más profundo de Costa Rica, un paraíso natural de aproximadamente 2,500 km² que separa las provincias de Guanacaste y Puntarenas. Sus aguas albergan una biodiversidad inigualable, desde extensos manglares hasta el estuario vital del río Tempisque.
           </p>
           <p className="info-description">
-            Desde hospedaje inmersivo hasta emocionantes tours de avistamiento y gastronomía auténtica,
-            te invitamos a vivir una aventura inolvidable respetando la riqueza natural que nos rodea.
+            En Raíces del Golfo, nuestra misión es preservar este ecosistema único. A través del turismo sostenible, invitamos a nuestros visitantes a explorar islas emblemáticas como Chira, Venado y San Lucas, promoviendo el bienestar de las comunidades locales y la protección de su herencia natural.
           </p>
           
           <div className="info-stats">
