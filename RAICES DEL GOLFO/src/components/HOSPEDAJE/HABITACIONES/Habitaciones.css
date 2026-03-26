@@ -84,6 +84,24 @@
   backdrop-filter: blur(4px);
 }
 
+.hab-status {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(34, 197, 94, 0.9);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+  margin: 0;
+}
+
 .hab-info {
   padding: clamp(20px, 3vw, 30px);
   display: flex;

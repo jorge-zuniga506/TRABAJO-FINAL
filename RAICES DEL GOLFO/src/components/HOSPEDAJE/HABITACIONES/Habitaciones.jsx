@@ -12,6 +12,7 @@ const habitacionesEstaticas = [
     precio: 85,
     capacidad: 2,
     amenidades: ["Cama Queen", "Iluminación Solar", "Terraza Privada", "Desayuno Típico", "Senderos cercanos"],
+    status: 'disponible',
     imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
   },
   {
@@ -21,6 +22,7 @@ const habitacionesEstaticas = [
     precio: 110,
     capacidad: 4,
     amenidades: ["2 Camas Matrimoniales", "Ventilador Potente", "Baño Privado", "Hamacas en exterior", "Cerca del muelle"],
+    status: 'disponible',
     imagenes: ["/src/CHIRA/IMG_1019 (2).JPG"]
   },
   {
@@ -30,6 +32,7 @@ const habitacionesEstaticas = [
     precio: 70,
     capacidad: 2,
     amenidades: ["Cama Matrimonial", "Decoración Artesanal", "Vistas al manglar", "Guía de pesca incluido", "Ambiente tranquilo"],
+    status: 'disponible',
     imagenes: ["/src/CHIRA/IMG_0984 (2).JPG"]
   },
   {
@@ -39,6 +42,7 @@ const habitacionesEstaticas = [
     precio: 95,
     capacidad: 3,
     amenidades: ["Cama Matrimonial", "Balcón", "Aire Acondicionado", "TV por cable", "Vistas al mar"],
+    status: 'disponible',
     imagenes: ["https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg"]
   },
   {
@@ -48,6 +52,7 @@ const habitacionesEstaticas = [
     precio: 150,
     capacidad: 5,
     amenidades: ["Camas King y Individuales", "Cocineta equipada", "Área de estar familiar", "Vistas al jardín", "Wifi en áreas comunes"],
+    status: 'disponible',
     imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.2.avif"]
   },
   {
@@ -57,6 +62,7 @@ const habitacionesEstaticas = [
     precio: 120,
     capacidad: 4,
     amenidades: ["Camas Matrimoniales", "Decoración Temática", "Tour histórico opcional", "Ventilación Natural", "Balcón con vista"],
+    status: 'disponible',
     imagenes: ["https://a0.muscache.com/im/pictures/miso/Hosting-963071887857759256/original/ea191874-8dbd-461b-a48e-5c8901893413.jpeg"]
   },
   {
@@ -66,6 +72,7 @@ const habitacionesEstaticas = [
     precio: 110,
     capacidad: 4,
     amenidades: ["Cama King", "Frente al Mar", "Hamacas Privadas", "Cocina de leña", "Ambiente de retiro"],
+    status: 'disponible',
     imagenes: ["https://a0.muscache.com/im/pictures/4ac2fa8a-7fe5-47e5-beb3-3df2823f2734.jpg"]
   }
 ];
@@ -93,8 +100,10 @@ function Habitaciones() {
     fetch('http://localhost:3007/habitaciones')
       .then(res => res.json())
       .then(data => {
-        // Solo mostrar las que estén disponibles
-        const disponibles = data.filter(h => h.disponible);
+        // Solo mostrar las que estén disponibles con el status 'disponible'
+        const disponibles = data.filter(h => h.status === 'disponible');
+        console.log(disponibles);
+        
         setHabitacionesAdmin(disponibles);
       })
       .catch(() => {
@@ -130,12 +139,14 @@ function Habitaciones() {
         {todasLasHabitaciones.map(hab => (
           <div key={hab.id} className="habitacion-card">
             <div className="hab-image-container">
+              <h5 className="hab-status">{hab.status}</h5>
               <img
                 src={hab.imagenes ? hab.imagenes[0] : (hab.imagen || IMAGENES_DEFECTO[todasLasHabitaciones.indexOf(hab) % IMAGENES_DEFECTO.length])}
                 alt={hab.nombre}
                 onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
               />
               <div className="hab-price">${hab.precio}/noche</div>
+             
             </div>
             <div className="hab-info">
               <h3>{hab.nombre}</h3>
