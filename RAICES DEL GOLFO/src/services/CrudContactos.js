@@ -1,4 +1,6 @@
-const BASE_URL = 'http://localhost:3007/formularioContacto';
+import { ENDPOINTS } from '../config/api';
+
+const BASE_URL = ENDPOINTS.CONTACTOS;
 
 export const createContacto = async (contactoData) => {
   try {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ENDPOINTS } from '../../../config/api';
 import './AdminPanel.css';
 import NavbarAdmin from '../Navbar/NavbarAdmin';
 import UsuariosPanel from './UsuariosPanel';
@@ -21,8 +22,8 @@ function AdminPanel() {
         try {
             setLoadingStats(true);
             const [usersRes, resRes] = await Promise.all([
-                fetch('http://localhost:3007/users'),
-                fetch('http://localhost:3007/reservations')
+                fetch(ENDPOINTS.USERS),
+                fetch(ENDPOINTS.RESERVATIONS)
             ]);
 
             const users = await usersRes.json();

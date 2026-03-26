@@ -149,3 +149,36 @@
     top: 20px;
   }
 }
+.hab-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.availability-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.availability-badge.available {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.availability-badge.unavailable {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.btn-reservar-hab:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

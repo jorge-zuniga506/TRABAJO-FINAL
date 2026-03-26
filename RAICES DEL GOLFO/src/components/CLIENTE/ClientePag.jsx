@@ -3,8 +3,10 @@ import { useLocation } from 'react-router-dom';
 import NavbarCliente from './NavbarCliente';
 import Opiniones from '../INICIO/OPINIONES/Opiniones';
 import { getTours } from '../../services/CrudTours';
-import { getReservasByUser, createReserva } from '../../services/CrudReservas';
-import { getRoomReservasByUser, createRoomReserva } from '../../services/CrudReservasHabitaciones';
+
+import { getReservasByUser, createReserva, getAllReservas } from '../../services/CrudReservas';
+import { getRoomReservasByUser, createRoomReserva, getAllRoomReservas } from '../../services/CrudReservasHabitaciones';
+
 import { updateUserProfile } from '../../services/CrudParaUsuarios';
 import { getHabitaciones } from '../../services/CrudHabitaciones';
 import './ClientePag.css';
@@ -35,6 +37,10 @@ function ClientePag() {
   const [allHabitaciones, setAllHabitaciones] = useState([]);
   const [loadingTours, setLoadingTours] = useState(true);
   const [loadingHab, setLoadingHab] = useState(true);
+
+  const [allToursReservations, setAllToursReservations] = useState([]);
+  const [allRoomsReservations, setAllRoomsReservations] = useState([]);
+
 
   // Estado para el formulario de nueva reserva de tour
   const [newReserva, setNewReserva] = useState({
@@ -74,13 +80,17 @@ function ClientePag() {
         setLoadingTours(true);
         setLoadingHab(true);
 
-        const [toursRes, habRes] = await Promise.all([
+        const [toursRes, habRes, allToursRes, allRoomsRes] = await Promise.all([
           getTours(),
-          getHabitaciones()
+          getHabitaciones(),
+          getAllReservas(),
+          getAllRoomReservas()
         ]);
 
         setAllTours(toursRes.filter(t => t.disponible));
         setAllHabitaciones(habRes);
+        setAllToursReservations(allToursRes);
+        setAllRoomsReservations(allRoomsRes);
 
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -106,6 +116,31 @@ function ClientePag() {
     fetchData();
   }, [location.state]);
 
+
+  // Funciones de validación de disponibilidad
+  const isTourDateAvailable = (tourName, date, time) => {
+    if (!tourName || !date || !time) return true;
+    return !allToursReservations.some(res => 
+      res.tourName === tourName && 
+      res.date === date && 
+      res.time === time &&
+      res.status !== 'Denegada'
+    );
+  };
+
+  const isRoomRangeAvailable = (roomId, checkIn, checkOut) => {
+    if (!roomId || !checkIn || !checkOut) return true;
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    return !allRoomsReservations.some(res => {
+      if (res.roomId !== roomId || res.status === 'Denegada') return false;
+      const resStart = new Date(res.checkIn);
+      const resEnd = new Date(res.checkOut);
+      // Traslape si (StartA <= EndB) y (EndA >= StartB)
+      return start < resEnd && end > resStart;
+    });
+  };
   const handleCreateReserva = async (e) => {
     e.preventDefault();
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
@@ -114,6 +149,13 @@ function ClientePag() {
       alert("Por favor completa todos los campos");
       return;
     }
+
+
+    if (!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario)) {
+      alert("Lo sentimos, este horario ya está reservado para este tour. Por favor elige otra fecha u horario.");
+      return;
+    }
+
 
     const reservaData = {
       userId: storedUser.id,
@@ -143,6 +185,18 @@ function ClientePag() {
       alert("Por favor completa todos los campos obligatorios");
       return;
     }
+
+
+    if (new Date(newRoomReserva.checkIn) >= new Date(newRoomReserva.checkOut)) {
+      alert("La fecha de salida debe ser posterior a la de entrada");
+      return;
+    }
+
+    if (!isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut)) {
+      alert("Lo sentimos, la habitación no está disponible para las fechas seleccionadas.");
+      return;
+    }
+
 
     const reservaData = {
       userId: storedUser.id,
@@ -299,7 +353,17 @@ function ClientePag() {
                         </div>
                       </div>
 
-                      <button type="submit" className={`btn-booking-modern ${newReserva.tour && newReserva.fecha && newReserva.horario ? 'ready' : ''}`}>
+                      {!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario) && (
+                        <div className="availability-warning">
+                          ⚠️ Este horario no está disponible.
+                        </div>
+                      )}
+
+                      <button 
+                        type="submit" 
+                        className={`btn-booking-modern ${newReserva.tour && newReserva.fecha && newReserva.horario && isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario) ? 'ready' : 'disabled'}`}
+                        disabled={!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario)}
+                      >
                         <span>RESERVAR AHORA</span>
                         <div className="btn-shine"></div>
                       </button>
@@ -463,7 +527,17 @@ function ClientePag() {
                         </div>
                       )}
 
-                      <button type="submit" className={`btn-booking-modern ${newRoomReserva.roomId && newRoomReserva.checkIn && newRoomReserva.checkOut ? 'ready' : ''}`}>
+                      {!isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut) && (
+                        <div className="availability-warning">
+                          ⚠️ Fechas no disponibles para esta habitación.
+                        </div>
+                      )}
+
+                      <button 
+                        type="submit" 
+                        className={`btn-booking-modern ${newRoomReserva.roomId && newRoomReserva.checkIn && newRoomReserva.checkOut && isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut) ? 'ready' : 'disabled'}`}
+                        disabled={!isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut)}
+                      >
                         <span>SOLICITAR RESERVA</span>
                         <div className="btn-shine"></div>
                       </button>

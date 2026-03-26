@@ -134,6 +134,10 @@
 
 /* Responsive constraints strictly enforced */
 @media screen and (max-width: 960px) {
+  .contenedor-extra {
+    padding: 60px 0;
+  }
+
   .contenedor-gallery {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -146,6 +150,7 @@
 
   .gallery-side {
     height: auto;
+    gap: 1.5rem;
   }
   
   .small {

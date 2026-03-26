@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/opiniones';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.OPINIONES;
 
 export const getOpiniones = async () => {
     try {

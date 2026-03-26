@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3007/users';
+import { ENDPOINTS } from '../config/api';
+
+const API_URL = ENDPOINTS.USERS;
 
 export const getUsers = async () => {
     try {
