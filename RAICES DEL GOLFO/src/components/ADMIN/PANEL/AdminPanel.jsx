@@ -7,6 +7,7 @@ import HabitacionesPanel from './HabitacionesPanel';
 import ResevaTours from '../TOURS/ResevaTours';
 import ReservasPanel from './ReservasPanel';
 import ConfiguracionPanel from './ConfiguracionPanel';
+import MensajesPanel from './MensajesPanel';
 
 
 function AdminPanel() {
@@ -96,6 +97,8 @@ function AdminPanel() {
                 return <ReservasPanel />;
             case 'settings':
                 return <ConfiguracionPanel />;
+            case 'messages':
+                return <MensajesPanel />;
             default:
                 return null;
         }
@@ -103,7 +106,10 @@ function AdminPanel() {
 
     return (
         <div className="admin-panel">
-            <NavbarAdmin toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+            <NavbarAdmin 
+                toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+                onTabChange={handleTabChange}
+            />
             <div className="admin-container">
                 <aside className={`sidebar ${isSidebarOpen ? '' : 'closed'}`}>
                     <div className="sidebar-header">
@@ -157,6 +163,15 @@ function AdminPanel() {
                                 onClick={() => handleTabChange('settings')}
                             >
                                 Configuración
+                            </button>
+                        </li>
+
+                        <li>
+                            <button
+                                className={`sidebar-btn ${activeTab === 'messages' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('messages')}
+                            >
+                                Mensajes
                             </button>
                         </li>
                     </ul>

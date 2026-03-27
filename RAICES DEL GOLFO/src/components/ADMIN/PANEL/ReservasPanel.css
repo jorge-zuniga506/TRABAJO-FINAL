@@ -125,20 +125,10 @@
   color: #9d174d;
 }
 
-.btn-delete-reserva {
-  border: none;
-  background: none;
-  color: #ef4444;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 14px;
-}
-
-.btn-delete-reserva:hover {
-  transform: scale(1.15);
-  color: #dc2626;
+.msg-content {
+  max-width: 400px;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.4;
+  white-space: pre-wrap;
 }
