@@ -2,6 +2,8 @@ import { ENDPOINTS } from '../config/api';
 
 const API_URL = ENDPOINTS.RESERVATIONS;
 
+// Servicio para gestionar reservaciones de tours.
+// Encapsula lectura, actualizacion de estado y eliminacion.
 export const getReservations = async () => {
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error('Error al obtener reservaciones');

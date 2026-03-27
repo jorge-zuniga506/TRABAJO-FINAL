@@ -28,6 +28,8 @@ const IMAGES_MAP = {
   't005': isla1, 't006': isla2, 't007': isla3, 't008': isla4, 't009': isla5,
 };
 
+// Vista principal del cliente autenticado.
+// Coordina catalogos, reservas, perfil y mensajeria dentro de una sola interfaz.
 function ClientePag() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('inicio');
@@ -411,7 +413,7 @@ function ClientePag() {
             </section>
           </div>
         );
-      case 'reservas':
+      case 'reservas': {
         const selectedTourInfo = allTours.find(t => t.nombre === newReserva.tour);
         const horariosDisponibles = ["08:00 AM", "10:00 AM", "01:00 PM", "03:00 PM"];
 
@@ -556,7 +558,8 @@ function ClientePag() {
             </div>
           </div>
         );
-      case 'hospedajes':
+      }
+      case 'hospedajes': {
         const selectedRoomInfo = allHabitaciones.find(h => h.id === newRoomReserva.roomId);
         const IMAGENES_DEFECTO = [
           "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
@@ -736,15 +739,16 @@ function ClientePag() {
             </div>
           </div>
         );
+      }
       case 'servicios':
         return (
           <div className="cliente-tab-content fade-in">
             <Opiniones />
           </div>
         );
-      case 'perfil':
+      case 'perfil': {
         const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-        
+
         const handleStartEditing = () => {
           setEditedUser({
             name: userName,
@@ -861,6 +865,7 @@ function ClientePag() {
             </div>
           </div>
         );
+      }
       case 'mensajes':
         return (
           <div className="cliente-tab-content fade-in">

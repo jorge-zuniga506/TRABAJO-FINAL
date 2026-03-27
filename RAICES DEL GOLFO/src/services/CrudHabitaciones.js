@@ -2,6 +2,8 @@ import { ENDPOINTS } from '../config/api';
 
 const API_URL = ENDPOINTS.HABITACIONES;
 
+// Servicio CRUD de habitaciones.
+// Se usa tanto en el panel de administracion como en vistas del cliente.
 export const getHabitaciones = async () => {
     try {
         const response = await fetch(API_URL);

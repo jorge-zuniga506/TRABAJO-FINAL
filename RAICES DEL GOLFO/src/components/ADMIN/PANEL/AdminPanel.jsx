@@ -9,7 +9,8 @@ import ReservasPanel from './ReservasPanel';
 import ConfiguracionPanel from './ConfiguracionPanel';
 import MensajesPanel from './MensajesPanel';
 
-
+// Panel principal del administrador.
+// Desde aqui se controla la navegacion interna del dashboard y se montan sus modulos.
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);

@@ -1,47 +1,42 @@
-// src/routes/Routing.jsx
-// Sistema de enrutamiento principal de la aplicación
-
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Inicio from '../pages/Inicio';
-import Tours from '../pages/Tours';
-import Login from '../pages/Login';
-import Registro from '../pages/Registro';
-import Habitaciones from '../pages/Habitaciones';
-import Gastronomia from '../pages/Gastronomia';
-import Transporte from '../pages/Transporte';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AccessibilityWidget from '../components/ACCESSIBILITY/AccessibilityWidget';
+import Chatbot from '../components/CHATBOT/Chatbot';
 import AcercaDe from '../pages/AcercaDe';
-import HistoriaIslasPage from '../pages/HistoriaIslasPage';
 import Admin from '../pages/Admin';
 import Cliente from '../pages/Cliente';
+import Gastronomia from '../pages/Gastronomia';
+import Habitaciones from '../pages/Habitaciones';
+import HistoriaIslasPage from '../pages/HistoriaIslasPage';
+import Inicio from '../pages/Inicio';
+import Login from '../pages/Login';
+import Registro from '../pages/Registro';
+import Tours from '../pages/Tours';
+import Transporte from '../pages/Transporte';
 import ProtectedRoute from './ProtectedRoute';
-import Chatbot from '../components/CHATBOT/Chatbot';
-import AccessibilityWidget from '../components/ACCESSIBILITY/AccessibilityWidget';
 
+// Routing es el mapa principal de navegacion de toda la aplicacion.
+// Aqui se decide que pagina mostrar segun la URL y que rutas requieren autenticacion.
 function Routing() {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
-        {/* Rutas principales */}
+        {/* Rutas publicas visibles para cualquier usuario. */}
         <Route path="/" element={<Inicio />} />
         <Route path="/tours" element={<Tours />} />
         <Route path="/habitaciones" element={<Habitaciones />} />
         <Route path="/gastronomia" element={<Gastronomia />} />
         <Route path="/transporte" element={<Transporte />} />
         <Route path="/acerca-de" element={<AcercaDe />} />
-        
-        {/* Ruta de Historia - RUTA ÚNICA Y CONSISTENTE */}
         <Route path="/historia-de-las-islas" element={<HistoriaIslasPage />} />
-        
-        {/* Rutas de isla específicas */}
         <Route path="/isla-venado" element={<AcercaDe />} />
 
-        {/* Rutas de autenticación */}
+        {/* Rutas del flujo de autenticacion. */}
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/reservar" element={<Login />} />
 
-        {/* Rutas protegidas */}
+        {/* Rutas privadas separadas por rol. */}
         <Route
           path="/admin"
           element={
@@ -59,14 +54,12 @@ function Routing() {
           }
         />
 
-        {/* Ruta por defecto: 404 - redirige a inicio */}
+        {/* Si la ruta no existe, se redirige al inicio usando la vista principal. */}
         <Route path="*" element={<Inicio />} />
       </Routes>
-      
-      {/* Chatbot global */}
+
+      {/* Widgets globales siempre montados, sin importar la pagina actual. */}
       <Chatbot />
-      
-      {/* Widget de Accesibilidad Global */}
       <AccessibilityWidget />
     </BrowserRouter>
   );

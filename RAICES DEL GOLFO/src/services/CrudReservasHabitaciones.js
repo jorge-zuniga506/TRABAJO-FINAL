@@ -2,6 +2,8 @@ import { ENDPOINTS } from '../config/api';
 
 const API_URL = ENDPOINTS.RESERVAS_HABITACIONES;
 
+// Servicio CRUD de reservas de habitaciones.
+// Maneja consultas por usuario y operaciones del panel administrativo.
 export const getRoomReservasByUser = async (userId) => {
     try {
         const response = await fetch(`${API_URL}?userId=${userId}`);

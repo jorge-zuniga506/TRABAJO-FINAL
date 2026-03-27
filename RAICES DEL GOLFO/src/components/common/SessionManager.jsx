@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 /**
  * SessionManager Component
@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
  */
 const SessionManager = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Solo actuar si hay un usuario en el localStorage

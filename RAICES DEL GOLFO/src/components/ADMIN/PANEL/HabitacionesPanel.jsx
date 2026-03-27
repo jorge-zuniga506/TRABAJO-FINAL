@@ -32,8 +32,8 @@ const HabitacionesPanel = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const [form, setForm] = useState(FORM_INICIAL);
-    const [formError, setFormError] = useState('');
-    const [saving, setSaving] = useState(false);
+    const [, setFormError] = useState('');
+    const [, setSaving] = useState(false);
 
     const cargarHabitaciones = async () => {
         try {
