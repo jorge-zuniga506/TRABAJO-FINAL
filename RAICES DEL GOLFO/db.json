@@ -457,20 +457,19 @@
   ],
   "formularioContacto": [
     {
-      "id": "0866",
-      "nombre": "JORGE",
-      "email": "j@gmail.com",
-      "asunto": "Consulta General",
-      "mensaje": "No me gusto el servicio",
-      "createdAt": "2026-03-27T17:35:17.491Z",
-      "userId": "a1ce",
-      "respuestaAdmin": "Algo en especifico ",
-      "respondidoAt": "2026-03-27T17:36:24.372Z",
-      "status": "Respondido"
+      "id": "8467",
+      "nombre": "stacy",
+      "email": "stacy@gmail.com",
+      "asunto": "la comida",
+      "mensaje": "todo rico ",
+      "createdAt": "2026-03-27T19:41:14.469Z",
+      "userId": "a1d7",
+      "status": "Respondido",
+      "respuestaAdmin": "bueno",
+      "respondidoAt": "2026-03-27T19:41:36.415Z"
     }
   ],
   "balances": [],
-  "formularioContacto": [],
   "settings": {
     "hotelName": "Raíces del Golfo",
     "address": "Isla de Chira, Puntarenas, Costa Rica",

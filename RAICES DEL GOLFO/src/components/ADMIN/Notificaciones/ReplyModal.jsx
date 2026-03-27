@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import './ReplyModal.css';
 
 function ReplyModal({ notification, onClose, onSend }) {
@@ -15,7 +16,12 @@ function ReplyModal({ notification, onClose, onSend }) {
       onClose();
     } catch (error) {
       console.error("Error al enviar respuesta:", error);
-      alert("Hubo un error al enviar la respuesta.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al enviar la respuesta.',
+        confirmButtonColor: '#ef4444'
+      });
     } finally {
       setSending(false);
     }
@@ -35,7 +41,7 @@ function ReplyModal({ notification, onClose, onSend }) {
           </div>
           <form onSubmit={handleSubmit}>
             <textarea
-              placeholder="Escribe tu respuesta aquí..."
+              placeholder="Escribe tu respuesta aqui..."
               value={reply}
               onChange={(e) => setReply(e.target.value)}
               required
