@@ -1,10 +1,8 @@
-import { ENDPOINTS } from '../config/api';
+export const API_URL = 'http://localhost:3007/users';
 
-export const API = ENDPOINTS.USERS;
-
-export const registerUser = async (user) => {
+export const registerUserLocal = async (user) => {
     const userWithRole = { ...user, role: 'cliente' };
-    const response = await fetch(API, {
+    const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,26 +12,28 @@ export const registerUser = async (user) => {
     return response.json();
 };
 
+export const registerUser = registerUserLocal;
+
 export const loginUser = async (email, password) => {
     const cleanEmail = email.trim();
     const cleanPassword = password.trim();
-    
+
     console.log(`Intentando login para: ${cleanEmail}`);
-    
+
     try {
-        const response = await fetch(`${API}?email=${cleanEmail}&password=${cleanPassword}`);
+        const response = await fetch(`${API_URL}?email=${cleanEmail}&password=${cleanPassword}`);
         const users = await response.json();
-        
+
         if (users.length > 0) {
             console.log("Usuario encontrado:", users[0].email);
             return users[0];
         } else {
             // Fallback: buscar manualmente por si json-server query falla
             console.log("No encontrado vía query, intentando filtrado manual...");
-            const allResponse = await fetch(API);
+            const allResponse = await fetch(API_URL);
             const allUsers = await allResponse.json();
-            const foundUser = allUsers.find(u => 
-                u.email.toLowerCase().trim() === cleanEmail.toLowerCase() && 
+            const foundUser = allUsers.find(u =>
+                u.email.toLowerCase().trim() === cleanEmail.toLowerCase() &&
                 u.password.toString().trim() === cleanPassword.toString()
             );
             return foundUser || null;

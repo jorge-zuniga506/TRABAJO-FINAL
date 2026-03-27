@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { ENDPOINTS } from '../../../config/api';
-import './ReservasPanel.css'; // Reutilizamos estilos de tablas de administración
+import './ReservasPanel.css'; // Reutilizamos estilos de tablas de administracion
 
 function MensajesPanel() {
     const [messages, setMessages] = useState([]);
@@ -15,7 +16,7 @@ function MensajesPanel() {
             setLoading(true);
             const response = await fetch(ENDPOINTS.CONTACTOS);
             const data = await response.json();
-            // Ordenar por ID o fecha si existe (simulado por ID inverso aquí)
+            // Ordenar por ID o fecha si existe (simulado por ID inverso aqui)
             setMessages(data.reverse());
         } catch (error) {
             console.error("Error fetching messages:", error);
@@ -25,13 +26,35 @@ function MensajesPanel() {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('¿Estás seguro de eliminar este mensaje?')) return;
-        
+        const result = await Swal.fire({
+            title: 'Eliminar mensaje',
+            text: 'Esta accion no se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#64748b'
+        });
+
+        if (!result.isConfirmed) return;
+
         try {
             await fetch(`${ENDPOINTS.CONTACTOS}/${id}`, { method: 'DELETE' });
             setMessages(messages.filter(m => m.id !== id));
+            Swal.fire({
+                icon: 'success',
+                title: 'Mensaje eliminado',
+                text: 'El mensaje fue eliminado correctamente.',
+                confirmButtonColor: '#0d9488'
+            });
         } catch (error) {
-            alert('Error al eliminar el mensaje');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo eliminar el mensaje.',
+                confirmButtonColor: '#ef4444'
+            });
         }
     };
 
@@ -41,7 +64,7 @@ function MensajesPanel() {
         <div className="tab-content fade-in">
             <div className="panel-header">
                 <h1>Mensajes de Contacto</h1>
-                <p>Gestiona las consultas recibidas a través del formulario de contacto.</p>
+                <p>Gestiona las consultas recibidas a traves del formulario de contacto.</p>
             </div>
 
             <div className="admin-table-container">
@@ -73,12 +96,12 @@ function MensajesPanel() {
                                     </td>
                                     <td>
                                         <div className="action-buttons">
-                                            <button 
-                                                className="btn-deny" 
+                                            <button
+                                                className="btn-deny"
                                                 onClick={() => handleDelete(msg.id)}
                                                 title="Eliminar mensaje"
                                             >
-                                                ✕
+                                                X
                                             </button>
                                         </div>
                                     </td>

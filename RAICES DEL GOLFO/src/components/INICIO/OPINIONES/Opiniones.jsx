@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { getOpiniones, createOpinion } from '../../../services/CrudOpiniones';
 import './Opiniones.css';
 
@@ -6,7 +7,7 @@ function Opiniones() {
   const [reviews, setReviews] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  
+
   // Estado para el formulario de nuevo comentario
   const [newReview, setNewReview] = useState({
     calificacion: 5,
@@ -47,7 +48,12 @@ function Opiniones() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newReview.comentario.trim()) {
-      alert("Por favor escribe un comentario");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Comentario vacio',
+        text: 'Por favor escribe un comentario.',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
@@ -69,12 +75,22 @@ function Opiniones() {
       const addedReview = await createOpinion(feedbackData);
       setReviews(prev => [...prev, addedReview]);
       setNewReview({ calificacion: 5, comentario: '', experiencia: 'General' });
-      alert("¡Gracias por tu comentario!");
-      
+      Swal.fire({
+        icon: 'success',
+        title: 'Comentario enviado',
+        text: 'Gracias por compartir tu experiencia.',
+        confirmButtonColor: '#0d9488'
+      });
+
       // Mover al nuevo comentario
       setCurrentIndex(reviews.length);
     } catch (error) {
-      alert("Error al enviar el comentario");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo enviar el comentario.',
+        confirmButtonColor: '#ef4444'
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -90,7 +106,7 @@ function Opiniones() {
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={i < rating ? "star filled" : "star"}>★</span>
+      <span key={i} className={i < rating ? "star filled" : "star"}>*</span>
     ));
   };
 
@@ -106,18 +122,18 @@ function Opiniones() {
             <div className="stars-box">
               {renderStars(5)}
             </div>
-            <span className="total-reviews">Promedio basado en +200 reseñas</span>
+            <span className="total-reviews">Promedio basado en +200 resenas</span>
           </div>
         </div>
 
         {reviews.length > 0 && (
           <div className="carousel-wrapper">
-            <button className="carousel-btn prev" onClick={prevReview}>❮</button>
-            
+            <button className="carousel-btn prev" onClick={prevReview}>&lt;</button>
+
             <div className="review-card-container">
               {reviews.map((review, index) => (
-                <div 
-                  key={review.id} 
+                <div
+                  key={review.id}
                   className={`review-card ${index === currentIndex ? 'active' : ''}`}
                 >
                   {index === currentIndex && (
@@ -137,14 +153,14 @@ function Opiniones() {
               ))}
             </div>
 
-            <button className="carousel-btn next" onClick={nextReview}>❯</button>
+            <button className="carousel-btn next" onClick={nextReview}>&gt;</button>
           </div>
         )}
 
         <div className="carousel-dots">
           {reviews.map((_, index) => (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className={`dot ${index === currentIndex ? 'active' : ''}`}
               onClick={() => setCurrentIndex(index)}
             ></span>
@@ -153,35 +169,35 @@ function Opiniones() {
 
         {/* Formulario para escribir nuevo comentario */}
         <div className="write-review-section">
-          <h3>Cuéntanos tu experiencia</h3>
+          <h3>Cuentanos tu experiencia</h3>
           <form className="review-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Calificación:</label>
+              <label>Calificacion:</label>
               <select name="calificacion" value={newReview.calificacion} onChange={handleInputChange}>
-                <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
-                <option value="4">⭐⭐⭐⭐ (Muy Bueno)</option>
-                <option value="3">⭐⭐⭐ (Bueno)</option>
-                <option value="2">⭐⭐ (Regular)</option>
-                <option value="1">⭐ (Malo)</option>
+                <option value="5">5 estrellas (Excelente)</option>
+                <option value="4">4 estrellas (Muy Bueno)</option>
+                <option value="3">3 estrellas (Bueno)</option>
+                <option value="2">2 estrellas (Regular)</option>
+                <option value="1">1 estrella (Malo)</option>
               </select>
             </div>
             <div className="form-group">
               <label>Comentario:</label>
-              <textarea 
-                name="comentario" 
-                value={newReview.comentario} 
-                onChange={handleInputChange} 
-                placeholder="¿Qué te pareció tu visita?"
+              <textarea
+                name="comentario"
+                value={newReview.comentario}
+                onChange={handleInputChange}
+                placeholder="Que te parecio tu visita?"
                 required
               />
             </div>
             <div className="form-group">
               <label>Experiencia realizada:</label>
-              <input 
-                type="text" 
-                name="experiencia" 
-                value={newReview.experiencia} 
-                onChange={handleInputChange} 
+              <input
+                type="text"
+                name="experiencia"
+                value={newReview.experiencia}
+                onChange={handleInputChange}
                 placeholder="Ej: Tour de Pesca, Hospedaje..."
               />
             </div>
