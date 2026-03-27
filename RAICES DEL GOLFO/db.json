@@ -458,45 +458,47 @@
   ],
   "formularioContacto": [
     {
-      "id": "8467",
-      "nombre": "stacy",
-      "email": "stacy@gmail.com",
-      "asunto": "la comida",
-      "mensaje": "todo rico ",
-      "createdAt": "2026-03-27T19:41:14.469Z",
-      "userId": "a1d7",
-      "status": "Respondido",
-      "respuestaAdmin": "bueno",
-      "respondidoAt": "2026-03-27T19:41:36.415Z"
+      "id": "0866",
+      "nombre": "JORGE",
+      "email": "j@gmail.com",
+      "asunto": "Consulta General",
+      "mensaje": "No me gusto el servicio",
+      "createdAt": "2026-03-27T17:35:17.491Z",
+      "userId": "a1ce",
+      "respuestaAdmin": "buenp",
+      "respondidoAt": "2026-03-27T19:44:27.656Z",
+      "status": "Respondido"
     }
   ],
   "balances": [],
-  "settings": {
-    "hotelName": "Raíces del Golfo",
-    "address": "Isla de Chira, Puntarenas, Costa Rica",
-    "contact": {
-      "phone": "+506 8888 8888",
-      "email": "info@raicesdelgolfo.com"
-    },
-    "timezone": "America/Costa_Rica",
-    "currency": "USD",
-    "languages": [
-      "es",
-      "en"
-    ],
-    "policies": {
-      "checkIn": "14:00",
-      "checkOut": "11:00",
-      "cancellation": "Cancelación gratuita hasta 24 horas antes.",
-      "pets": "Se permiten mascotas con cargo adicional.",
-      "rules": "Prohibido fumar en las habitaciones. Silencio después de las 10 PM. Respetar la flora y fauna local.",
-      "requireAcceptance": true
-    },
-    "appearance": {
-      "primaryColor": "#2c3e50",
-      "logo": "/logo.png"
+  "settings": [
+    {
+      "hotelName": "Raíces del Golfo",
+      "address": "Isla de Chira, Puntarenas, Costa Rica",
+      "contact": {
+        "phone": "+506 8888 8888",
+        "email": "info@raicesdelgolfo.com"
+      },
+      "timezone": "America/Costa_Rica",
+      "currency": "USD",
+      "languages": [
+        "es",
+        "en"
+      ],
+      "policies": {
+        "checkIn": "14:00",
+        "checkOut": "11:00",
+        "cancellation": "Cancelación gratuita hasta 24 horas antes.",
+        "pets": "Se permiten mascotas con cargo adicional.",
+        "rules": "Prohibido fumar en las habitaciones. Silencio después de las 10 PM. Respetar la flora y fauna local.",
+        "requireAcceptance": true
+      },
+      "appearance": {
+        "primaryColor": "#2c3e50",
+        "logo": "/logo.png"
+      },
+      "id": "5234"
     }
-  }
-],
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

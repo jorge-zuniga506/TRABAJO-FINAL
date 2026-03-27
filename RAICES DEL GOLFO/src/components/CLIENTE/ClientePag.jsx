@@ -13,15 +13,15 @@ import { getHabitaciones } from '../../services/CrudHabitaciones';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
-import posada1 from '../TOURS/img toures/posada1.jpg';
-import posada2 from '../TOURS/img toures/posada2.jpg';
-import posada3 from '../TOURS/img toures/posada3.jpg';
-import posada4 from '../TOURS/img toures/posada4.jpg';
-import isla1 from '../TOURS/img toures/isla1.jpg';
-import isla2 from '../TOURS/img toures/isla2.jpg';
-import isla3 from '../TOURS/img toures/isla3.jpg';
-import isla4 from '../TOURS/img toures/isla4.jpg';
-import isla5 from '../TOURS/img toures/isla5.jpg';
+import posada1 from '../VIDEOS Y IMG/posada1.jpg';
+import posada2 from '../VIDEOS Y IMG/posada2.jpg';
+import posada3 from '../VIDEOS Y IMG/posada3.jpg';
+import posada4 from '../VIDEOS Y IMG/posada4.jpg';
+import isla1 from '../VIDEOS Y IMG/isla1.jpg';
+import isla2 from '../VIDEOS Y IMG/isla2.jpg';
+import isla3 from '../VIDEOS Y IMG/isla3.jpg';
+import isla4 from '../VIDEOS Y IMG/isla4.jpg';
+import isla5 from '../VIDEOS Y IMG/isla5.jpg';
 
 const IMAGES_MAP = {
   't001': posada1, 't002': posada2, 't003': posada3, 't004': posada4,

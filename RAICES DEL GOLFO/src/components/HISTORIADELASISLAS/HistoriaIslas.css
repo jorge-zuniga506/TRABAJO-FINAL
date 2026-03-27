@@ -9,7 +9,7 @@
 }
 
 .historia-hero {
-  background: linear-gradient(rgba(15, 118, 110, 0.7), rgba(13, 148, 136, 0.7)), url('/src/CHIRA/unnamed.jpg');
+  background: linear-gradient(rgba(15, 118, 110, 0.7), rgba(13, 148, 136, 0.7)), url("../VIDEOS Y IMG/unnamed.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

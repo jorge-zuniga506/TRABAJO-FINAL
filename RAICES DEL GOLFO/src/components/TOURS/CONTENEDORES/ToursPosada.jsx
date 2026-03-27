@@ -3,10 +3,10 @@ import TourCard from '../INFO/TourCard';
 import { getTours } from '../../../services/CrudTours';
 import './ToursSection.css'; // Shared CSS for both sections
 
-import posadaImg1 from '../img toures/posada1.jpg';
-import posadaImg2 from '../img toures/posada2.jpg';
-import posadaImg3 from '../img toures/posada3.jpg';
-import posadaImg4 from '../img toures/posada4.jpg';
+import posadaImg1 from '../../VIDEOS Y IMG/posada1.jpg';
+import posadaImg2 from '../../VIDEOS Y IMG/posada2.jpg';
+import posadaImg3 from '../../VIDEOS Y IMG/posada3.jpg';
+import posadaImg4 from '../../VIDEOS Y IMG/posada4.jpg';
 
 const IMAGES = {
   't001': posadaImg1,

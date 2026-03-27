@@ -3,6 +3,10 @@ import { ENDPOINTS } from '../../../config/api';
 import './Habitaciones.css';
 import ReservaModal from '../../MODAL/ReservaModal';
 import { WHATSAPP_HABITACIONES } from '../../../config/whatsapp';
+import habi1Img from '../../VIDEOS Y IMG/Habi.1.webp';
+import habi2Img from '../../VIDEOS Y IMG/Habi.2.avif';
+import chiraVistaImg from '../../VIDEOS Y IMG/img-1019-2.jpg';
+import chiraRefugioImg from '../../VIDEOS Y IMG/img-0984-2.jpg';
 
 // ── Habitaciones estáticas (con imágenes y amenidades propias) ──
 const habitacionesEstaticas = [
@@ -13,7 +17,7 @@ const habitacionesEstaticas = [
     precio: 85,
     capacidad: 2,
     amenidades: ["Cama Queen", "Iluminación Solar", "Terraza Privada", "Desayuno Típico", "Senderos cercanos"],
-    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.1.webp"]
+    imagenes: [habi1Img]
   },
   {
     id: 'static-2',
@@ -22,7 +26,7 @@ const habitacionesEstaticas = [
     precio: 110,
     capacidad: 4,
     amenidades: ["2 Camas Matrimoniales", "Ventilador Potente", "Baño Privado", "Hamacas en exterior", "Cerca del muelle"],
-    imagenes: ["/src/CHIRA/IMG_1019 (2).JPG"]
+    imagenes: [chiraVistaImg]
   },
   {
     id: 'static-3',
@@ -31,7 +35,7 @@ const habitacionesEstaticas = [
     precio: 70,
     capacidad: 2,
     amenidades: ["Cama Matrimonial", "Decoración Artesanal", "Vistas al manglar", "Guía de pesca incluido", "Ambiente tranquilo"],
-    imagenes: ["/src/CHIRA/IMG_0984 (2).JPG"]
+    imagenes: [chiraRefugioImg]
   },
   {
     id: 'static-4',
@@ -49,7 +53,7 @@ const habitacionesEstaticas = [
     precio: 150,
     capacidad: 5,
     amenidades: ["Camas King y Individuales", "Cocineta equipada", "Área de estar familiar", "Vistas al jardín", "Wifi en áreas comunes"],
-    imagenes: ["/src/components/HOSPEDAJE/IMGEN/Habi.2.avif"]
+    imagenes: [habi2Img]
   },
   {
     id: 'static-6',

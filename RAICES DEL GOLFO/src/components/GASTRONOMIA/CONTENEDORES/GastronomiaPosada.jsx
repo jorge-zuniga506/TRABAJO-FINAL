@@ -2,10 +2,10 @@ import React from 'react';
 import FoodCard from '../INFO/FoodCard';
 import './GastronomiaSection.css';
 
-import comida1 from '../IMG/comida1.jpg';
-import comida2 from '../IMG/comida2.jpg';
-import comida3 from '../IMG/comida3.jpg';
-import comida4 from '../IMG/comida4.jpg';
+import comida1 from '../../VIDEOS Y IMG/comida1.jpg';
+import comida2 from '../../VIDEOS Y IMG/comida2.jpg';
+import comida3 from '../../VIDEOS Y IMG/comida3.jpg';
+import comida4 from '../../VIDEOS Y IMG/comida4.jpg';
 
 function GastronomiaPosada() {
   const dishes = [

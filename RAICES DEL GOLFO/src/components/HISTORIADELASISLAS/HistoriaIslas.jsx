@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Navbar from '../INICIO/NAVBAR/Navbar';
 import './HistoriaIslas.css';
+import historiaPosadaImg from '../VIDEOS Y IMG/img-0984-2.jpg';
+import historiaIslasImg from '../VIDEOS Y IMG/img-1019-2.jpg';
 
 const islandsData = [
   {
@@ -56,7 +58,7 @@ function HistoriaIslas() {
             </p>
           </div>
           <div className="historia-image-wrapper">
-            <img src="/src/CHIRA/IMG_0984 (2).JPG" alt="Historia de la Posada" />
+            <img src={historiaPosadaImg} alt="Historia de la Posada" />
           </div>
         </section>
 
@@ -75,7 +77,7 @@ function HistoriaIslas() {
             </p>
           </div>
           <div className="historia-image-wrapper">
-            <img src="/src/CHIRA/IMG_1019 (2).JPG" alt="Islas del Golfo" />
+            <img src={historiaIslasImg} alt="Islas del Golfo" />
           </div>
         </section>
 
