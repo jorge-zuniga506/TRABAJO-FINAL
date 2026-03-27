@@ -18,25 +18,24 @@
     },
     {
       "id": "958f",
-
       "name": "admin",
       "email": "admin@gmail.com",
       "password": "12345",
       "role": "admin",
       "photo": "https://i.pinimg.com/736x/96/53/f7/9653f749c03eb888c0dde626b925437b.jpg"
-
     },
     {
       "id": "10ff",
-      "name": "stay",
+      "name": "papoi",
       "email": "stay@gmail.com",
       "password": "1234",
-      "role": "cliente"
+      "role": "cliente",
+      "photo": "https://i.pinimg.com/736x/44/27/d5/4427d50302b28a5c231d35b982607215.jpg"
     },
     {
       "id": "a1ce",
       "name": "JORGE",
-      "email": "[EMAIL_ADDRESS]",
+      "email": "j@gmail.com",
       "password": "1234",
       "role": "cliente",
       "photo": "https://th.bing.com/th/id/OIP.ztUqD07OF078DYuB1vt86QHaIl?w=135&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
@@ -368,88 +367,21 @@
       "tipo": "Habitación",
       "item": "Glamping Ecológico Isla de Chira",
       "date": "2026-04-01 al 2026-04-05"
+    },
+    {
+      "id": "314c",
+      "userId": "10ff",
+      "userName": "stay",
+      "roomId": "hab002",
+      "roomName": "Habitación Brisa del Golfo",
+      "checkIn": "2026-03-28",
+      "checkOut": "2026-03-29",
+      "time": "11:21",
+      "price": 110,
+      "status": "Pendiente",
+      "createdAt": "2026-03-27T17:17:59.073Z"
     }
   ],
-  "opiniones": [
-    {
-      "id": "op001",
-      "nombre": "Ana García",
-      "imagen": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-      "calificacion": 5,
-      "comentario": "Una experiencia inolvidable. El servicio es excelente y la vista al Golfo es simplemente espectacular.",
-      "experiencia": "Hospedaje de Lujo"
-    },
-    {
-      "id": "op002",
-      "nombre": "Carlos Rodríguez",
-      "imagen": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-      "calificacion": 4,
-      "comentario": "Muy buen tour de pesca. El guía fue muy amable y aprendimos mucho sobre las técnicas locales.",
-      "experiencia": "Tour de Pesca"
-    },
-    {
-      "id": "op003",
-      "nombre": "Elena Martínez",
-      "imagen": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-      "calificacion": 5,
-      "comentario": "Los manglares son mágicos. ¡Recomiendo totalmente el tour al atardecer!",
-      "experiencia": "Recorrido Manglares"
-    },
-    {
-      "id": "6f3e",
-      "calificacion": 4,
-      "comentario": "bueno",
-      "experiencia": "General",
-      "nombre": "stay",
-      "imagen": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-      "createdAt": "2026-03-24T19:34:47.380Z"
-    },
-    {
-      "id": "415b",
-      "calificacion": 5,
-      "comentario": "hola",
-      "experiencia": "General",
-      "nombre": "stay",
-      "imagen": "https://th.bing.com/th/id/OIP.qtGisoL8zshYmPZgHQBRCQHaFj?w=255&h=191&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-      "createdAt": "2026-03-24T19:43:53.822Z"
-    }
-  ],
-  "balances": [],
-  "formularioContacto": [
-    {
-      "id": "2775",
-      "nombre": "Test User Node Native",
-      "correo": "node@test.com",
-      "asunto": "Prueba de script nativo",
-      "mensaje": "Verificando persistencia con fetch nativo de Node.js",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "8d69",
-      "nombre": "stacy",
-      "correo": "hola@gmail.com",
-      "asunto": "hola",
-      "mensaje": "hola ",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "1864",
-      "nombre": "stacy",
-      "correo": "mmmm@gmail.com",
-      "asunto": "hola",
-      "mensaje": "hola",
-      "fecha": "2026-03-24"
-    },
-    {
-      "id": "628a",
-      "nombre": "JORGE",
-      "correo": "jzunigafwdcostarica@gmail.com",
-      "asunto": "jdjjdjs",
-      "mensaje": "jdsnisnsdin",
-      "fecha": "2026-03-24"
-    }
-  ],
-
   "opiniones": [
     {
       "id": "op001",
@@ -503,6 +435,7 @@
       "createdAt": "2026-03-24T22:05:27.937Z"
     }
   ],
+  "balances": [],
   "formularioContacto": [
     {
       "id": "msg001",
@@ -512,7 +445,6 @@
       "createdAt": "2026-03-26T18:00:00Z"
     }
   ],
-  "balances": [],
   "settings": {
     "hotelName": "Raíces del Golfo",
     "address": "Isla de Chira, Puntarenas, Costa Rica",
