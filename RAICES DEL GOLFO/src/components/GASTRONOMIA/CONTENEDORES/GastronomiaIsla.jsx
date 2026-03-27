@@ -2,10 +2,10 @@ import React from 'react';
 import FoodCard from '../INFO/FoodCard';
 import './GastronomiaSection.css';
 
-import marisco1 from '../IMG/marisco1.jpg';
-import marisco2 from '../IMG/marisco2.jpg';
-import marisco3 from '../IMG/marisco3.jpg';
-import marisco4 from '../IMG/marisco4.jpg';
+import marisco1 from '../../VIDEOS Y IMG/marisco1.jpg';
+import marisco2 from '../../VIDEOS Y IMG/marisco2.jpg';
+import marisco3 from '../../VIDEOS Y IMG/marisco3.jpg';
+import marisco4 from '../../VIDEOS Y IMG/marisco4.jpg';
 
 function GastronomiaIsla() {
   const dishes = [

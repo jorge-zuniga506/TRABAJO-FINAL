@@ -3,11 +3,11 @@ import TourCard from '../INFO/TourCard';
 import { getTours } from '../../../services/CrudTours';
 // Reusing ToursSection.css
 
-import islaImg1 from '../img toures/isla1.jpg';
-import islaImg2 from '../img toures/isla2.jpg';
-import islaImg3 from '../img toures/isla3.jpg';
-import islaImg4 from '../img toures/isla4.jpg';
-import islaImg5 from '../img toures/isla5.jpg';
+import islaImg1 from '../../VIDEOS Y IMG/isla1.jpg';
+import islaImg2 from '../../VIDEOS Y IMG/isla2.jpg';
+import islaImg3 from '../../VIDEOS Y IMG/isla3.jpg';
+import islaImg4 from '../../VIDEOS Y IMG/isla4.jpg';
+import islaImg5 from '../../VIDEOS Y IMG/isla5.jpg';
 
 const IMAGES = {
   't005': islaImg1,
