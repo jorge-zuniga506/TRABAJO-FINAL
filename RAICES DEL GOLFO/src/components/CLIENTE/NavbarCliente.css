@@ -72,6 +72,13 @@
     font-size: 0.95rem;
     border: 2px solid #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .cliente-name {

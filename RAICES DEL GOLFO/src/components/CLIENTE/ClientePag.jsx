@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import NavbarCliente from './NavbarCliente';
 import Opiniones from '../INICIO/OPINIONES/Opiniones';
 import { getTours } from '../../services/CrudTours';
+
 import { getReservasByUser, createReserva, getAllReservas } from '../../services/CrudReservas';
 import { getRoomReservasByUser, createRoomReserva, getAllRoomReservas } from '../../services/CrudReservasHabitaciones';
+
 import { updateUserProfile } from '../../services/CrudParaUsuarios';
 import { getHabitaciones } from '../../services/CrudHabitaciones';
 import './ClientePag.css';
@@ -36,8 +39,10 @@ function ClientePag() {
   const [allHabitaciones, setAllHabitaciones] = useState([]);
   const [loadingTours, setLoadingTours] = useState(true);
   const [loadingHab, setLoadingHab] = useState(true);
+
   const [allToursReservations, setAllToursReservations] = useState([]);
   const [allRoomsReservations, setAllRoomsReservations] = useState([]);
+
 
   // Estado para el formulario de nueva reserva de tour
   const [newReserva, setNewReserva] = useState({
@@ -190,6 +195,7 @@ function ClientePag() {
     fetchData();
   }, [location.state]);
 
+
   // Funciones de validación de disponibilidad
   const isTourDateAvailable = (tourName, date, time) => {
     if (!tourName || !date || !time) return true;
@@ -214,7 +220,6 @@ function ClientePag() {
       return start < resEnd && end > resStart;
     });
   };
-
   const handleCreateReserva = async (e) => {
     e.preventDefault();
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
@@ -229,6 +234,7 @@ function ClientePag() {
       return;
     }
 
+
     if (!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario)) {
       Swal.fire({
         title: 'No disponible',
@@ -238,6 +244,7 @@ function ClientePag() {
       });
       return;
     }
+
 
     const reservaData = {
       userId: storedUser.id,
@@ -283,6 +290,7 @@ function ClientePag() {
       return;
     }
 
+
     if (new Date(newRoomReserva.checkIn) >= new Date(newRoomReserva.checkOut)) {
       Swal.fire({
         title: 'Fecha inválida',
@@ -302,6 +310,7 @@ function ClientePag() {
       });
       return;
     }
+
 
     const reservaData = {
       userId: storedUser.id,

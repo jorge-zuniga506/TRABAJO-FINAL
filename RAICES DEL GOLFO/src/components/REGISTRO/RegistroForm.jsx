@@ -13,7 +13,7 @@ const RegistroForm = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        
+
         if (!name || !email || !password) {
             setError('Por favor, completa todos los campos.');
             return;

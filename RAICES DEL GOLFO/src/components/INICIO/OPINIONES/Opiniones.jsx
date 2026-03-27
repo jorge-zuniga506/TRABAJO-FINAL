@@ -46,7 +46,6 @@ function Opiniones() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!newReview.comentario.trim()) {
       alert("Por favor escribe un comentario");
       return;

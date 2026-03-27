@@ -16,7 +16,6 @@ function Transporte() {
         <p>Planifica tu viaje a la hermosa Isla Venado.</p>
       </header>
 
-
       <main className="transporte-container">
         <TransporteComponent />
       </main>

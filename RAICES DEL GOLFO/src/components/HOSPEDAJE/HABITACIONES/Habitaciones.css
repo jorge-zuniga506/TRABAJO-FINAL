@@ -149,7 +149,6 @@
     top: 20px;
   }
 }
-
 .hab-header-info {
   display: flex;
   justify-content: space-between;
@@ -188,4 +187,3 @@
   transform: none;
   box-shadow: none;
 }
-
