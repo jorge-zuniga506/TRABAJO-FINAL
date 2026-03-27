@@ -220,12 +220,22 @@ function ClientePag() {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (!newReserva.tour || !newReserva.fecha || !newReserva.horario) {
-      alert("Por favor completa todos los campos");
+      Swal.fire({
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
     if (!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario)) {
-      alert("Lo sentimos, este horario ya está reservado para este tour. Por favor elige otra fecha u horario.");
+      Swal.fire({
+        title: 'No disponible',
+        text: 'Lo sentimos, este horario ya está reservado para este tour. Por favor elige otra fecha u horario.',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
@@ -243,9 +253,19 @@ function ClientePag() {
       const added = await createReserva(reservaData);
       setReservas([...reservas, added]);
       setNewReserva({ tour: '', fecha: '', horario: '' });
-      alert("¡Solicitud de reserva enviada con éxito!");
+      Swal.fire({
+        title: '¡Reserva Enviada!',
+        text: 'Tu solicitud de reserva ha sido enviada con éxito.',
+        icon: 'success',
+        confirmButtonColor: '#0d9488'
+      });
     } catch (error) {
-      alert("Error al enviar la reserva");
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un error al enviar la reserva.',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
     }
   };
 
@@ -254,17 +274,32 @@ function ClientePag() {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (!newRoomReserva.roomId || !newRoomReserva.checkIn || !newRoomReserva.checkOut) {
-      alert("Por favor completa todos los campos obligatorios");
+      Swal.fire({
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos obligatorios',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
     if (new Date(newRoomReserva.checkIn) >= new Date(newRoomReserva.checkOut)) {
-      alert("La fecha de salida debe ser posterior a la de entrada");
+      Swal.fire({
+        title: 'Fecha inválida',
+        text: 'La fecha de salida debe ser posterior a la de entrada',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
     if (!isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut)) {
-      alert("Lo sentimos, la habitación no está disponible para las fechas seleccionadas.");
+      Swal.fire({
+        title: 'No disponible',
+        text: 'Lo sentimos, la habitación no está disponible para las fechas seleccionadas.',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
       return;
     }
 
@@ -285,9 +320,19 @@ function ClientePag() {
       const added = await createRoomReserva(reservaData);
       setReservasHab([...reservasHab, added]);
       setNewRoomReserva({ roomId: '', roomName: '', checkIn: '', checkOut: '', time: '12:00 PM', price: 0 });
-      alert("¡Solicitud de reserva de habitación enviada con éxito!");
+      Swal.fire({
+        title: '¡Habitación Reservada!',
+        text: 'Tu solicitud de reserva de habitación ha sido enviada con éxito.',
+        icon: 'success',
+        confirmButtonColor: '#0d9488'
+      });
     } catch (error) {
-      alert("Error al enviar la reserva de habitación");
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al enviar la reserva de habitación',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
     }
   };
 
@@ -711,9 +756,19 @@ function ClientePag() {
             // Actualizar estados locales
             setUserName(updated.name || userName);
             setIsEditing(false);
-            alert('Perfil actualizado con éxito');
+            Swal.fire({
+              title: '¡Perfil Actualizado!',
+              text: 'Tu perfil ha sido actualizado con éxito',
+              icon: 'success',
+              confirmButtonColor: '#0d9488'
+            });
           } catch (error) {
-            alert('Error al actualizar el perfil');
+            Swal.fire({
+              title: 'Error',
+              text: 'Hubo un error al actualizar el perfil',
+              icon: 'error',
+              confirmButtonColor: '#ef4444'
+            });
           }
         };
 
@@ -806,9 +861,9 @@ function ClientePag() {
               <p>Envíanos tus dudas y revisa las respuestas del administrador.</p>
             </header>
 
-            <div className="soporte-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '1.5rem' }}>
+            <div className="soporte-layout">
               <div className="contact-form-side">
-                <form className="client-message-form" onSubmit={handleSendClientMessage} style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                <form className="client-message-form" onSubmit={handleSendClientMessage}>
                   <h3>Nueva Consulta</h3>
                   <div className="form-group" style={{ marginBottom: '1rem' }}>
                     <label>Asunto:</label>
@@ -835,14 +890,14 @@ function ClientePag() {
                     {sendingMsg ? 'Enviando...' : 'ENVIAR CONSULTA'}
                   </button>
                 </form>
-                <div className="contact-info-mini-cards" style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-                  <div style={{ flex: 1, padding: '1rem', background: '#f8fafc', borderRadius: '8px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '1.2rem' }}>📧</span>
-                    <p style={{ margin: '5px 0 0', fontSize: '0.8rem', fontWeight: '600' }}>Email</p>
+                <div className="contact-info-mini-cards">
+                  <div className="contact-info-card">
+                    <span className="info-icon">📧</span>
+                    <p>Email</p>
                   </div>
-                  <div style={{ flex: 1, padding: '1rem', background: '#f8fafc', borderRadius: '8px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '1.2rem' }}>📞</span>
-                    <p style={{ margin: '5px 0 0', fontSize: '0.8rem', fontWeight: '600' }}>WhatsApp</p>
+                  <div className="contact-info-card">
+                    <span className="info-icon">📞</span>
+                    <p>WhatsApp</p>
                   </div>
                 </div>
               </div>
@@ -854,26 +909,27 @@ function ClientePag() {
                     <p>No tienes mensajes anteriores.</p>
                   </div>
                 ) : (
-                  <div className="messages-list-scroll" style={{ maxHeight: '500px', overflowY: 'auto', paddingRight: '10px' }}>
+                  <div className="messages-list-scroll">
                     {userMessages.map(msg => (
-                      <div key={msg.id} className="message-thread" style={{ marginBottom: '1.5rem', padding: '1rem', background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                      <div key={msg.id} className="message-thread">
                         <div className="user-query">
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <strong style={{ color: '#0d9488' }}>{msg.asunto}</strong>
-                            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{new Date(msg.createdAt).toLocaleDateString()}</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '0.9rem' }}>{msg.mensaje}</p>
+                          <h4>Consulta - {new Date(msg.createdAt).toLocaleDateString()}</h4>
+                          <div className="query-msg">{msg.mensaje}</div>
                         </div>
+
                         {msg.respuestaAdmin ? (
-                          <div className="admin-reply" style={{ marginTop: '1rem', padding: '1rem', background: '#f0fdfa', borderRadius: '8px', borderLeft: '4px solid #0d9488' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                              <strong style={{ fontSize: '0.85rem', color: '#115e59' }}>Respuesta Administrativa:</strong>
-                              <span style={{ fontSize: '0.7rem', color: '#5fb3b3' }}>{new Date(msg.respondidoAt).toLocaleDateString()}</span>
+                          <div className="admin-reply">
+                            <div className="reply-content">
+                              {msg.respuestaAdmin}
                             </div>
-                            <p style={{ margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>{msg.respuestaAdmin}</p>
+                            <div className="reply-meta">
+                              <span>Oficinas Centrales</span>
+                              <span>•</span>
+                              <span>{msg.respondidoAt ? new Date(msg.respondidoAt).toLocaleDateString() : 'Reciente'}</span>
+                            </div>
                           </div>
                         ) : (
-                          <div style={{ marginTop: '0.8rem', fontSize: '0.8rem', color: '#eab308', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <div className="pending-pulse">
                             <span>⏳ En espera de respuesta...</span>
                           </div>
                         )}

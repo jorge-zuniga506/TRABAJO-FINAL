@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import './ReplyModal.css';
 
 function ReplyModal({ notification, onClose, onSend }) {
@@ -15,7 +16,12 @@ function ReplyModal({ notification, onClose, onSend }) {
       onClose();
     } catch (error) {
       console.error("Error al enviar respuesta:", error);
-      alert("Hubo un error al enviar la respuesta.");
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un error al enviar la respuesta.',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
     } finally {
       setSending(false);
     }
