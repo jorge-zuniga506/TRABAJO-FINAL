@@ -471,7 +471,8 @@
     }
   ],
   "balances": [],
-  "settings": {
+  "settings": [
+    {
     "hotelName": "Raíces del Golfo",
     "address": "Isla de Chira, Puntarenas, Costa Rica",
     "contact": {
@@ -496,6 +497,7 @@
       "primaryColor": "#2c3e50",
       "logo": "/logo.png"
     }
-  },
+  }
+],
   "$schema": "./node_modules/json-server/schema.json"
 }
