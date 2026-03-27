@@ -111,9 +111,36 @@
     line-height: 1.4;
 }
 
+.notif-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
 .notif-time {
     font-size: 0.75rem;
     color: #94a3b8;
+}
+
+.btn-reply-small {
+  padding: 0.2rem 0.6rem;
+  background: #0d9488;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-reply-small:hover {
+  background: #0f766e;
+}
+
+.notification-item:hover {
+  background: #f8fafc;
 }
 
 /* Reusable icon-btn styles from NavbarAdmin if needed, but scoped here */
