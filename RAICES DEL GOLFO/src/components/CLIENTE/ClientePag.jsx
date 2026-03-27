@@ -67,6 +67,83 @@ function ClientePag() {
     photo: ''
   });
 
+  // Estado para mensajes del cliente
+  const [clientMessage, setClientMessage] = useState({ asunto: '', mensaje: '' });
+  const [sendingMsg, setSendingMsg] = useState(false);
+  const [userMessages, setUserMessages] = useState([]);
+
+  const fetchUserMessages = async () => {
+    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+    if (storedUser.id) {
+      try {
+        const res = await fetch(`http://localhost:3007/formularioContacto?userId=${storedUser.id}`);
+        const data = await res.json();
+        setUserMessages(data.reverse());
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'mensajes') {
+      fetchUserMessages();
+    }
+  }, [activeTab]);
+
+  const handleSendClientMessage = async (e) => {
+    e.preventDefault();
+    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    if (!clientMessage.mensaje.trim()) {
+      Swal.fire({
+        title: 'Mensaje vacío',
+        text: 'Por favor escribe un mensaje antes de enviar.',
+        icon: 'warning',
+        confirmButtonColor: '#0d9488'
+      });
+      return;
+    }
+
+    setSendingMsg(true);
+    try {
+      const messageData = {
+        nombre: storedUser.name || 'Cliente',
+        email: storedUser.email || 'No disponible',
+        asunto: clientMessage.asunto || 'Consulta General',
+        mensaje: clientMessage.mensaje,
+        createdAt: new Date().toISOString(),
+        userId: storedUser.id,
+        status: 'Pendiente'
+      };
+
+      await fetch('http://localhost:3007/formularioContacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(messageData)
+      });
+
+      Swal.fire({
+        title: '¡Mensaje Enviado!',
+        text: 'Tu mensaje ha sido enviado al administrador. Te responderemos pronto.',
+        icon: 'success',
+        confirmButtonColor: '#0d9488'
+      });
+      setClientMessage({ asunto: '', mensaje: '' });
+      fetchUserMessages();
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudo enviar el mensaje en este momento.',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
+    } finally {
+      setSendingMsg(false);
+    }
+  };
+
   useEffect(() => {
     // Verificar si venimos desde un botón de "Reservar" en un Tour
     if (location.state && location.state.tab) {
@@ -264,6 +341,7 @@ function ClientePag() {
     }
     return 0;
   };
+
 
   const renderContent = () => {
     switch (activeTab) {
@@ -768,6 +846,93 @@ function ClientePag() {
             </div>
           </div>
         );
+      case 'mensajes':
+        return (
+          <div className="cliente-tab-content fade-in">
+            <header className="section-header-flex">
+              <h2>Soporte y Consultas</h2>
+              <p>Envíanos tus dudas y revisa las respuestas del administrador.</p>
+            </header>
+
+            <div className="soporte-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '1.5rem' }}>
+              <div className="contact-form-side">
+                <form className="client-message-form" onSubmit={handleSendClientMessage} style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                  <h3>Nueva Consulta</h3>
+                  <div className="form-group" style={{ marginBottom: '1rem' }}>
+                    <label>Asunto:</label>
+                    <input 
+                      type="text" 
+                      placeholder="Ej: Duda sobre mi reserva"
+                      value={clientMessage.asunto}
+                      onChange={(e) => setClientMessage({...clientMessage, asunto: e.target.value})}
+                      className="input-custom-style"
+                    />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: '1rem' }}>
+                    <label>Mensaje:</label>
+                    <textarea 
+                      placeholder="Describe tu consulta aquí..."
+                      value={clientMessage.mensaje}
+                      onChange={(e) => setClientMessage({...clientMessage, mensaje: e.target.value})}
+                      required
+                      className="input-custom-style"
+                      style={{ minHeight: '120px', resize: 'vertical' }}
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn-booking-modern ready" disabled={sendingMsg} style={{ width: '100%' }}>
+                    {sendingMsg ? 'Enviando...' : 'ENVIAR CONSULTA'}
+                  </button>
+                </form>
+                <div className="contact-info-mini-cards" style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                  <div style={{ flex: 1, padding: '1rem', background: '#f8fafc', borderRadius: '8px', textAlign: 'center' }}>
+                    <span style={{ fontSize: '1.2rem' }}>📧</span>
+                    <p style={{ margin: '5px 0 0', fontSize: '0.8rem', fontWeight: '600' }}>Email</p>
+                  </div>
+                  <div style={{ flex: 1, padding: '1rem', background: '#f8fafc', borderRadius: '8px', textAlign: 'center' }}>
+                    <span style={{ fontSize: '1.2rem' }}>📞</span>
+                    <p style={{ margin: '5px 0 0', fontSize: '0.8rem', fontWeight: '600' }}>WhatsApp</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="messages-history-side">
+                <h3 style={{ marginBottom: '1rem' }}>Historial de Mensajes</h3>
+                {userMessages.length === 0 ? (
+                  <div style={{ textAlign: 'center', padding: '3rem', background: '#f8fafc', borderRadius: '12px', color: '#94a3b8' }}>
+                    <p>No tienes mensajes anteriores.</p>
+                  </div>
+                ) : (
+                  <div className="messages-list-scroll" style={{ maxHeight: '500px', overflowY: 'auto', paddingRight: '10px' }}>
+                    {userMessages.map(msg => (
+                      <div key={msg.id} className="message-thread" style={{ marginBottom: '1.5rem', padding: '1rem', background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                        <div className="user-query">
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                            <strong style={{ color: '#0d9488' }}>{msg.asunto}</strong>
+                            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{new Date(msg.createdAt).toLocaleDateString()}</span>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '0.9rem' }}>{msg.mensaje}</p>
+                        </div>
+                        {msg.respuestaAdmin ? (
+                          <div className="admin-reply" style={{ marginTop: '1rem', padding: '1rem', background: '#f0fdfa', borderRadius: '8px', borderLeft: '4px solid #0d9488' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                              <strong style={{ fontSize: '0.85rem', color: '#115e59' }}>Respuesta Administrativa:</strong>
+                              <span style={{ fontSize: '0.7rem', color: '#5fb3b3' }}>{new Date(msg.respondidoAt).toLocaleDateString()}</span>
+                            </div>
+                            <p style={{ margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>{msg.respuestaAdmin}</p>
+                          </div>
+                        ) : (
+                          <div style={{ marginTop: '0.8rem', fontSize: '0.8rem', color: '#eab308', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <span>⏳ En espera de respuesta...</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -800,7 +965,15 @@ function ClientePag() {
                 className={`client-nav-btn ${activeTab === 'hospedajes' ? 'active' : ''}`}
                 onClick={() => setActiveTab('hospedajes')}
               >
-                <span className="nav-icon">🏠</span> Reservas de Habitaciones
+                <span className="nav-icon">🛌</span> Habitaciones
+              </button>
+            </li>
+            <li>
+              <button
+                className={`client-nav-btn ${activeTab === 'mensajes' ? 'active' : ''}`}
+                onClick={() => setActiveTab('mensajes')}
+              >
+                <span className="nav-icon">📧</span> Soporte
               </button>
             </li>
             <li>
@@ -823,6 +996,7 @@ function ClientePag() {
         </aside>
 
         <main className="cliente-main">
+
           {renderContent()}
         </main>
       </div>
