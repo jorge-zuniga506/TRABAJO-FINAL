@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SharkLogo from '../../common/SharkLogo';
+import Notificaciones from '../Notificaciones/Notificaciones';
 import './NavbarAdmin.css';
 
-function NavbarAdmin({ toggleSidebar }) {
+function NavbarAdmin({ toggleSidebar, onTabChange }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -42,11 +43,8 @@ function NavbarAdmin({ toggleSidebar }) {
 
         {/* Acciones de navegación a la derecha */}
         <div className="navbar-admin-actions">
-           {/* Notificaciones */}
-           <button className="icon-btn" aria-label="Notificaciones">
-             <i className="icon-bell">&#128276;</i>
-             <span className="notification-badge">3</span>
-           </button>
+           {/* Componente de Notificaciones */}
+           <Notificaciones onTabChange={onTabChange} />
            
            {/* Perfil del Usuario */}
            <div className="admin-profile" onClick={() => navigate('/admin/configuracion')}>

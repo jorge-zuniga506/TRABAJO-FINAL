@@ -124,3 +124,11 @@
   background: #fdf2f8;
   color: #9d174d;
 }
+
+.msg-content {
+  max-width: 400px;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}

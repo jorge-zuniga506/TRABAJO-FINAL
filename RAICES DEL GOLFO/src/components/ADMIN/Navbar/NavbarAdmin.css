@@ -109,19 +109,6 @@
     font-style: normal;
 }
 
-.notification-badge {
-    position: absolute;
-    top: -5px;
-    right: -8px;
-    background-color: #ef4444; /* red-500 */
-    color: white;
-    font-size: 0.65rem;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 10px;
-    border: 2px solid #ffffff;
-}
-
 .admin-profile {
     display: flex;
     align-items: center;

@@ -86,42 +86,80 @@ const IMAGENES_DEFECTO = [
 
 function Habitaciones() {
   const [habitacionesAdmin, setHabitacionesAdmin] = useState([]);
+  const [roomReservations, setRoomReservations] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [habitacionSeleccionada, setHabitacionSeleccionada] = useState(null);
 
-  // ── Cargar habitaciones del panel admin ──
+  // ── Cargar datos del servidor ──
   useEffect(() => {
-    fetch(ENDPOINTS.HABITACIONES)
-      .then(res => res.json())
-      .then(data => {
-        // Mostrar todas las habitaciones del admin
-        setHabitacionesAdmin(data);
-      })
-      .catch(() => {
-        // Si no hay conexión al servidor, simplemente no se agregan extras
+    const fetchData = async () => {
+      try {
+        const [hData, rData] = await Promise.all([
+          fetch(ENDPOINTS.HABITACIONES).then(res => res.json()),
+          fetch(ENDPOINTS.RESERVAS_HABITACIONES).then(res => res.json())
+        ]);
+        setHabitacionesAdmin(hData);
+        setRoomReservations(rData);
+      } catch (error) {
+        console.error("Error cargando habitaciones/reservas:", error);
         setHabitacionesAdmin([]);
-      })
-      .finally(() => setCargando(false));
+        setRoomReservations([]);
+      } finally {
+        setCargando(false);
+      }
+    };
+    
+    fetchData();
   }, []);
 
-  // ── Combinar estáticas + las del admin (respetando la disponibilidad de la API) ──
+  // ── Función para determinar si una habitación está ocupada hoy ──
+  const checkOccupied = (roomId, roomNombre) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return roomReservations.some(res => {
+      // Coincidencia por ID o por nombre (para las estáticas)
+      const matches = res.roomId === roomId || res.roomName === roomNombre;
+      if (!matches || res.status !== 'Aprobada') return false;
+
+      const checkIn = new Date(res.checkIn);
+      const checkOut = new Date(res.checkOut);
+      checkIn.setHours(0, 0, 0, 0);
+      checkOut.setHours(0, 0, 0, 0);
+
+      return today >= checkIn && today < checkOut;
+    });
+  };
+
+  // ── Combinar estáticas + las del admin ──
   const todasLasHabitaciones = habitacionesEstaticas.map(staticHab => {
-    // Buscar si esta habitación existe en los datos del admin para obtener su disponibilidad real
     const adminData = habitacionesAdmin.find(
       h => h.nombre.toLowerCase().trim() === staticHab.nombre.toLowerCase().trim()
     );
     
-    return adminData 
-      ? { ...staticHab, disponible: adminData.disponible } 
-      : staticHab;
+    // Normalizar disponibilidad (true por defecto si no existe en admin)
+    const isManualDisabled = adminData ? adminData.disponible === false : false;
+    const isNowOccupied = checkOccupied(adminData?.id, staticHab.nombre);
+
+    return { 
+      ...staticHab, 
+      disponible: !isManualDisabled && !isNowOccupied,
+      isManualDisabled,
+      isNowOccupied
+    };
   });
 
   // Agregar habitaciones nuevas que solo están en el admin
   const nombresEstaticos = new Set(habitacionesEstaticas.map(h => h.nombre.toLowerCase().trim()));
-  const habitacionesNuevas = habitacionesAdmin.filter(
-    h => !nombresEstaticos.has(h.nombre.toLowerCase().trim())
-  );
+  const habitacionesNuevas = habitacionesAdmin
+    .filter(h => !nombresEstaticos.has(h.nombre.toLowerCase().trim()))
+    .map(h => ({
+      ...h,
+      isManualDisabled: h.disponible === false,
+      isNowOccupied: checkOccupied(h.id, h.nombre),
+      disponible: h.disponible !== false && !checkOccupied(h.id, h.nombre)
+    }));
 
   const listaCompleta = [...todasLasHabitaciones, ...habitacionesNuevas];
 
@@ -153,8 +191,8 @@ function Habitaciones() {
             <div className="hab-info">
               <div className="hab-header-info">
                 <h3>{hab.nombre}</h3>
-                <span className={`availability-badge ${hab.disponible !== false ? 'available' : 'unavailable'}`}>
-                  {hab.disponible !== false ? '● Disponible' : '● No Disponible'}
+                <span className={`availability-badge ${hab.isManualDisabled ? 'unavailable' : hab.isNowOccupied ? 'occupied' : 'available'}`}>
+                  {hab.isManualDisabled ? '● No Disponible' : hab.isNowOccupied ? '● Ocupada' : '● Disponible'}
                 </span>
               </div>
               <p>{hab.descripcion || hab.description}</p>
@@ -181,7 +219,7 @@ function Habitaciones() {
                 onClick={() => handleReservar(hab)}
                 disabled={hab.disponible === false}
               >
-                {hab.disponible !== false ? 'Reservar Habitación' : 'No Disponible'}
+                {hab.isManualDisabled ? 'No Disponible' : hab.isNowOccupied ? 'Habitación Ocupada' : 'Reservar Habitación'}
               </button>
             </div>
           </div>
