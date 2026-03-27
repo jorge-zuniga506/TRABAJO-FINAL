@@ -1,8 +1,8 @@
 import React from 'react';
 import './Contenedor.css';
-import playaImg from './IMG/playa.png';
-import gastronomiaImg from './IMG/gastronomia.png';
-import aventuraImg from './IMG/aventura.png';
+import playaImg from '../../VIDEOS Y IMG/playa.png';
+import gastronomiaImg from '../../VIDEOS Y IMG/gastronomia.png';
+import aventuraImg from '../../VIDEOS Y IMG/aventura.png';
 
 function Contenedor() {
   const caracteristicas = [

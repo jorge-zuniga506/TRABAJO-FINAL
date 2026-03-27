@@ -1,6 +1,6 @@
 import React from 'react';
 import './Informacion.css';
-import infoImg from './IMG/image copy.png';
+import infoImg from '../../VIDEOS Y IMG/image-copy.png';
 
 function Informacion() {
   return (

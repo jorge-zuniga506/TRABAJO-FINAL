@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Carrusel.css';
 
 // Importando imágenes de alta calidad generadas
-import img1 from './IMG/gastronomia_1.png';
-import img2 from './IMG/gastronomia_2.png';
-import img3 from './IMG/isla_1.png';
-import img4 from './IMG/isla_2.png';
+import img1 from '../../VIDEOS Y IMG/gastronomia_1.png';
+import img2 from '../../VIDEOS Y IMG/gastronomia_2.png';
+import img3 from '../../VIDEOS Y IMG/isla_1.png';
+import img4 from '../../VIDEOS Y IMG/isla_2.png';
 
 const images = [
   { url: img1, title: 'Sabores del Golfo', subtitle: 'Gastronomía auténtica con ingredientes locales' },

@@ -1,6 +1,6 @@
 import React from 'react';
 import './IMGULTIMA.css';
-import footerBg from './IMG/footer-bg.png';
+import footerBg from '../../VIDEOS Y IMG/footer-bg.png';
 
 function IMGULTIMA() {
   return (
