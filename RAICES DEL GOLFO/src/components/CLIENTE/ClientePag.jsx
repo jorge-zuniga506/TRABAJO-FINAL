@@ -236,9 +236,9 @@ function ClientePag() {
 
     if (!isTourDateAvailable(newReserva.tour, newReserva.fecha, newReserva.horario)) {
       Swal.fire({
-        title: 'No disponible',
-        text: 'Lo sentimos, este horario ya está reservado para este tour. Por favor elige otra fecha u horario.',
         icon: 'warning',
+        title: 'Horario no disponible',
+        text: 'Lo sentimos, este horario ya esta reservado para este tour. Por favor elige otra fecha u horario.',
         confirmButtonColor: '#0d9488'
       });
       return;
@@ -292,9 +292,9 @@ function ClientePag() {
 
     if (new Date(newRoomReserva.checkIn) >= new Date(newRoomReserva.checkOut)) {
       Swal.fire({
-        title: 'Fecha inválida',
-        text: 'La fecha de salida debe ser posterior a la de entrada',
         icon: 'warning',
+        title: 'Fechas invalidas',
+        text: 'La fecha de salida debe ser posterior a la de entrada.',
         confirmButtonColor: '#0d9488'
       });
       return;
@@ -302,9 +302,9 @@ function ClientePag() {
 
     if (!isRoomRangeAvailable(newRoomReserva.roomId, newRoomReserva.checkIn, newRoomReserva.checkOut)) {
       Swal.fire({
-        title: 'No disponible',
-        text: 'Lo sentimos, la habitación no está disponible para las fechas seleccionadas.',
         icon: 'warning',
+        title: 'Habitacion no disponible',
+        text: 'Lo sentimos, la habitacion no esta disponible para las fechas seleccionadas.',
         confirmButtonColor: '#0d9488'
       });
       return;

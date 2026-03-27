@@ -455,7 +455,20 @@
       "createdAt": "2026-03-27T17:19:59.782Z"
     }
   ],
-  "formularioContacto": [],
+  "formularioContacto": [
+    {
+      "id": "8467",
+      "nombre": "stacy",
+      "email": "stacy@gmail.com",
+      "asunto": "la comida",
+      "mensaje": "todo rico ",
+      "createdAt": "2026-03-27T19:41:14.469Z",
+      "userId": "a1d7",
+      "status": "Respondido",
+      "respuestaAdmin": "bueno",
+      "respondidoAt": "2026-03-27T19:41:36.415Z"
+    }
+  ],
   "balances": [],
   "settings": {
     "hotelName": "Raíces del Golfo",

@@ -17,9 +17,9 @@ function ReplyModal({ notification, onClose, onSend }) {
     } catch (error) {
       console.error("Error al enviar respuesta:", error);
       Swal.fire({
+        icon: 'error',
         title: 'Error',
         text: 'Hubo un error al enviar la respuesta.',
-        icon: 'error',
         confirmButtonColor: '#ef4444'
       });
     } finally {
@@ -41,7 +41,7 @@ function ReplyModal({ notification, onClose, onSend }) {
           </div>
           <form onSubmit={handleSubmit}>
             <textarea
-              placeholder="Escribe tu respuesta aquí..."
+              placeholder="Escribe tu respuesta aqui..."
               value={reply}
               onChange={(e) => setReply(e.target.value)}
               required
