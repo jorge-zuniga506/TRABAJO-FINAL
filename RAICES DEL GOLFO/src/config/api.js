@@ -10,6 +10,7 @@ export const ENDPOINTS = {
     OPINIONES: `${API_BASE_URL}/opiniones`,
     CONTACTOS: `${API_BASE_URL}/formularioContacto`,
     RESERVAS_HABITACIONES: `${API_BASE_URL}/room_reservations`,
+    SETTINGS: `${API_BASE_URL}/settings`,
 };
 
 export default API_BASE_URL;

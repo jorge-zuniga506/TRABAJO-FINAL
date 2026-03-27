@@ -17,6 +17,8 @@ const FORM_INICIAL = {
     capacidad: '',
     tipo: 'Estándar',
     disponible: true,
+    status: 'disponible',
+    features: ['WiFi'],
     imagen: '',
 };
 
@@ -68,6 +70,8 @@ const HabitacionesPanel = () => {
             capacidad: hab.capacidad,
             tipo: hab.tipo,
             disponible: hab.disponible,
+            status: hab.status || 'disponible',
+            features: hab.features || [],
             imagen: hab.imagen || '',
         });
         setFormError('');
@@ -86,6 +90,14 @@ const HabitacionesPanel = () => {
         setForm(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value,
+        }));
+    };
+
+    const handleFeaturesChange = (e) => {
+        const { value } = e.target;
+        setForm(prev => ({
+            ...prev,
+            features: value.split(',').map(f => f.trim()).filter(f => f !== '')
         }));
     };
 
@@ -195,8 +207,8 @@ const HabitacionesPanel = () => {
                                     <td><strong>${hab.precio}</strong></td>
                                     <td>{hab.capacidad} pers.</td>
                                     <td>
-                                        <span className={`badge-status ${hab.disponible ? 'aprobada' : 'denegada'}`}>
-                                            {hab.disponible ? 'Disponible' : 'No disponible'}
+                                        <span className={`badge-status ${hab.status || (hab.disponible ? 'disponible' : 'ocupada')}`}>
+                                            {hab.status ? (hab.status.charAt(0).toUpperCase() + hab.status.slice(1)) : (hab.disponible ? 'Disponible' : 'Ocupada')}
                                         </span>
                                     </td>
                                     <td>
@@ -232,9 +244,22 @@ const HabitacionesPanel = () => {
                             <input type="number" name="capacidad" value={form.capacidad} onChange={handleChange} placeholder="Capacidad" required style={{ padding: '0.5rem' }} />
                             <textarea name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Descripción" style={{ padding: '0.5rem' }} />
                             <input type="url" name="imagen" value={form.imagen} onChange={handleChange} placeholder="URL Imagen" style={{ padding: '0.5rem' }} />
+                            <select name="status" value={form.status} onChange={handleChange} style={{ padding: '0.5rem' }}>
+                                <option value="disponible">Disponible</option>
+                                <option value="ocupada">Ocupada</option>
+                                <option value="mantenimiento">Mantenimiento</option>
+                            </select>
+                            <input 
+                                type="text" 
+                                name="features" 
+                                value={form.features.join(', ')} 
+                                onChange={handleFeaturesChange} 
+                                placeholder="Características (WiFi, TV, AC...)" 
+                                style={{ padding: '0.5rem' }} 
+                            />
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 <input type="checkbox" name="disponible" checked={form.disponible} onChange={handleChange} id="disp" />
-                                <label htmlFor="disp">Disponible</label>
+                                <label htmlFor="disp">Mostrar en web</label>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginTop: '1rem' }}>
                                 <button type="button" onClick={cerrarModal} style={{ padding: '0.5rem 1rem', background: '#ccc', border: 'none', borderRadius: '4px' }}>Cancelar</button>

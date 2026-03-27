@@ -126,7 +126,7 @@ const AccessibilityWidget = () => {
             aria-pressed={settings.textSize > 0}
           >
             <div className="icon-char">A+</div>
-            <span className="a11y-option-text">Alargar Texto {settings.textSize > 0 && `(x${settings.textSize})`}</span>
+            <span className="a11y-option-text">Aumentar Texto {settings.textSize > 0 && `(x${settings.textSize})`}</span>
           </button>
 
           {/* High Contrast */}

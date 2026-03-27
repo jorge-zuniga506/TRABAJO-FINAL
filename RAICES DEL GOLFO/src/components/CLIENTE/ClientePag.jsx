@@ -695,10 +695,10 @@ function ClientePag() {
                 {isEditing ? (
                   <div className="avatar-edit-container">
                     <div className="avatar-large">
-                      {editedUser.photo ? (
+                      {editedUser.photo && editedUser.photo.trim() !== '' ? (
                         <img src={editedUser.photo} alt="Profile" className="avatar-img" />
                       ) : (
-                        editedUser.name.substring(0, 2).toUpperCase()
+                        (editedUser.name || '').substring(0, 2).toUpperCase()
                       )}
                     </div>
                     <div className="input-group-modern">
@@ -715,10 +715,10 @@ function ClientePag() {
                 ) : (
                   <>
                     <div className="avatar-large">
-                      {currentUser.photo ? (
+                      {currentUser.photo && currentUser.photo.trim() !== '' ? (
                         <img src={currentUser.photo} alt="Profile" className="avatar-img" />
                       ) : (
-                        userName.substring(0, 2).toUpperCase()
+                        (userName || '').substring(0, 2).toUpperCase()
                       )}
                     </div>
                     <div>

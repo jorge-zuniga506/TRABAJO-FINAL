@@ -6,6 +6,7 @@ import UsuariosPanel from './UsuariosPanel';
 import HabitacionesPanel from './HabitacionesPanel';
 import ResevaTours from '../TOURS/ResevaTours';
 import ReservasPanel from './ReservasPanel';
+import ConfiguracionPanel from './ConfiguracionPanel';
 
 
 function AdminPanel() {
@@ -94,12 +95,7 @@ function AdminPanel() {
             case 'orders':
                 return <ReservasPanel />;
             case 'settings':
-                return (
-                    <div className="tab-content fade-in">
-                        <h1>Configuración</h1>
-                        <p>Ajustes generales del hotel.</p>
-                    </div>
-                );
+                return <ConfiguracionPanel />;
             default:
                 return null;
         }

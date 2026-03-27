@@ -44,8 +44,8 @@ const Chatbot = () => {
 
         // Lógica de Habitaciones
         if (text.includes("habitacion") || text.includes("hospedaje") || text.includes("dormir") || text.includes("alojamiento")) {
-            const minPrice = Math.min(...data.habitaciones.map(h => h.precio));
-            return `Contamos con diversas opciones de hospedaje, desde Glamping en Isla Venado hasta suites familiares. Los precios inician en $${minPrice || 70} por noche. ¿Te gustaría saber sobre alguna habitación en específico?`;
+            const minPrice = data.habitaciones.length > 0 ? Math.min(...data.habitaciones.map(h => h.precio)) : 70;
+            return `Contamos con diversas opciones de hospedaje, desde Glamping en Isla Venado hasta suites familiares. Los precios inician en $${minPrice} por noche. ¿Te gustaría saber sobre alguna habitación en específico?`;
         }
 
         // Lógica de Tours
