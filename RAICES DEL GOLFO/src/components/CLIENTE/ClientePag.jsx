@@ -10,6 +10,7 @@ import { getRoomReservasByUser, createRoomReserva, getAllRoomReservas } from '..
 
 import { updateUserProfile } from '../../services/CrudParaUsuarios';
 import { getHabitaciones } from '../../services/CrudHabitaciones';
+import { ENDPOINTS } from '../../config/api';
 import './ClientePag.css';
 
 // Importar imágenes de tours para el catálogo
@@ -129,7 +130,7 @@ function ClientePag() {
     const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
     if (storedUser.id) {
       try {
-        const res = await fetch(`http://localhost:3007/formularioContacto?userId=${storedUser.id}`);
+        const res = await fetch(`${ENDPOINTS.CONTACTOS}?userId=${storedUser.id}`);
         const data = await res.json();
         setUserMessages(data.reverse());
       } catch (error) {
@@ -170,7 +171,7 @@ function ClientePag() {
         status: 'Pendiente'
       };
 
-      await fetch('http://localhost:3007/formularioContacto', {
+      await fetch(ENDPOINTS.CONTACTOS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(messageData)

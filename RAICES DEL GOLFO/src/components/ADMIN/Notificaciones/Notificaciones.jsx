@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import './Notificaciones.css';
 import ReplyModal from './ReplyModal';
+import { ENDPOINTS } from '../../../config/api';
 
 function Notificaciones({ onTabChange }) {
   const [notifications, setNotifications] = useState([]);
@@ -12,9 +13,9 @@ function Notificaciones({ onTabChange }) {
   const fetchNotifications = async () => {
     try {
       const [resTours, resRooms, resContacts] = await Promise.all([
-        fetch('http://localhost:3007/reservations?status=Pendiente').then(r => r.json()),
-        fetch('http://localhost:3007/room_reservations?status=Pendiente').then(r => r.json()),
-        fetch('http://localhost:3007/formularioContacto').then(r => r.json())
+        fetch(`${ENDPOINTS.RESERVATIONS}?status=Pendiente`).then(r => r.json()),
+        fetch(`${ENDPOINTS.RESERVAS_HABITACIONES}?status=Pendiente`).then(r => r.json()),
+        fetch(ENDPOINTS.CONTACTOS).then(r => r.json())
       ]);
 
       const allNotifications = [
@@ -55,7 +56,7 @@ function Notificaciones({ onTabChange }) {
   const handleSendReply = async (id, replyText) => {
     try {
       // Obtenemos el mensaje actual para actualizarlo con la respuesta
-      const response = await fetch(`http://localhost:3007/formularioContacto/${id}`);
+      const response = await fetch(`${ENDPOINTS.CONTACTOS}/${id}`);
       const contactMsg = await response.json();
 
       const updatedMsg = {
@@ -65,7 +66,7 @@ function Notificaciones({ onTabChange }) {
         status: 'Respondido'
       };
 
-      await fetch(`http://localhost:3007/formularioContacto/${id}`, {
+      await fetch(`${ENDPOINTS.CONTACTOS}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedMsg)

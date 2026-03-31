@@ -31,10 +31,10 @@ npm install
 
 ### 2. Levantar el backend local
 
-El proyecto consume datos desde `http://localhost:3007`. Para simular la API se usa `db.json`.
+El proyecto consume datos desde `http://localhost:3007`. Para simular la API se usa `db.json` mediante el servidor incluido en `backend/server.cjs`.
 
 ```bash
-npx json-server --watch db.json --port 3007
+npm run api
 ```
 
 ### 3. Levantar el frontend
@@ -50,6 +50,29 @@ npm run lint
 npm run build
 npm run preview
 ```
+
+## Publicacion
+
+### Frontend en Firebase Hosting
+
+El frontend puede compilarse apuntando a una API publica usando la variable `VITE_API_BASE_URL`.
+
+Ejemplo en PowerShell:
+
+```powershell
+$env:VITE_API_BASE_URL="https://tu-backend.onrender.com"
+npm run build
+firebase deploy
+```
+
+### Backend con `db.json` en Render
+
+El backend puede subirse como servicio Node usando:
+
+- Build Command: `npm install`
+- Start Command: `npm run api`
+
+Mas detalle en [`DEPLOY.md`](DEPLOY.md).
 
 ## Estructura general
 

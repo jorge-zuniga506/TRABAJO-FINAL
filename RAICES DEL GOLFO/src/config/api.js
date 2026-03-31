@@ -1,6 +1,10 @@
 // Configuracion central de endpoints.
-// Tener las rutas del backend en un solo lugar facilita mantenimiento y cambios futuros.
-export const API_BASE_URL = 'http://localhost:3007';
+// La URL base puede cambiar entre desarrollo local y produccion.
+const DEFAULT_API_BASE_URL = 'http://localhost:3007';
+
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
+
+export const API_BASE_URL = rawApiBaseUrl.replace(/\/+$/, '');
 
 export const ENDPOINTS = {
     // Coleccion de usuarios para login, registro y administracion.
