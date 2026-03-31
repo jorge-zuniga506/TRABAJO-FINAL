@@ -47,7 +47,17 @@ function NavbarAdmin({ toggleSidebar, onTabChange }) {
            <Notificaciones onTabChange={onTabChange} />
            
            {/* Perfil del Usuario */}
-           <div className="admin-profile" onClick={() => navigate('/admin/configuracion')}>
+           <div
+             className="admin-profile"
+             onClick={() => {
+               if (onTabChange) {
+                 onTabChange('settings');
+                 navigate('/admin');
+                 return;
+               }
+               navigate('/admin');
+             }}
+           >
              <div className="avatar">
                {user?.photo ? (
                  <img src={user.photo} alt={user.name} className="avatar-img" />
