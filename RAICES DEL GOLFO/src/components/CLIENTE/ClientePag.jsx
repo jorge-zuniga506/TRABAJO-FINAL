@@ -22,10 +22,61 @@ import isla2 from '../VIDEOS Y IMG/isla2.jpg';
 import isla3 from '../VIDEOS Y IMG/isla3.jpg';
 import isla4 from '../VIDEOS Y IMG/isla4.jpg';
 import isla5 from '../VIDEOS Y IMG/isla5.jpg';
+import habi1Img from '../VIDEOS Y IMG/Habi.1.webp';
+import habi2Img from '../VIDEOS Y IMG/Habi.2.avif';
+import chiraVistaImg from '../VIDEOS Y IMG/img-1019-2.jpg';
+import chiraRefugioImg from '../VIDEOS Y IMG/img-0984-2.jpg';
 
 const IMAGES_MAP = {
   't001': posada1, 't002': posada2, 't003': posada3, 't004': posada4,
   't005': isla1, 't006': isla2, 't007': isla3, 't008': isla4, 't009': isla5,
+};
+
+const ROOM_IMAGES_MAP = {
+  hab001: habi1Img,
+  hab002: chiraVistaImg,
+  hab003: chiraRefugioImg,
+  hab004: 'https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg',
+  hab005: habi2Img,
+  'glamping ecologico isla de chira': habi1Img,
+  'habitacion brisa del golfo': chiraVistaImg,
+  'eco-refugio del pescador': chiraRefugioImg,
+  'habitacion vista al mar': 'https://islavenado-cr.com/wp-content/uploads/2024/05/Cabinas-Atardecer-5.jpg',
+  'suite familiar raices': habi2Img,
+};
+
+const ROOM_DEFAULT_IMAGES = [
+  'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80',
+  'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80',
+  'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80',
+  'https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80'
+];
+
+const normalizeText = value =>
+  (value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
+const isBrokenRoomImagePath = image =>
+  !image ||
+  image.trim() === '' ||
+  image.startsWith('/src/') ||
+  image.startsWith('src/');
+
+const getRoomImage = (room, index = 0) => {
+  if (!room) return ROOM_DEFAULT_IMAGES[index % ROOM_DEFAULT_IMAGES.length];
+
+  if (!isBrokenRoomImagePath(room.imagen)) {
+    return room.imagen;
+  }
+
+  return (
+    ROOM_IMAGES_MAP[room.id] ||
+    ROOM_IMAGES_MAP[normalizeText(room.nombre)] ||
+    ROOM_DEFAULT_IMAGES[index % ROOM_DEFAULT_IMAGES.length]
+  );
 };
 
 // Vista principal del cliente autenticado.
@@ -561,13 +612,6 @@ function ClientePag() {
       }
       case 'hospedajes': {
         const selectedRoomInfo = allHabitaciones.find(h => h.id === newRoomReserva.roomId);
-        const IMAGENES_DEFECTO = [
-          "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80",
-          "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
-          "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80",
-          "https://images.unsplash.com/photo-1521783988139-89397d761dce?w=600&q=80"
-        ];
-
         return (
           <div className="cliente-tab-content fade-in">
             <div className="reservas-layout-new">
@@ -596,7 +640,15 @@ function ClientePag() {
                                   setNewRoomReserva({ ...newRoomReserva, roomId: h.id, roomName: h.nombre, price: totalPrice });
                                 }}
                               >
-                                <div className="mini-img"><img src={h.imagen || IMAGENES_DEFECTO[0]} alt={h.nombre} /></div>
+                                <div className="mini-img">
+                                  <img
+                                    src={getRoomImage(h, allHabitaciones.findIndex(room => room.id === h.id))}
+                                    alt={h.nombre}
+                                    onError={e => {
+                                      e.target.src = ROOM_DEFAULT_IMAGES[0];
+                                    }}
+                                  />
+                                </div>
                                 <span className="mini-name">{h.nombre}</span>
                                 {newRoomReserva.roomId === h.id && <div className="mini-check">✓</div>}
                               </div>
@@ -675,7 +727,13 @@ function ClientePag() {
                     {selectedRoomInfo ? (
                       <>
                         <div className="preview-image-container">
-                          <img src={selectedRoomInfo.imagen || IMAGENES_DEFECTO[0]} alt={selectedRoomInfo.nombre} />
+                          <img
+                            src={getRoomImage(selectedRoomInfo, allHabitaciones.findIndex(room => room.id === selectedRoomInfo.id))}
+                            alt={selectedRoomInfo.nombre}
+                            onError={e => {
+                              e.target.src = ROOM_DEFAULT_IMAGES[0];
+                            }}
+                          />
                           <div className="preview-price-badge">${selectedRoomInfo.precio} / noche</div>
                         </div>
                         <div className="preview-info">
@@ -714,9 +772,9 @@ function ClientePag() {
                         <div className="reserva-card-item" key={res.id}>
                           <div className="reserva-card-img">
                             <img
-                              src={roomInfo?.imagen || IMAGENES_DEFECTO[0]}
+                              src={getRoomImage(roomInfo || { nombre: res.roomName }, allHabitaciones.findIndex(room => room.id === roomInfo?.id))}
                               alt={res.roomName}
-                              onError={e => { e.target.src = IMAGENES_DEFECTO[0]; }}
+                              onError={e => { e.target.src = ROOM_DEFAULT_IMAGES[0]; }}
                             />
                             <span className={`reserva-status-tag ${res.status.toLowerCase()}`}>
                               {res.status}
